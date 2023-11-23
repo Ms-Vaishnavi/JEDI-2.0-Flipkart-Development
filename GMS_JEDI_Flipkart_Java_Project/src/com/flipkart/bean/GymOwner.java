@@ -11,6 +11,18 @@ public class GymOwner extends User {
 	private String phoneNumber;
 	private String aadharNumber;
 	private String panNumber;
+	
+	public GymOwner(String email, String password, int roleId, String name, String phoneNumber, String aadharNumber, String panNumber) {
+		super(email, password, roleId);
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.aadharNumber = aadharNumber;
+		this.panNumber = panNumber;
+	}
+	
+	public GymOwner() {
+		super();
+	}
 
 	public String getName() {
 		return name;

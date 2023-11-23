@@ -9,7 +9,17 @@ package com.flipkart.bean;
 public class Administrator extends User {
 	private String name;
 	private String phoneNumber;
-
+	
+	public Administrator(String email, String password, int roleId, String name, String phoneNumber) {
+		super(email, password, roleId);
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+	}
+	
+	public Administrator() {
+		super();
+	}
+	
 	public String getName() {
 		return name;
 	}

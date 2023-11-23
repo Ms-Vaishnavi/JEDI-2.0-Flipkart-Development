@@ -10,6 +10,16 @@ public class User {
 	private String email;
 	private String password;
 	private int roleId;
+	
+	public User(String email, String password, int roleId) {
+		this.email = email;
+		this.password = password;
+		this.roleId = roleId;
+	}
+	
+	public User() {
+		
+	}
 
 	public String getEmail() {
 		return email;

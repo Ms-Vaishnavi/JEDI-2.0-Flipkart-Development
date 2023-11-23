@@ -11,6 +11,18 @@ public class Customer extends User {
 	private String phoneNumber;
 	private int age;
 	private String address;
+	
+	public Customer(String email, String password, int roleId, String name, String phoneNumber, int age, String address) {
+		super(email, password, roleId);
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.age = age;
+		this.address = address;
+	}
+	
+	public Customer() {
+		super();
+	}
 
 	public String getName() {
 		return name;
