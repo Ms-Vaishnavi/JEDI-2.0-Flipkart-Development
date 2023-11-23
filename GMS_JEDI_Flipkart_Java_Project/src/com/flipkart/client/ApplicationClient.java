@@ -2,7 +2,7 @@ package com.flipkart.client;
 
 import java.util.*;
 import com.flipkart.bean.User;
-import com.flipkart.DAO.UserDAO;
+import com.flipkart.DAO.*;
 
 public class ApplicationClient {
 	public static void login() throws Exception{
@@ -15,7 +15,7 @@ public class ApplicationClient {
         int roleId = in.nextInt();
         User user = new User(username, password, roleId);
         UserDAO authicated = new UserDAO();
-        if(authicated.authenticateUser(user)!=null)
+        if(authicated.isAuthenticated(user))
         {
             System.out.println("Welcome " + username + "! You are logged in.");
             int role = user.getRoleId();

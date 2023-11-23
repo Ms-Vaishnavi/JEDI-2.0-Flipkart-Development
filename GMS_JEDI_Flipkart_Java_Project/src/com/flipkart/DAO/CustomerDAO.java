@@ -1,10 +1,10 @@
-package com.flipkart.dao;
+package com.flipkart.DAO;
 
 import java.util.List;
 
 import com.flipkart.bean.Gym;
 
-public interface CustomerGMSDao {
+public interface CustomerDAO {
 
 	public List<Gym> fetchGymList();
 	

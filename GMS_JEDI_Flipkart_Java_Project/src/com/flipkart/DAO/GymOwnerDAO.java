@@ -1,22 +1,22 @@
-package com.flipkart.dao;
+package com.flipkart.DAO;
 
 import java.util.List;
 
 import com.flipkart.bean.*;
 
-public interface GymOwnerGMSDao {
+public interface GymOwnerDAO {
 
 	public GymOwner fetchOwnerDetails(String phoneNumber);
 	
 	public void addGymOwnerDetails(GymOwner gymOwnerDetails);
 	
-	public List<Gymnasium> fetchGymDetails(String phoneNumber);
+	public List<Gym> fetchGymDetails(String phoneNumber);
 	
-	public void addGymDetails(Gymnasium gymDetails);
+	public void addGymDetails(Gym gymDetails);
 	
-	public List<Slots> fetchPossibleSlots();
+	public List<Slot> fetchPossibleSlots();
 	
-	public void addSlots(int gymId, String chosenSlots, List<Slots> slotInfo);
+	public void addSlots(int gymId, String chosenSlots, List<Slot> slotInfo);
 
 	public boolean checkOwnerApproval(String email);
 
