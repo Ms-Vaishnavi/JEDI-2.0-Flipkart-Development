@@ -125,10 +125,15 @@ public class GymOwnerClient {
 		
 		switch(choice) {
 		case 1: viewProfile(in);
+				break;
 		case 2: editProfile(in);
+				break;
 		case 3: addGym(in);
+				break;
 		case 4: editGym(in);
+				break;
 		case 5: getGymDetails(in);
+				break;
 		}
 		
 	}

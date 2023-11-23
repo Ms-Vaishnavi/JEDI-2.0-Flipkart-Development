@@ -31,9 +31,8 @@ public class ApplicationClient {
                 break;
             case 3:
                 AdminClient admin = new AdminClient();
-                admin.viewAllGyms();
+                admin.adminMenu(in);
                 break;
-            
             }
         }
         else
@@ -58,12 +57,12 @@ public class ApplicationClient {
 			login();
 			break;
 		case 2:
-			CustomerClient Customer = new CustomerClient();
-			Customer.registerCustomer();
+			CustomerClient customer = new CustomerClient();
+			customer.registerCustomer();
 			break;
 		case 3:
-			GymOwnerClient Owner = new GymOwnerClient();
-			Owner.gymOwnerRegistration(in);
+			GymOwnerClient owner = new GymOwnerClient();
+			owner.gymOwnerRegistration(in);
 			break;
 		case 4:
 			System.out.println("Exiting.....");

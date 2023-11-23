@@ -36,14 +36,13 @@ public class AdminClient {
 		}
 	}
 
-	public void AdminPage(Scanner in) throws Exception {
-		while (true) {
+	public void adminMenu(Scanner in) throws Exception {
 //			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++");
 			System.out.println("1. View All Gym ");
 			System.out.println("2. View All Gym Owners");
-			System.out.println("3.  Approve Pending Gym  Requests");
-			System.out.println("4. 	Approve pending Gym owner request");
-			System.out.println("5. Exit");
+			System.out.println("3. Approve Pending Gym  Requests");
+			System.out.println("4. Approve pending Gym owner request");
+//			System.out.println("5. Exit");
 			System.out.print("Enter your choice: ");
 			int choice = in.nextInt();
 			switch (choice) {
@@ -65,7 +64,6 @@ public class AdminClient {
 			default:
 				System.out.println("Wrong choice");
 			}
-		}
 }
 			
 	public void viewAllGyms() {
