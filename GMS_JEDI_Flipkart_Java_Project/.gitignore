@@ -177,4 +177,8 @@ nb-configuration.xml
 
 .DS_Store
 
+<<<<<<< Updated upstream
 find . -name .DS_Store -print0 | xargs -0 git rm --ignore-unmatch
+=======
+find . -name .DS_Store -print0 | xargs -0 git rm --ignore-unmatch
+>>>>>>> Stashed changes
