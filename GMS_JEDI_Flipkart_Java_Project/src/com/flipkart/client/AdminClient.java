@@ -1,7 +1,10 @@
 package com.flipkart.client;
 
+import com.flipkart.bean.Gym;
+import com.flipkart.bean.GymOwner;
 import com.flipkart.business.*;
-import java.util.Scanner;
+
+import java.util.List;
 
 /**
  * 
@@ -16,54 +19,20 @@ public class AdminClient {
 	List<GymOwner> gymOwnerList = adminBusiness.getGymOwners();
 	List<Gym> gymList = adminBusiness.getGym();
 
-	public void viewAllGyms() {
-		for (Gym gym : gymList) {
-			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("Gym Id-->" + gym.gymId);
-			System.out.println("Gym Name-->" + gym.gymName);
-			System.out.println("Gym Owner Mail-->" + gym.ownerEmail);
-			System.out.println("Gym Address-->" + gym.address);
-			System.out.println("Gym Slot Count-->" + gym.slotCount);
-			if(gym.isVerified)
-			{
-				System.out.println("Is gym verified YES");
-			}
-			else
-				System.err.println(" Is gym verified NO");
-			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
-		}
-	}
-
-	public void viewAllGymOwners() {
-		for (GymOwner gymOwner : gymOwnerList) {
-			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
-			System.out.println("Gym Owner Name-->" + gymOwner.name);
-			System.out.println("Gym Owner phone numver-->" + gymOwner.phoneNumber);
-			System.out.println("Gym Owner Aadhar-->" + gymOwner.aadharNumber);
-			System.out.println("Gym Owner panNumber-->" + gymOwner.panNumber);
-			if(gymOwner.isVerified)
-			{
-				System.out.println("Is gym Owner verified YES");
-			}
-			else
-				System.err.println(" Is gym Owner verified NO");
-			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
-		}
-	}
+	
 
 	public void approvePendingGymOwnerRequest(List<GymOwner> pendingGymOwnerList) {
 		for (GymOwner gymOwner : pendingGymOwnerList) {
-			System.out.println("Approved gym owner" + gymOwner.name);
-			gymOwner.isVerified=true;
-			adminBusiness.approveGymOwnerRequest();
+			System.out.println("Approved gym owner" + gymOwner.getName());
+			adminBusiness.approveGymOwnerRequest(gymOwner);
 		}
 	}
 
 	public void approvePendingGymRequest() {
 		for (Gym gym : pendingGymList) {
-			System.out.println("Approved gym" + gym.gymName);
-			gym.isVerified = true;
-			adminBusiness.approveGymRequest();
+			System.out.println("Approved gym" + gym.getGymName());
+			gym.setVerified(true);
+			adminBusiness.approveGymRequest(gym);
 		}
 	}
 
@@ -89,13 +58,36 @@ public class AdminClient {
 				approvePendingGymRequest();
 				break;
 			case 4:
-				approvePendingGymOwnerRequest();
+//				approvePendingGymOwnerRequest();
 				break;
 
 			// Default case statement
 			default:
 				System.out.println("Wrong choice");
 			}
+		}
+}
+			
+	public void viewAllGyms() {
+		for (Gym gym : gymList) {
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println("Gym Id-->" + gym.getGymId());
+			System.out.println("Gym Name-->" + gym.getGymName());
+			System.out.println("Gym Owner Mail-->" + gym.getOwnerEmail());
+			System.out.println("Gym Address-->" + gym.getAddress());
+			System.out.println("Gym Slot Count-->" + gym.getSlotCount());
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+		}
+	}
+
+	public void viewAllGymOwners() {
+		for (GymOwner gymOwner : gymOwnerList) {
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
+			System.out.println("Gym Owner Name-->" + gymOwner.getName());
+			System.out.println("Gym Owner phone numver-->" + gymOwner.getPhoneNumber());
+			System.out.println("Gym Owner Aadhar-->" + gymOwner.getAadharNumber());
+			System.out.println("Gym Owner panNumber-->" + gymOwner.getPanNumber());
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
 		}
 
 	}

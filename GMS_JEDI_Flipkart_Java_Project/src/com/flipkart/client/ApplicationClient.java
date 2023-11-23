@@ -27,7 +27,7 @@ public class ApplicationClient {
                 GymOwnerClient gymOwner = new GymOwnerClient();
                 gymOwner.gymOwnerMenu(in);
                 break;
-            case3:
+            case 3:
                 AdminClient admin = new AdminClient();
                 admin.viewAllGyms();
                 break;
