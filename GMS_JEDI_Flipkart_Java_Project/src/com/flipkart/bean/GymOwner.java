@@ -11,6 +11,7 @@ public class GymOwner extends User {
 	private String phoneNumber;
 	private String aadharNumber;
 	private String panNumber;
+	private boolean isVerified;
 	
 	public GymOwner(String email, String password, int roleId, String name, String phoneNumber, String aadharNumber, String panNumber) {
 		super(email, password, roleId);
@@ -54,6 +55,13 @@ public class GymOwner extends User {
 
 	public void setPanNumber(String panNumber) {
 		this.panNumber = panNumber;
+	}
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
 	}
 
 }
