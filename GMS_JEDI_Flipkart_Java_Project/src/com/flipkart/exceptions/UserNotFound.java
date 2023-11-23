@@ -1,11 +1,8 @@
-/**
- * 
- */
-package com.flipkart.exceptions;
+package com.flipkart.exception; 
 
-/**
- * 
- */
-public class UserNotFound {
-
+public class UserNotFoundException extends Exception {
+    public UserNotFoundException(String message){
+        super(message);
+    }
 }
+

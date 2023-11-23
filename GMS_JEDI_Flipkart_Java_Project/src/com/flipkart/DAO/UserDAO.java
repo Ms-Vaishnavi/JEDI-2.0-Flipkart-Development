@@ -1,11 +1,15 @@
-package com.flipkart.DAO;
+package com.flipkart.dao;
+import com.flipkart.bean.*;
 import com.flipkart.bean.User;
-/**
- * 
- */
-public class UserDAO {
+import com.flipkart.exception.UserNotFoundException;
 
-    public User authenticateUser(User userData) {
-        return userData;
-    }
+public interface UserDao {
+	
+	public User isAuthenticated(User userData) throws UserNotFoundException;
+	
+	public void registerCustomer(Customer customerData);
+	
+	public void registerGymOwner(GymOwner ownerData);
+	
+	public void registerUser(User userData);
 }
