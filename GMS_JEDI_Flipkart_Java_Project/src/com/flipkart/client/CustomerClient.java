@@ -4,6 +4,9 @@
 package com.flipkart.client;
 import com.flipkart.business.*;
 import com.flipkart.bean.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 /**
  * 
@@ -35,12 +38,15 @@ public class CustomerClient {
 			userBusiness.registerCustomer(customer);
 			
 		}
-		public void viewGyms(String email) {
+		public void viewGyms(String email) throws ParseException {
 			getGyms();
 			System.out.print("Enter gym ID");
 			String gymId = sc.next();
-			System.out.print("Enter Date");
-			Date date = new Date();
+			System.out.print("Enter Date (yyyy-mm-dd): ");
+			String dateStr = sc.next();
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = dateFormat.parse(dateStr);
+			
 			List<Slot> slots = customerBusiness.getSlotInGym(gymId);
 			for (Slot slot: slots) {
 				System.out.print("Slot Id: " + slot.getSlotId());
@@ -81,7 +87,7 @@ public class CustomerClient {
 			customerBusiness.cancelBooking(bookingId, email);
 		}
 		
-		public void customerMenu(String email) {
+		public void customerMenu(String email) throws ParseException {
 			int choice = 0;
 			
 			while(choice != 4) {				
@@ -108,6 +114,4 @@ public class CustomerClient {
 				}
 			}
 		}
-	
-
 }
