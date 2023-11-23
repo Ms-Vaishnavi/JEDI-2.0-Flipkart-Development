@@ -41,7 +41,7 @@ public class GymOwnerClient {
 		UserBusiness userBusiness = new UserBusiness();
 		userBusiness.registerGymOwner(gymOwner);
 		
-		
+		System.out.println("Customer registered successfully!");
 	}
 	
 	public void editProfile(Scanner in) {

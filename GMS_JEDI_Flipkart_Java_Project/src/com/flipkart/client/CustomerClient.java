@@ -37,6 +37,8 @@ public class CustomerClient {
 			UserBusiness userBusiness = new UserBusiness();
 			userBusiness.registerCustomer(customer);
 			
+			System.out.println("Customer registered successfully!");
+			
 		}
 		public void viewGyms(String email) throws ParseException {
 			getGyms();

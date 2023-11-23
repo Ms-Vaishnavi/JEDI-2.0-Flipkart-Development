@@ -6,7 +6,7 @@ import com.flipkart.exception.UserNotFoundException;
 public class UserDAO {
 	
 	public boolean isAuthenticated(User userData) throws UserNotFoundException{
-		return false;
+		return true;
 	}
 	
 	public void registerCustomer(Customer customerData) {

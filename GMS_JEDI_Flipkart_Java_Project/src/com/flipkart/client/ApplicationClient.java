@@ -37,7 +37,8 @@ public class ApplicationClient {
         }
         else
         {
-            login();
+        	System.out.println("Sorry! You are not Registered!");
+        	applicationMenu();
         }
     }
 
@@ -45,7 +46,7 @@ public class ApplicationClient {
 		System.out.println("Welcome to FlipFit");
 		System.out.println("Choose your action:");
 		System.out.println("1. Login");
-		System.out.println("2. User Registration");
+		System.out.println("2. Customer Registration");
 		System.out.println("3. Gym Owner Registration");
 		System.out.println("4. exit");
 
@@ -55,6 +56,7 @@ public class ApplicationClient {
 		switch (choice) {
 		case 1:
 			login();
+			
 			break;
 		case 2:
 			CustomerClient customer = new CustomerClient();
