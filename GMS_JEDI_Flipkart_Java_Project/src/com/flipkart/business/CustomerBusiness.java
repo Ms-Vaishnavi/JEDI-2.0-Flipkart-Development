@@ -16,7 +16,7 @@ public class CustomerBusiness {
 
 	}
 
-	public List<Booking> getBookings(Customer customer) {
+	public List<Booking> getBookings(String email) {
 		return new ArrayList<>();
 	}
 
