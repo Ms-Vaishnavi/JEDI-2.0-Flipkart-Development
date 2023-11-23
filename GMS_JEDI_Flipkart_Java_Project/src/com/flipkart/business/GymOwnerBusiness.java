@@ -3,8 +3,9 @@
  */
 package com.flipkart.business;
 
-import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
+import com.flipkart.bean.GymOwner;
+
 import java.util.*;
 
 /**
@@ -12,11 +13,11 @@ import java.util.*;
  */
 public class GymOwnerBusiness {
 
-	public void getProfile(Customer customer) {
-
+	public GymOwner getProfile(String Id) {
+		return new GymOwner();
 	}
 
-	public void editProfile(Customer customer) {
+	public void editProfile(GymOwner gymOwner) {
 
 	}
 	
@@ -28,7 +29,7 @@ public class GymOwnerBusiness {
 		
 	}
 	
-	public List<Gym> getGymDetail() {
+	public List<Gym> getGymDetail(String gymOwnerEmail) {
 		return new ArrayList<>();
 	}
 	
