@@ -4,7 +4,7 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.*;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * 
