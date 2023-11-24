@@ -1,25 +1,14 @@
 package com.flipkart.client;
 
 import java.util.*;
+
+import com.flipkart.DAO.UserDAO;
 import com.flipkart.bean.User;
-import com.flipkart.dao.*;
+import com.flipkart.DAO.*;
 import com.flipkart.constants.*;
 
 public class ApplicationClient {
-<<<<<<< Updated upstream
-	public static void login() throws Exception{
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter Email: ");
-        String userEmail = in.next();
-        System.out.println("Enter password: ");
-        String password = in.next();
-        System.out.println("Enter role Id: ");
-        String roleId = in.next();
-        User user = new User(userEmail, password, roleId);
-        UserDao authicated = new UserDao();
-        if(authicated.isAuthenticated(user))
-        {
-=======
+
 	public static void login() throws Exception {
 		Scanner in = new Scanner(System.in);
 		System.out.println("__________________________________________________________________________________\n");
@@ -37,7 +26,6 @@ public class ApplicationClient {
 			System.out.println(
 					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in." + ColorConstants.RESET);
 			String role = user.getRoleId();
->>>>>>> Stashed changes
 
 			if (roleId.equalsIgnoreCase("Customer")) {
 

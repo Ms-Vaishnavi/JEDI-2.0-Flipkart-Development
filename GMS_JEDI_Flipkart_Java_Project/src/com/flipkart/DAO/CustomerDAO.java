@@ -1,29 +1,44 @@
-package com.flipkart.dao;
+package com.flipkart.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.flipkart.bean.Gym;
 
-public interface CustomerDao {
+public class CustomerDAO {
 
-	public List<Gym> fetchGymList();
+	public List<Gym> fetchGymList(){
+		return new ArrayList<>();
+	}
 	
-	public void fetchSlotList(int gymId);
+	public void fetchSlotList(int gymId) {}
 	
-	public void fetchBookedSlots(String email);
+	public void fetchBookedSlots(String email) {}
 	
-	public void bookSlots(int gymId, String slotId,String email,String date);
+	public void bookSlots(int gymId, String slotId,String email,String date) {}
 	
-	public boolean isFull(String slotId,String date);
+	public boolean isFull(String slotId,String date) {
+		return true;
+	}
 
-	public boolean alreadyBooked(String slotId, String email, String date);
+	public boolean alreadyBooked(String slotId, String email, String date) {
+		return true;
+	}
 
-	public void cancelBooking(String slotId, String email, String date);
+	public void cancelBooking(String slotId, String email, String date) {
+		
+	}
 
-	public boolean checkSlotExists(String slotId, int gymId);
+	public boolean checkSlotExists(String slotId, int gymId) {
+		return true;
+	}
 
-	public void cancelBookedSlots(String email, int bookingId);
+	public void cancelBookedSlots(String email, int bookingId) {
+		
+	}
 
-	public boolean checkGymApprove(int gymId);
+	public boolean checkGymApprove(int gymId) {
+		return true;
+	}
 
 }
