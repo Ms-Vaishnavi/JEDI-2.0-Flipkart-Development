@@ -15,6 +15,8 @@ public class CustomerBusiness {
 	List<Booking> bookings=new ArrayList<>();
 
 	List<Slot>slots=new ArrayList<>();
+	List<Gym> gyms = new ArrayList<>();
+
 	Date d1=new Date();
 	Customer customer1 = new Customer("c1@gmail.com", "c1", "Customer", "Vaishnavi", "0000", 22, "Kanpur");
 	Customer customer2 = new Customer("c2@gmail.com", "c2", "Customer", "Anjali", "0000", 32, "Vadodara");
@@ -28,10 +30,16 @@ public class CustomerBusiness {
 	Booking b3=new Booking("113","129","173","confirmed",d1,"c3@gmail.com","Johnathon");
 	Booking b4=new Booking("193","127","971","waitlisted",d1,"c4@gmail.com","J");
 
-	Slot s1=new Slot("900","1400","1500",100,"John");
-	Slot s2=new Slot("910","1500","1600",100,"J");
-	Slot s3=new Slot("930","1600","1700",100,"Jack");
-	Slot s4=new Slot("950","1700","1800",100,"Johnny");
+	Slot s1=new Slot("900","1400","1500",100,"John","g1");
+	Slot s2=new Slot("910","1500","1600",100,"J","g2");
+	Slot s3=new Slot("930","1600","1700",100,"Jack","g3");
+	Slot s4=new Slot("950","1700","1800",100,"Johnny","g4");
+
+
+	Gym gym1 = new Gym("g1", "gym1", "gymowner1@gmail.com", "Kanpur", 2, 5, true);
+	Gym gym2 = new Gym("g2", "gym2", "gymowner2@gmail.com", "Hyderabad", 3, 5, true);
+	Gym gym3 = new Gym("g3", "gym3", "gymowner3@gmail.com", "Bangalore", 2, 3, true);
+	Gym gym4 = new Gym("g4", "gym4", "gymowner4@gmail.com", "Cochin", 6, 5, true);
 
 	public CustomerBusiness()
 	{
@@ -49,6 +57,11 @@ public class CustomerBusiness {
 		slots.add(s2);
 		slots.add(s3);
 		slots.add(s4);
+
+		gyms.add(gym1);
+		gyms.add(gym2);
+		gyms.add(gym3);
+		gyms.add(gym4);
 	}
 	
 	public Customer getProfile(Customer customer) {
