@@ -22,12 +22,29 @@ public class CustomerBusiness {
 		customers.add(customer4);
 	}
 	
-	public void getProfile(Customer customer) {
-
+	public Customer getProfile(Customer customer) {
+		for(Customer cust:customers)
+		{
+			if(cust.getEmail().equals(customer.getEmail()))
+				return cust;
+		}
+		return null;
 	}
 
 	public void editProfile(Customer customer) {
-
+		for(Customer cust:customers)
+		{
+			if(cust.getEmail().equals(customer.getEmail()))
+			{
+				cust.setName(customer.getName());
+				cust.setPhoneNumber(customer.getPhoneNumber());
+				cust.setAge(customer.getAge());
+				cust.setAddress(customer.getAddress());
+				customers.add(cust);
+				System.out.println("Successfully edited your profile");
+				break;
+			}
+		}
 	}
 
 	public List<Booking> getBookings(String email) {
