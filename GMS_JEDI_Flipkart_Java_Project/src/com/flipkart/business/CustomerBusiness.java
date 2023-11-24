@@ -122,7 +122,15 @@ public class CustomerBusiness {
 		}
 
 	public List<Slot> getSlotInGym(String gymId) {
-		return new ArrayList<>();
+	     List<Slot> slotsOfGym=new ArrayList<>();
+		 for(slot s:slots)
+		 {
+			 if(s.getGymId().equals(gymId))
+			 {
+				 slotsOfGym.add(s);
+			 }
+		 }
+		 return slotsOfGym;
 	}
 
 	public int bookSlot(String gymId, String slotId, String customerId, Date date) {
@@ -133,7 +141,15 @@ public class CustomerBusiness {
 		return false;
 	}
 	
-	public boolean hasBookedSlotAlready(String slotId, String customerId, Date date) {
+	public boolean hasBookedSlotAlready(String slotId, String customerEmail, Date date) {
+		for(Booking b:bookings)
+		{
+			if(b.getSlotId().equals(slotId))
+			{
+				if(b.getCustomerEmail().equals(customerEmail))
+					return true;
+			}
+		}
 		return false;
 	}
 
