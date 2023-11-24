@@ -6,6 +6,7 @@ import com.flipkart.dao.*;
 import com.flipkart.constants.*;
 
 public class ApplicationClient {
+<<<<<<< Updated upstream
 	public static void login() throws Exception{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Email: ");
@@ -18,35 +19,46 @@ public class ApplicationClient {
         UserDao authicated = new UserDao();
         if(authicated.isAuthenticated(user))
         {
+=======
+	public static void login() throws Exception {
+		Scanner in = new Scanner(System.in);
+		System.out.println("__________________________________________________________________________________\n");
+		System.out.println("Enter LogIn Details\n");
+		System.out.print("Enter Email: ");
+		String userEmail = in.next();
+		System.out.print("Enter password: ");
+		String password = in.next();
+		System.out.print("Enter role Id: ");
+		String roleId = in.next();
+		User user = new User(userEmail, password, roleId);
+		UserDAO authicated = new UserDAO();
+		if (authicated.isAuthenticated(user)) {
+			System.out.println("__________________________________________________________________________________\n");
+			System.out.println(
+					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in." + ColorConstants.RESET);
+			String role = user.getRoleId();
+>>>>>>> Stashed changes
 
-            System.out.println("Welcome " + userEmail + "! You are logged in.");
-            String role = user.getRoleId();
-            
-            if(roleId.equals("Customer")) {
-          
-                CustomerClient customer = new CustomerClient();
-                customer.customerMenu(userEmail);
-                
-            }
-            else if(roleId.equals("GymOwner")) {
-            
-                GymOwnerClient gymOwner = new GymOwnerClient();
-                gymOwner.gymOwnerMenu(in, userEmail);
-                
-            }
-            else if(roleId.equals("Admin")) {
-                AdminClient admin = new AdminClient();
-                admin.adminMenu(in);
- 
-           
-            }
-        }
-        else
-        {
-        	System.out.println("Sorry! You are not Registered!");
-        	applicationMenu();
-        }
-    }
+			if (roleId.equalsIgnoreCase("Customer")) {
+
+				CustomerClient customer = new CustomerClient();
+				customer.customerMenu(userEmail);
+
+			} else if (roleId.equalsIgnoreCase("GymOwner")) {
+
+				GymOwnerClient gymOwner = new GymOwnerClient();
+				gymOwner.gymOwnerMenu(in, userEmail);
+
+			} else if (roleId.equalsIgnoreCase("Admin")) {
+				AdminClient admin = new AdminClient();
+				admin.adminMenu(in);
+
+			}
+		} else {
+			System.out.println("Sorry! You are not Registered!");
+			applicationMenu();
+		}
+	}
 
 	public static void applicationMenu() throws Exception {
 		System.out.println(ColorConstants.GREEN + "Welcome to FlipFit Application!" + ColorConstants.RESET);
@@ -56,17 +68,14 @@ public class ApplicationClient {
 		System.out.println("3. Gym Owner Registration");
 		System.out.println("4. exit");
 		System.out.print("\nEnter Your Choice: ");
-		
 
 		Scanner in = new Scanner(System.in);
-		System.out.println("______________________________________________________________\n");
-
 
 		int choice = in.nextInt();
 		switch (choice) {
 		case 1:
 			login();
-			
+
 			break;
 		case 2:
 			CustomerClient customer = new CustomerClient();

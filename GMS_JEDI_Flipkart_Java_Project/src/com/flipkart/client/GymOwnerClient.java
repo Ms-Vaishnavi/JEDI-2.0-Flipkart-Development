@@ -43,7 +43,7 @@ public class GymOwnerClient {
 		UserBusiness userBusiness = new UserBusiness();
 		userBusiness.registerGymOwner(gymOwner);
 
-		System.out.println("\n" + ColorConstants.GREEN + "Customer registered successfully!" + ColorConstants.RESET);
+		System.out.println("\n" + ColorConstants.CYAN + "Customer registered successfully!" + ColorConstants.RESET);
 	}
 
 	public void editProfile(Scanner in, String email) {
