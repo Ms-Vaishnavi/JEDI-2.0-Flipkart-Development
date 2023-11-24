@@ -1,9 +1,9 @@
-package com.flipkart.DAO;
+package com.flipkart.dao;
 import com.flipkart.bean.*;
 import com.flipkart.bean.User;
 import com.flipkart.exception.UserNotFoundException;
 
-public class UserDAO {
+public class UserDao {
 	
 	public boolean isAuthenticated(User userData) throws UserNotFoundException{
 		return true;

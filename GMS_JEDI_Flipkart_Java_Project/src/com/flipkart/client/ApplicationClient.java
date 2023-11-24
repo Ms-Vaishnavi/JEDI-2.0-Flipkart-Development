@@ -2,7 +2,7 @@ package com.flipkart.client;
 
 import java.util.*;
 import com.flipkart.bean.User;
-import com.flipkart.DAO.*;
+import com.flipkart.dao.*;
 import com.flipkart.constants.*;
 
 public class ApplicationClient {
@@ -15,7 +15,7 @@ public class ApplicationClient {
         System.out.println("Enter role Id: ");
         String roleId = in.next();
         User user = new User(userEmail, password, roleId);
-        UserDAO authicated = new UserDAO();
+        UserDao authicated = new UserDao();
         if(authicated.isAuthenticated(user))
         {
 

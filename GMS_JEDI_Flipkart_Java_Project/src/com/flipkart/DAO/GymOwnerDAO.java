@@ -1,10 +1,10 @@
-package com.flipkart.DAO;
+package com.flipkart.dao;
 
 import java.util.List;
 
 import com.flipkart.bean.*;
 
-public interface GymOwnerDAO {
+public interface GymOwnerDao {
 
 	public GymOwner fetchOwnerDetails(String phoneNumber);
 	
