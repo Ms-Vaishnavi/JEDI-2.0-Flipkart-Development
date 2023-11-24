@@ -31,7 +31,7 @@ import java.util.Date;
 		{
 			if(b.getBookingId().equals(bookingId))
 			{
-				if(b.type=="confirmed")
+				if(b.getType()=="confirmed")
 					return true;
 				else
 					return false;
