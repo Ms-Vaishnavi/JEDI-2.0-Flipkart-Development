@@ -19,6 +19,7 @@ public class GymOwner extends User {
 		this.phoneNumber = phoneNumber;
 		this.aadharNumber = aadharNumber;
 		this.panNumber = panNumber;
+		this.isVerified= false;
 	}
 	
 	public GymOwner() {
