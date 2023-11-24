@@ -146,6 +146,16 @@ public class CustomerBusiness {
 	}
 
 	public boolean isSlotBooked(String slotId, Date date) {
+		for(Slot s:slots)
+		{
+			if(s.getSlotId().equals(slotId))
+			{
+				if(s.getNumOfSeats()<=s.getNumOfSeatsBooked())
+					return true;
+				else
+					return false;
+			}
+		}
 		return false;
 	}
 	
