@@ -5,6 +5,7 @@ package com.flipkart.business;
 
 import com.flipkart.bean.*;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.utils.IdGenerator;
 
 import java.util.Date;
 import java.util.*;
@@ -128,7 +129,86 @@ public class CustomerBusiness {
 		return slotsOfGym;
 	}
 
-	public int bookSlot(String gymId, String slotId, String customerId, Date date) {
+	public int bookSlot(String slotId, String email, Date date) {
+//		for(Booking booking:bookings)
+//		{
+//			if(booking.getCustomerEmail().equals(email) && booking.getDate().equals(date) && booking.getType().equals("confirmed"))
+//			{
+//				for(Slot s:slots)
+//				{
+//					if(s.getSlotId().equals(slotId)) 
+//					{
+//						int num=s.getNumOfSeatsBooked();
+//						s.setNumOfSeatsBooked(num--);
+//						Booking getBooking = new Booking();
+//						getBooking.setBookingId(IdGenerator.generateId("Booking"));
+//						if(s.getNumOfSeatsBooked()>0)
+//						{
+//							Booking b6=new Booking(getBooking.getBookingId(),slotId,s.getGymId(),"confirmed",date,email,s.getTrainer());
+//							bookings.add(b6);
+//							return 0;
+//						}
+//						else
+//						{
+//							Booking b6=new Booking(getBooking.getBookingId(),slotId,s.getGymId(),"waitlisted",date,email,s.getTrainer());
+//							bookings.add(b6);
+//							return 1;
+//						}
+//					}
+//					else return 4;
+//					
+//				}
+//			}
+//			else if(booking.getCustomerEmail().equals(email) && booking.getDate().equals(date) && booking.getType().equals("waitlisted"))
+//			{
+//				for(Slot s:slots)
+//				{
+//					if(s.getSlotId().equals(slotId)) 
+//					{
+//						int num=s.getNumOfSeatsBooked();
+//						s.setNumOfSeatsBooked(num--);
+//						Booking getBooking = new Booking();
+//						getBooking.setBookingId(IdGenerator.generateId("Booking"));
+//						if(s.getNumOfSeatsBooked()>0)
+//						{
+//							Booking b6=new Booking(getBooking.getBookingId(),slotId,s.getGymId(),"confirmed",date,email,s.getTrainer());
+//							bookings.add(b6);
+//							return 2;
+//						}
+//						else
+//						{
+//							Booking b6=new Booking(getBooking.getBookingId(),slotId,s.getGymId(),"waitlisted",date,email,s.getTrainer());
+//							bookings.add(b6);
+//							return 1;
+//						}
+//					}
+//					else return 4;
+//					
+//				}
+//			}
+//			return 0;
+//		}
+//		for(Slot s:slots)
+//		{
+//			if(s.getSlotId().equals(slotId)) 
+//			{
+//				int num=s.getNumOfSeatsBooked();
+//				s.setNumOfSeatsBooked(num--);
+//				Booking booking = new Booking();
+//				booking.setBookingId(IdGenerator.generateId("Booking"));
+//				if(s.getNumOfSeatsBooked()>0)
+//				{
+//					Booking b6=new Booking(booking.getBookingId(),slotId,s.getGymId(),"confirmed",date,email,s.getTrainer());
+//					bookings.add(b6);
+//				}
+//				else
+//				{
+//					Booking b6=new Booking(booking.getBookingId(),slotId,s.getGymId(),"waitlisted",date,email,s.getTrainer());
+//					bookings.add(b6);
+//				}
+//			}
+//			else return 0;
+//		}
 		return 0;
 	}
 

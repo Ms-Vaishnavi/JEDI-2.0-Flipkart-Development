@@ -52,16 +52,19 @@ public class CustomerClient {
 		}
 		System.out.print("Enter the slot ID which you want to book: ");
 		String slotId = sc.next();
-		int bookingResponse = customerBusiness.bookSlot(gymId, slotId, email, date);
+		int bookingResponse = customerBusiness.bookSlot(slotId, email, date);
 		switch (bookingResponse) {
 		case 0:
 			System.out.println("You have already booked this time. Cancelling the previous one and booking this slot");
 			break;
 		case 1:
-			System.out.println("Slot is already booked");
+			System.out.println("Slot is already booked, added to the waiting list");
 			break;
 		case 2:
 			System.out.println("Successfully booked the slot");
+			break;
+		case 3:
+			System.out.println("Slot not found");
 			break;
 		default:
 			System.out.println("Booking failed");
