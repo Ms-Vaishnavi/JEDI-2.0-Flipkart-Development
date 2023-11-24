@@ -13,6 +13,19 @@ public class Slot {
 	private int numOfSeats;
 	private String trainer;
 
+	public Slot()
+	{
+
+	}
+
+	public Slot(String slotId,String startTime,String endTime,int numOfSeats,String trainer)
+	{
+		this.slotId=slotId;
+		this.startTime=startTime;
+		this.endTime=endTime;
+		this.numOfSeats=numOfSeats;
+		this.trainer=trainer;
+	}
 	public String getSlotId() {
 		return slotId;
 	}
