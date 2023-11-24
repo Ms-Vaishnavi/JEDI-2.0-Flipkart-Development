@@ -79,9 +79,9 @@ public class GymOwnerClient {
 		System.out.println("Enter Address : ");
 		gym.setAddress(in.next());
 		System.out.println("Enter SlotCount : ");
-		gym.setSlotCount(in.next());
+		gym.setSlotCount(in.nextInt());
 		System.out.println("Enter seatsPerSlotCount : ");
-		gym.setSeatsPerSlotCount(in.next());
+		gym.setSeatsPerSlotCount(in.nextInt());
 		gym.setVerified(false);
 		
 		gymOwnerBusiness.addGym(gym);
@@ -100,9 +100,9 @@ public class GymOwnerClient {
 		System.out.println("Enter Address : ");
 		gym.setAddress(in.next());
 		System.out.println("Enter SlotCount : ");
-		gym.setSlotCount(in.next());
+		gym.setSlotCount(in.nextInt());
 		System.out.println("Enter seatsPerSlotCount : ");
-		gym.setSeatsPerSlotCount(in.next());
+		gym.setSeatsPerSlotCount(in.nextInt());
 		gym.setVerified(false);
 		
 		gymOwnerBusiness.editGym(gym);

@@ -11,15 +11,15 @@ public class Gym {
 	private String gymName;
 	private String ownerEmail;
 	private String address;
-	private String slotCount;
-	private String seatsPerSlotCount;
+	private int slotCount;
+	private int seatsPerSlotCount;
 	private boolean isVerified;
 	
 	public Gym() {
 		
 	}
 	
-	public Gym(String gymId, String gymName, String ownerEmail, String address, String slotCount, String seatsPerSlotCount, boolean isVarified) {
+	public Gym(String gymId, String gymName, String ownerEmail, String address, int slotCount, int seatsPerSlotCount, boolean isVerified) {
 		
 	}
 
@@ -55,19 +55,19 @@ public class Gym {
 		this.address = address;
 	}
 
-	public String getSlotCount() {
+	public int getSlotCount() {
 		return slotCount;
 	}
 
-	public void setSlotCount(String slotCount) {
+	public void setSlotCount(int slotCount) {
 		this.slotCount = slotCount;
 	}
 
-	public String getSeatsPerSlotCount() {
+	public int getSeatsPerSlotCount() {
 		return seatsPerSlotCount;
 	}
 
-	public void setSeatsPerSlotCount(String seatsPerSlotCount) {
+	public void setSeatsPerSlotCount(int seatsPerSlotCount) {
 		this.seatsPerSlotCount = seatsPerSlotCount;
 	}
 

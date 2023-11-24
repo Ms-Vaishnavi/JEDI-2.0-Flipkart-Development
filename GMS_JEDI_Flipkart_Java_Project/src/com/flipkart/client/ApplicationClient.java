@@ -18,7 +18,6 @@ public class ApplicationClient {
         if(authicated.isAuthenticated(user))
         {
             System.out.println("Welcome " + username + "! You are logged in.");
-            String role = user.getRoleId();
             
             if(roleId.equals("Customer")) {
           
