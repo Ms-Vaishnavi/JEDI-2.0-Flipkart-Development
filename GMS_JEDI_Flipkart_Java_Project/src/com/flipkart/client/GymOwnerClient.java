@@ -5,9 +5,11 @@ import java.util.Scanner;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.bean.Slot;
 import com.flipkart.business.GymOwnerBusiness;
 import com.flipkart.business.UserBusiness;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.utils.IdGenerator;
 
 public class GymOwnerClient {
 
@@ -76,7 +78,22 @@ public class GymOwnerClient {
         gym.setSeatsPerSlotCount(in.nextInt());
         gym.setVerified(false);
 
+<<<<<<< HEAD
         gymOwnerBusiness.addGym(gym);
+=======
+		Gym gym = new Gym();
+		gym.setGymId(IdGenerator.generateId("Gym"));
+		System.out.println("Enter GymName : ");
+		gym.setGymName(in.next());
+		gym.setOwnerEmail(email);
+		System.out.println("Enter Address : ");
+		gym.setAddress(in.next());
+		System.out.println("Enter SlotCount : ");
+		gym.setSlotCount(in.nextInt());
+		System.out.println("Enter seatsPerSlotCount : ");
+		gym.setSeatsPerSlotCount(in.nextInt());
+		gym.setVerified(false);
+>>>>>>> 00d3ed2 (Resolved merge conflicts)
 
     }
 
@@ -111,7 +128,27 @@ public class GymOwnerClient {
         boolean recur = true;
         while (recur) {
 
+<<<<<<< HEAD
             System.out.println("\nHere are the actions you can perform!");
+=======
+	public void addSlot(Scanner in) {
+		System.out.println("Enter Slot Details: ");
+		Slot slot = new Slot();
+		slot.setSlotId(IdGenerator.generateId("Slot"));
+		System.out.print("Enter Gym Id:");
+//		slot.setGymId(in.next());
+		System.out.print("\nEnter Slot Start Time: ");
+		slot.setStartTime(in.next());
+		System.out.print("\nEnter Slot End Time: ");
+		slot.setEndTime(in.next());
+		System.out.print("\nEnter Trainer: ");
+		slot.setTrainer(in.next());
+	}
+	
+	public void gymOwnerMenu(Scanner in, String email) {
+		boolean recur = true;
+		while (recur) {
+>>>>>>> 00d3ed2 (Resolved merge conflicts)
 
             System.out.println("1. View Profile");
             System.out.println("2. Edit Profile");
