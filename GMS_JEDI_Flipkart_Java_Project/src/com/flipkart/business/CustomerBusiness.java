@@ -131,7 +131,7 @@ public class CustomerBusiness {
 
 	public List<Slot> getSlotInGym(String gymId) {
 	     List<Slot> slotsOfGym=new ArrayList<>();
-		 for(slot s:slots)
+		 for(Slot s:slots)
 		 {
 			 if(s.getGymId().equals(gymId))
 			 {
