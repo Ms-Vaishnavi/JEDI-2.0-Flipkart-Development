@@ -12,7 +12,7 @@ public class Slot {
 	private String endTime;
 	private int numOfSeats;
 	private String trainer;
-
+	private int numOfSeatsBooked;
 	private String gymId;
 	public Slot()
 	{
@@ -27,6 +27,7 @@ public class Slot {
 		this.numOfSeats=numOfSeats;
 		this.trainer=trainer;
 		this.gymId=gymId;
+		this.numOfSeatsBooked=0;
 	}
 	public String getSlotId() {
 		return slotId;
@@ -40,6 +41,16 @@ public class Slot {
 		return startTime;
 	}
 
+	public void setNumOfSeatsBooked(int numOfSeatsBooked)
+	{
+		this.numOfSeatsBooked=numOfSeatsBooked;
+	}
+	
+	public int getNumOfSeatsBooked()
+	{
+		return numOfSeatsBooked;
+	}
+	
 	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}

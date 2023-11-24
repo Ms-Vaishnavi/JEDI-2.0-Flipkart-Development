@@ -103,10 +103,18 @@ public class CustomerBusiness {
 		return customerBookings;
 	}
 
-	public void cancelBooking(String bookingId, String email) {
-		bookings.remove(bookingId);
-		System.out.println(ColorConstants.GREEN+"Successfully cancelled your booking"+ColorConstants.RESET);
-		getBookings(email);
+	public boolean cancelBooking(String bookingId, String email) {
+		
+		for(Booking booking: bookings)
+		{
+			if(booking.getBookingId().equals(bookingId))
+			{
+				bookings.remove(booking);
+				System.out.println(ColorConstants.GREEN+"Successfully cancelled your booking"+ColorConstants.RESET);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public List<Gym> getGymInCity(String city) {
