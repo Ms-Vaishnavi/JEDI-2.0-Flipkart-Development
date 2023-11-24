@@ -4,6 +4,7 @@
 package com.flipkart.bean;
 
 import java.util.Date;
+import java.util.*;
 
 /**
  * 
@@ -16,6 +17,22 @@ public class Booking {
 	private Date date;
 	private String customerEmail;
 	private String trainer;
+
+	public Booking() {
+		super();
+	}//default constructor
+
+	public Booking(String bookingId,String slotId,String gymId,String type,Date date,String customerEmail,String trainer)
+	{
+		this.bookingId=bookingId;
+		this.slotId=slotId;
+		this.gymId=gymId;
+		this.type=type;
+		this.date=date;
+		this.customerEmail=customerEmail;
+		this.trainer=trainer;
+	}
+
 
 	public String getBookingId() {
 		return bookingId;
