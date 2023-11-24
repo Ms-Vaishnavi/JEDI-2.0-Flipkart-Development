@@ -33,6 +33,11 @@ public class GymOwnerBusiness {
 		gymOwners.add(gymOwner2);
 		gymOwners.add(gymOwner3);
 		gymOwners.add(gymOwner4);
+		
+		gyms.add(gym1);
+		gyms.add(gym2);
+		gyms.add(gym3);
+		gyms.add(gym4);
 	}
 	
 	public GymOwner getProfile(String email) {
