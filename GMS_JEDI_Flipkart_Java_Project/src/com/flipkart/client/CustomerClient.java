@@ -40,6 +40,8 @@ public class CustomerClient {
 			System.out.println("Customer registered successfully!");
 			
 		}
+		
+		
 		public void viewGyms(String email) throws ParseException {
 			getGyms();
 			System.out.print("Enter gym ID");
@@ -72,6 +74,21 @@ public class CustomerClient {
 			}
 		}
 		
+		public void editProfile(String email)
+		{
+			System.out.println("Enter password: ");
+			customer.setPassword(sc.next());
+			System.out.println("Enter Name: ");
+			customer.setName(sc.next());
+			System.out.println("Enter Phone Number: ");
+			customer.setPhoneNumber(sc.next());
+			System.out.println("Enter Age: ");
+			customer.setAge(Integer.valueOf(sc.next()));
+			System.out.println("Enter Address: ");
+			customer.setAddress(sc.next());
+			System.out.println("Successfully edited your profile");
+		}
+		
 		public void getGyms() {
 			System.out.println("Enter your city: ");
 			List<Gym> gyms = customerBusiness.getGymInCity(sc.next());
@@ -94,7 +111,7 @@ public class CustomerClient {
 			
 			while(choice != 4) {				
 				System.out.println("Menu:-");
-				System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4.Exit");
+				System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4. Edit Profile \n5.Exit");
 				System.out.print("Enter your choice: ");
 				choice = sc.nextInt();
 				
@@ -109,7 +126,10 @@ public class CustomerClient {
 						cancelBooking(email);
 						break;
 					case 4:
+						editProfile(email);
 //						applicationClient.mainPage();
+						break;
+					case 5:
 						break;
 					default:
 						System.out.println("Invalid choice!");
