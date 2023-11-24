@@ -66,35 +66,20 @@ public class GymOwnerClient {
     public void addGym(Scanner in, String email) {
         System.out.println("Enter Gym Details: ");
 
-        Gym gym = new Gym();
-        System.out.print("Enter GymName: ");
-        gym.setGymName(in.next());
-        gym.setOwnerEmail(email);
-        System.out.print("Enter Address: ");
-        gym.setAddress(in.next());
-        System.out.print("Enter SlotCount: ");
-        gym.setSlotCount(in.nextInt());
-        System.out.print("Enter seatsPerSlotCount: ");
-        gym.setSeatsPerSlotCount(in.nextInt());
-        gym.setVerified(false);
-
-<<<<<<< HEAD
-        gymOwnerBusiness.addGym(gym);
-=======
 		Gym gym = new Gym();
 		gym.setGymId(IdGenerator.generateId("Gym"));
-		System.out.println("Enter GymName : ");
+		System.out.print("Enter GymName : ");
 		gym.setGymName(in.next());
 		gym.setOwnerEmail(email);
-		System.out.println("Enter Address : ");
+		System.out.print("Enter Address : ");
 		gym.setAddress(in.next());
-		System.out.println("Enter SlotCount : ");
+		System.out.print("Enter SlotCount : ");
 		gym.setSlotCount(in.nextInt());
-		System.out.println("Enter seatsPerSlotCount : ");
+		System.out.print("Enter seatsPerSlotCount : ");
 		gym.setSeatsPerSlotCount(in.nextInt());
 		gym.setVerified(false);
->>>>>>> 00d3ed2 (Resolved merge conflicts)
-
+		
+        gymOwnerBusiness.addGym(gym);
     }
 
     public void editGym(Scanner in, String email) {
@@ -124,23 +109,18 @@ public class GymOwnerClient {
         }
     }
 
-    public void gymOwnerMenu(Scanner in, String email) {
-        boolean recur = true;
-        while (recur) {
-
-<<<<<<< HEAD
-            System.out.println("\nHere are the actions you can perform!");
-=======
 	public void addSlot(Scanner in) {
 		System.out.println("Enter Slot Details: ");
 		Slot slot = new Slot();
 		slot.setSlotId(IdGenerator.generateId("Slot"));
 		System.out.print("Enter Gym Id:");
-//		slot.setGymId(in.next());
+		slot.setGymId(in.next());
 		System.out.print("\nEnter Slot Start Time: ");
 		slot.setStartTime(in.next());
 		System.out.print("\nEnter Slot End Time: ");
 		slot.setEndTime(in.next());
+		System.out.print("\nEnter number of seats in slot: ");
+		slot.setNumOfSeats(in.nextInt());
 		System.out.print("\nEnter Trainer: ");
 		slot.setTrainer(in.next());
 	}
@@ -148,7 +128,7 @@ public class GymOwnerClient {
 	public void gymOwnerMenu(Scanner in, String email) {
 		boolean recur = true;
 		while (recur) {
->>>>>>> 00d3ed2 (Resolved merge conflicts)
+			System.out.println("\nHere are the actions you can perform!");
 
             System.out.println("1. View Profile");
             System.out.println("2. Edit Profile");
