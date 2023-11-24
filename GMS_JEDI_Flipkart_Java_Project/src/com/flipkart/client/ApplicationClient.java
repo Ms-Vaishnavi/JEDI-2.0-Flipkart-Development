@@ -8,27 +8,29 @@ public class ApplicationClient {
 	public static void login() throws Exception{
         Scanner in = new Scanner(System.in);
         System.out.println("Enter Email: ");
-        String username = in.next();
+        String userEmail = in.next();
         System.out.println("Enter password: ");
         String password = in.next();
         System.out.println("Enter role Id: ");
         String roleId = in.next();
-        User user = new User(username, password, roleId);
+        User user = new User(userEmail, password, roleId);
         UserDAO authicated = new UserDAO();
         if(authicated.isAuthenticated(user))
         {
-            System.out.println("Welcome " + username + "! You are logged in.");
+
+            System.out.println("Welcome " + userEmail + "! You are logged in.");
+            String role = user.getRoleId();
             
             if(roleId.equals("Customer")) {
           
                 CustomerClient customer = new CustomerClient();
-                customer.customerMenu(username);
+                customer.customerMenu(userEmail);
                 
             }
             else if(roleId.equals("GymOwner")) {
             
                 GymOwnerClient gymOwner = new GymOwnerClient();
-                gymOwner.gymOwnerMenu(in);
+                gymOwner.gymOwnerMenu(in, userEmail);
                 
             }
             else if(roleId.equals("Admin")) {
