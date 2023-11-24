@@ -10,8 +10,8 @@ public class Administrator extends User {
 	private String name;
 	private String phoneNumber;
 	
-	public Administrator(String email, String password, int roleId, String name, String phoneNumber) {
-		super(email, password, roleId);
+	public Administrator(String email, String password, String roleName, String name, String phoneNumber) {
+		super(email, password, roleName);
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 	}

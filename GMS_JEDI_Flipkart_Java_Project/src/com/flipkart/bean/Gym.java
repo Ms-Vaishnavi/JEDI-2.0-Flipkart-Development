@@ -14,6 +14,14 @@ public class Gym {
 	private String slotCount;
 	private String seatsPerSlotCount;
 	private boolean isVerified;
+	
+	public Gym() {
+		
+	}
+	
+	public Gym(String gymId, String gymName, String ownerEmail, String address, String slotCount, String seatsPerSlotCount, boolean isVarified) {
+		
+	}
 
 	public String getGymId() {
 		return gymId;

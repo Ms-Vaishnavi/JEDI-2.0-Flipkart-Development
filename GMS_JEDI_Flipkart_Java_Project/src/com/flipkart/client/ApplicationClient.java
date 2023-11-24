@@ -12,27 +12,31 @@ public class ApplicationClient {
         System.out.println("Enter password: ");
         String password = in.next();
         System.out.println("Enter role Id: ");
-        int roleId = in.nextInt();
+        String roleId = in.next();
         User user = new User(username, password, roleId);
         UserDAO authicated = new UserDAO();
         if(authicated.isAuthenticated(user))
         {
             System.out.println("Welcome " + username + "! You are logged in.");
-            int role = user.getRoleId();
-            switch(role)
-            {
-            case 1: 
+            String role = user.getRoleId();
+            
+            if(roleId.equals("Customer")) {
+          
                 CustomerClient customer = new CustomerClient();
                 customer.customerMenu(username);
-                break;
-            case 2:
+                
+            }
+            else if(roleId.equals("GymOwner")) {
+            
                 GymOwnerClient gymOwner = new GymOwnerClient();
                 gymOwner.gymOwnerMenu(in);
-                break;
-            case 3:
+                
+            }
+            else if(roleId.equals("Admin")) {
                 AdminClient admin = new AdminClient();
                 admin.adminMenu(in);
-                break;
+ 
+           
             }
         }
         else

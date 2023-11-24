@@ -36,7 +36,7 @@ public class GymOwnerClient {
 		gymOwner.setEmail(in.next());
 		System.out.println("Enter Password : ");
 		gymOwner.setPassword(in.next());
-		gymOwner.setRoleId(2);
+		gymOwner.setRoleId("GymOwner");
 		
 		UserBusiness userBusiness = new UserBusiness();
 		userBusiness.registerGymOwner(gymOwner);

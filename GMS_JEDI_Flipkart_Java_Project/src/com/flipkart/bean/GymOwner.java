@@ -13,7 +13,7 @@ public class GymOwner extends User {
 	private String panNumber;
 	private boolean isVerified;
 	
-	public GymOwner(String email, String password, int roleId, String name, String phoneNumber, String aadharNumber, String panNumber) {
+	public GymOwner(String email, String password, String roleId, String name, String phoneNumber, String aadharNumber, String panNumber) {
 		super(email, password, roleId);
 		this.name = name;
 		this.phoneNumber = phoneNumber;
