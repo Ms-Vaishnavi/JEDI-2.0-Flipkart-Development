@@ -47,28 +47,50 @@ public class GymOwnerBusiness {
 		return null;
 	}
 
-	public void editProfile(GymOwner gymOwnerNew) {
+	public void editProfile(GymOwner gymOwnerNew, String email) {
 		for(int i=0; i<gymOwners.size(); i++) {
-			if(gymOwners.get(i).getEmail().equals(gymOwnerNew.getEmail())) gymOwners.add(i, gymOwnerNew);
+			GymOwner prevGymOwner = gymOwners.get(i);
+			if(prevGymOwner.getEmail().equals(email)) {
+				prevGymOwner.setName(gymOwnerNew.getName());
+				prevGymOwner.setPhoneNumber(gymOwnerNew.getPhoneNumber());
+				prevGymOwner.setPanNumber(gymOwnerNew.getPanNumber());
+				prevGymOwner.setAadharNumber(gymOwnerNew.getAadharNumber());
+				gymOwners.add(i, prevGymOwner);
+				System.out.println("Successfully edited your profile");
+				break;
+			}
 		}
+		System.out.println("We could not find your profile, please retry!");
 	}
 	
 	public boolean addGym(Gym gym) {
-
 		gyms.add(gym);
+		System.out.println("Added Gym Successfully!");
 		return true;
 	}
 	
 	public void editGym(Gym gym) {
 		for(int i=0; i<gyms.size(); i++) {
-			if(gyms.get(i).getGymId().equals(gym.getGymId())) gyms.add(i, gym);
+			Gym prevGym = gyms.get(i);
+			if(prevGym.getGymId().equals(gym.getGymId())) {
+				prevGym.setGymName(gym.getGymName());
+				prevGym.setAddress(gym.getAddress());
+				prevGym.setSlotCount(gym.getSlotCount());
+				prevGym.setSeatsPerSlotCount(gym.getSeatsPerSlotCount());
+				gyms.add(i, prevGym);
+				System.out.println("Edited Gym Details Successfully");
+				break;
+			}
 		}
+		System.out.println("We could not find the gym with the ID provided, please retry!");
 	}
 	
 	public List<Gym> getGymDetail(String gymOwnerEmail) {
 		List<Gym> ownersGyms = new ArrayList<>();
 		for(Gym gym: gyms) {
-			if(gym.getOwnerEmail().equals(gymOwnerEmail)) ownersGyms.add(gym);
+			if(gym.getOwnerEmail().equals(gymOwnerEmail)) { 
+				ownersGyms.add(gym);
+			}
 		}
 		return ownersGyms;
 	}

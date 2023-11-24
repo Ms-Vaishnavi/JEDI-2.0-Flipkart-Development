@@ -20,7 +20,13 @@ public class Gym {
 	}
 	
 	public Gym(String gymId, String gymName, String ownerEmail, String address, int slotCount, int seatsPerSlotCount, boolean isVerified) {
-		
+		this.gymId = gymId;
+		this.gymName = gymName;
+		this.ownerEmail = ownerEmail;
+		this.address = address;
+		this.slotCount = slotCount;
+		this.seatsPerSlotCount = seatsPerSlotCount;
+		this.isVerified = isVerified;
 	}
 
 	public String getGymId() {
@@ -77,6 +83,18 @@ public class Gym {
 
 	public void setVerified(boolean isVerified) {
 		this.isVerified = isVerified;
+	}
+	
+	public String toString() {
+		String s = "Gym Id : " + this.gymId + 
+				"\nGym Name : " + this.gymName + 
+				"\nGym Owner Email : " + this.getOwnerEmail() + 
+				"\nGym Address : " + this.getAddress() + 
+				"\nGym Slotcount : " + this.getSlotCount() + 
+				"\nSeat per slot count : " + this.getSeatsPerSlotCount() + 
+				"\n Verification : " + (this.isVerified() ? "Yes" : "No");	
+		return s;
+		
 	}
 
 }

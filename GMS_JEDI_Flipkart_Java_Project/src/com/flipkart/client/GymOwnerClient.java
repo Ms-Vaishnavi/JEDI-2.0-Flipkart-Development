@@ -3,6 +3,7 @@
  */
 package com.flipkart.client;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.flipkart.bean.Gym;
@@ -44,7 +45,7 @@ public class GymOwnerClient {
 		System.out.println("Customer registered successfully!");
 	}
 
-	public void editProfile(Scanner in) {
+	public void editProfile(Scanner in, String email) {
 		System.out.println("Enter Details: ");
 		System.out.println("Enter Name : ");
 		gymOwner.setName(in.next());
@@ -55,7 +56,7 @@ public class GymOwnerClient {
 		System.out.println("Enter Aadhaar : ");
 		gymOwner.setAadharNumber(in.next());
 
-		gymOwnerBusiness.editProfile(gymOwner);
+		gymOwnerBusiness.editProfile(gymOwner, email);
 	}
 
 	public void viewProfile(Scanner in, String email) {
@@ -67,14 +68,13 @@ public class GymOwnerClient {
 
 	}
 
-	public void addGym(Scanner in) {
+	public void addGym(Scanner in, String email) {
 		System.out.println("Enter Gym Details: ");
 
 		Gym gym = new Gym();
 		System.out.println("Enter GymName : ");
 		gym.setGymName(in.next());
-		System.out.println("Enter Owner Email : ");
-		gym.setOwnerEmail(in.next());
+		gym.setOwnerEmail(email);
 		System.out.println("Enter Address : ");
 		gym.setAddress(in.next());
 		System.out.println("Enter SlotCount : ");
@@ -87,14 +87,15 @@ public class GymOwnerClient {
 
 	}
 
-	public void editGym(Scanner in) {
+	public void editGym(Scanner in, String email) {
 		System.out.println("Enter Gym Details: ");
 
 		Gym gym = new Gym();
+		System.out.println("Enter GymId : ");
+		gym.setGymId(in.next());
 		System.out.println("Enter GymName : ");
 		gym.setGymName(in.next());
-		System.out.println("Enter Owner Email : ");
-		gym.setOwnerEmail(in.next());
+		gym.setOwnerEmail(email);
 		System.out.println("Enter Address : ");
 		gym.setAddress(in.next());
 		System.out.println("Enter SlotCount : ");
@@ -107,7 +108,10 @@ public class GymOwnerClient {
 	}
 
 	public void getGymDetails(Scanner in, String email) {
-		gymOwnerBusiness.getGymDetail(email);
+		List<Gym> gymDetails = gymOwnerBusiness.getGymDetail(email);
+		for (Gym gym: gymDetails) {
+			System.out.println(gym);
+		}
 	}
 
 	public void gymOwnerMenu(Scanner in, String email) {
@@ -130,13 +134,13 @@ public class GymOwnerClient {
 				viewProfile(in, email);
 				break;
 			case 2:
-				editProfile(in);
+				editProfile(in, email);
 				break;
 			case 3:
-				addGym(in);
+				addGym(in, email);
 				break;
 			case 4:
-				editGym(in);
+				editGym(in, email);
 				break;
 			case 5:
 				getGymDetails(in, email);
