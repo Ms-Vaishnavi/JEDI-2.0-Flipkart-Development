@@ -3,6 +3,7 @@ package com.flipkart.client;
 import java.util.*;
 import com.flipkart.bean.User;
 import com.flipkart.DAO.*;
+import com.flipkart.constants.*;
 
 public class ApplicationClient {
 	public static void login() throws Exception{
@@ -48,14 +49,18 @@ public class ApplicationClient {
     }
 
 	public static void applicationMenu() throws Exception {
-		System.out.println("Welcome to FlipFit");
-		System.out.println("Choose your action:");
+		System.out.println(ColorConstants.GREEN + "Welcome to FlipFit Application!" + ColorConstants.RESET);
+		System.out.println("\nChoose your action:");
 		System.out.println("1. Login");
 		System.out.println("2. Customer Registration");
 		System.out.println("3. Gym Owner Registration");
 		System.out.println("4. exit");
+		System.out.print("\nEnter Your Choice: ");
+		
 
 		Scanner in = new Scanner(System.in);
+		System.out.println("______________________________________________________________\n");
+
 
 		int choice = in.nextInt();
 		switch (choice) {

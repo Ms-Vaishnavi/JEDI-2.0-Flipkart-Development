@@ -10,6 +10,7 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.GymOwnerBusiness;
 import com.flipkart.business.UserBusiness;
+import com.flipkart.constants.*;
 
 /**
  * 
@@ -42,7 +43,7 @@ public class GymOwnerClient {
 		UserBusiness userBusiness = new UserBusiness();
 		userBusiness.registerGymOwner(gymOwner);
 
-		System.out.println("Customer registered successfully!");
+		System.out.println("\n" + ColorConstants.GREEN + "Customer registered successfully!" + ColorConstants.RESET);
 	}
 
 	public void editProfile(Scanner in, String email) {
@@ -61,10 +62,12 @@ public class GymOwnerClient {
 
 	public void viewProfile(Scanner in, String email) {
 		gymOwner = gymOwnerBusiness.getProfile(email);
-		System.out.println("Name : " + gymOwner.getName());
-		System.out.println("Phone Number : " + gymOwner.getPhoneNumber());
-		System.out.println("PAN : " + gymOwner.getPanNumber());
-		System.out.println("Aadhaar : " + gymOwner.getAadharNumber());
+		System.out.println("______________________________________________________________");
+		System.out.printf("%15s%15s%15s%15s", "Gym Owner Name", "Phone Number", "PAN Number", "Aadhaar Number");
+		System.out.println();
+		System.out.printf("%15s%15s%15s%15s", gymOwner.getName(), gymOwner.getPhoneNumber(), gymOwner.getPanNumber(),
+				gymOwner.getAadharNumber());
+		System.out.println("______________________________________________________________");
 
 	}
 
@@ -109,7 +112,7 @@ public class GymOwnerClient {
 
 	public void getGymDetails(Scanner in, String email) {
 		List<Gym> gymDetails = gymOwnerBusiness.getGymDetail(email);
-		for (Gym gym: gymDetails) {
+		for (Gym gym : gymDetails) {
 			System.out.println(gym);
 		}
 	}
