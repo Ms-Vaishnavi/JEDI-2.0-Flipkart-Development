@@ -13,6 +13,8 @@ public class CustomerBusiness {
 
 	List<Customer> customers = new ArrayList<>();
 	List<Booking> bookings=new ArrayList<>();
+
+	List<Slot>slots=new ArrayList<>();
 	Date d1=new Date();
 	Customer customer1 = new Customer("c1@gmail.com", "c1", "Customer", "Vaishnavi", "0000", 22, "Kanpur");
 	Customer customer2 = new Customer("c2@gmail.com", "c2", "Customer", "Anjali", "0000", 32, "Vadodara");
@@ -26,6 +28,11 @@ public class CustomerBusiness {
 	Booking b3=new Booking("113","129","173","confirmed",d1,"c3@gmail.com","Johnathon");
 	Booking b4=new Booking("193","127","971","waitlisted",d1,"c4@gmail.com","J");
 
+	Slot s1=new Slot("900","1400","1500",100,"John");
+	Slot s2=new Slot("910","1500","1600",100,"J");
+	Slot s3=new Slot("930","1600","1700",100,"Jack");
+	Slot s4=new Slot("950","1700","1800",100,"Johnny");
+
 	public CustomerBusiness()
 	{
 		customers.add(customer1);
@@ -37,6 +44,11 @@ public class CustomerBusiness {
 		bookings.add(b2);
 		bookings.add(b3);
 		bookings.add(b4);
+
+		slots.add(s1);
+		slots.add(s2);
+		slots.add(s3);
+		slots.add(s4);
 	}
 	
 	public Customer getProfile(Customer customer) {
