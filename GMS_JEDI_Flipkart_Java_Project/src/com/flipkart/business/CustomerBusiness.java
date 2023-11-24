@@ -110,8 +110,16 @@ public class CustomerBusiness {
 	}
 
 	public List<Gym> getGymInCity(String city) {
-		return new ArrayList<>();
-	}
+			List<Gym> newGym = new ArrayList<Gym>();
+			for(Gym gym:gyms)
+			{
+				if(gym.getAddress().equals(city))
+				{
+					newGym.add(gym);
+				}
+			}
+			return newGym;
+		}
 
 	public List<Slot> getSlotInGym(String gymId) {
 		return new ArrayList<>();
