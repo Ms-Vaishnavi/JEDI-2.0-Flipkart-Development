@@ -115,13 +115,13 @@ public class GymOwnerClient {
 		slot.setSlotId(IdGenerator.generateId("Slot"));
 		System.out.print("Enter Gym Id:");
 		slot.setGymId(in.next());
-		System.out.print("\nEnter Slot Start Time: ");
+		System.out.print("Enter Slot Start Time: ");
 		slot.setStartTime(in.next());
-		System.out.print("\nEnter Slot End Time: ");
+		System.out.print("Enter Slot End Time: ");
 		slot.setEndTime(in.next());
-		System.out.print("\nEnter number of seats in slot: ");
+		System.out.print("Enter number of seats in slot: ");
 		slot.setNumOfSeats(in.nextInt());
-		System.out.print("\nEnter Trainer: ");
+		System.out.print("Enter Trainer: ");
 		slot.setTrainer(in.next());
 	}
 	
@@ -134,8 +134,9 @@ public class GymOwnerClient {
             System.out.println("2. Edit Profile");
             System.out.println("3. Add Gym");
             System.out.println("4. Edit Gym");
-            System.out.println("5. View All Gym Details");
-            System.out.println("6. Exit\n");
+            System.out.println("5. Add Slot");
+            System.out.println("6. View All Gym Details");
+            System.out.println("7. Exit\n");
 
             int choice = in.nextInt();
 
@@ -153,12 +154,16 @@ public class GymOwnerClient {
                     editGym(in, email);
                     break;
                 case 5:
+                	addSlot(in);
+                	break;
+                case 6:
                     getGymDetails(in, email);
                     break;
-
-                case 6:
+                case 7:
                     recur = false;
                     break;
+                default:
+                	System.out.println(ColorConstants.RED + "Invalid Choice!" + ColorConstants.RESET);
             }
         }
 
