@@ -229,7 +229,7 @@ public class CustomerBusiness {
 			}
 			return 3;
 		}
-		return 3;
+		return 1;
 	}
 
 	public boolean isSlotBooked(String slotId, Date date) {

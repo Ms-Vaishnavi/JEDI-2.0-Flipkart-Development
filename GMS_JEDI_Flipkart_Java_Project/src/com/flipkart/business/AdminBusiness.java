@@ -8,7 +8,7 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 
 /**
- * 
+ * This class gives the Gym Management System's admin operations capabilities by implementing the AdminGMSInterface.
  */
 public class AdminBusiness {
 	List<GymOwner> gymOwners = new ArrayList<>();
@@ -34,15 +34,24 @@ public class AdminBusiness {
 		gyms.add(gym3);
 		gyms.add(gym4);
 	}
-
+	/**
+	 * Obtains a list of every gym owner within the system.
+	 * @return List of GymOwner objects
+	 */
 	public List<GymOwner> getGymOwners() {
 		return gymOwners;
 	}
-	
+	/**
+	 * Obtains a list of every gym within the system.
+	 * @return List of Gym objects
+	 */
 	public List<Gym> getGym() {
 		return gyms;
 	}
-	
+	/**
+	 * Returns a list of pending GymOwner requests.
+	 * @return List of GymOwner objects
+	 */
 	public List<GymOwner> getPendingGymOwnersRequests() {
 		List<GymOwner> pendingGymOwnerRequests = new ArrayList<GymOwner>();
 		for (GymOwner owner: gymOwners) {
@@ -51,7 +60,10 @@ public class AdminBusiness {
 		}
 		return pendingGymOwnerRequests;
 	}
-	
+	/**
+	 * Returns a list of pending Gym requests.
+	 * @return List of Gym objects
+	 */
 	public List<Gym> getPendingGymRequests() {
 		List<Gym> pendingGymRequests = new ArrayList<Gym>();
 		for (Gym gym: gyms) {
@@ -60,7 +72,10 @@ public class AdminBusiness {
 		}
 		return pendingGymRequests;
 	}
-	
+	/**
+	 * Accepts one request from a gym owner. 
+	 * @param gymOwnerEmail The request's email that has to be approved
+	 */
 	public boolean approveSingleGymOwnerRequest(String gymOwnerEmail) {
 		for (int i = 0; i < gymOwners.size(); i++) {
 			GymOwner owner = gymOwners.get(i);
@@ -73,7 +88,10 @@ public class AdminBusiness {
 		}
 		return false;
 	}
-	
+	/**
+	 * Returns all GymOwners object whose requests are pending for approval. 
+	 * @return List of GymOwner objects
+	 */
 	public List<GymOwner> viewAllPendingGymOwnerRequests() {
 		List<GymOwner> pendingGymOwnerReq = new ArrayList<GymOwner>();
 		for (int i = 0; i < gymOwners.size(); i++) {
@@ -84,7 +102,9 @@ public class AdminBusiness {
 		}
 		return pendingGymOwnerReq;
 	}
-	
+	/**
+	 * Approves all GymOwners whose requests are pending for approval. 
+	 */
 	public boolean approveAllPendingGymOwnerRequests() {
 		for (int i = 0; i < gymOwners.size(); i++) {
 			GymOwner owner = gymOwners.get(i);
@@ -96,7 +116,10 @@ public class AdminBusiness {
 		}
 		return true;
 	}
-	
+	/**
+	 * Returns all Gym object whose requests are pending for approval. 
+	 * @return List of Gym objects
+	 */
 	public List<Gym> viewAllPendingGymRequests() {
 		List<Gym> pendingGymReq = new ArrayList<Gym>();
 		for (int i = 0; i < gyms.size(); i++) {
@@ -107,7 +130,11 @@ public class AdminBusiness {
 		}
 		return pendingGymReq;
 	}
-	
+	/**
+	 * Approves a single Gym object request. 
+	 * @param gymId the id of a gym that needs to be approved
+	 * @return true if the gymId is valid else returns false
+	 */
 	public boolean approveSingleGymRequest(String gymId) {
 		for (int i = 0; i < gyms.size(); i++) {
 			Gym gym = gyms.get(i);
@@ -120,6 +147,9 @@ public class AdminBusiness {
 		}
 		return false;
 	}
+	/**
+	 * Approves all Gym whose requests are pending for approval. 
+	 */
 	public boolean approveAllPendingGymRequests() {
 		for (int i = 0; i < gyms.size(); i++) {
 			Gym gym = gyms.get(i);
