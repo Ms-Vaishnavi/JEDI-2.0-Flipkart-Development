@@ -11,7 +11,7 @@ import java.util.*;
 /**
  * 
  */
-public class GymOwnerBusiness {
+public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	
 	List<GymOwner> gymOwners = new ArrayList<>();
 	GymOwner gymOwner1 = new GymOwner("gymowner1@gmail.com", "go1", "GymOwner", "Rakesh", "0000", "0000", "0000");
