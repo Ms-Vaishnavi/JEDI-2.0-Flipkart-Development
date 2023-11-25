@@ -10,7 +10,7 @@ import com.flipkart.bean.GymOwner;
 /**
  * This class gives the Gym Management System's admin operations capabilities by implementing the AdminGMSInterface.
  */
-public class AdminBusiness {
+public class AdminBusiness implements AdminBusinessInterface{
 	List<GymOwner> gymOwners = new ArrayList<>();
 	GymOwner gymOwner1 = new GymOwner("gymowner1@gmail.com", "go1", "GymOwner", "Rakesh", "0000", "0000", "0000");
 	GymOwner gymOwner2 = new GymOwner("gymowner2@gmail.com", "go2", "GymOwner", "Ramesh", "0000", "0000", "0000");
@@ -48,30 +48,22 @@ public class AdminBusiness {
 	public List<Gym> getGym() {
 		return gyms;
 	}
+
 	/**
-	 * Returns a list of pending GymOwner requests.
+	 * Returns all GymOwners object whose requests are pending for approval.
 	 * @return List of GymOwner objects
 	 */
-	public List<GymOwner> getPendingGymOwnersRequests() {
-		List<GymOwner> pendingGymOwnerRequests = new ArrayList<GymOwner>();
-		for (GymOwner owner: gymOwners) {
-			if (!owner.isVerified())
-				pendingGymOwnerRequests.add(owner);
+	public List<GymOwner> viewAllPendingGymOwnerRequests() {
+		List<GymOwner> pendingGymOwnerReq = new ArrayList<GymOwner>();
+		for (int i = 0; i < gymOwners.size(); i++) {
+			GymOwner owner = gymOwners.get(i);
+			if (!owner.isVerified()) {
+				pendingGymOwnerReq.add(owner);
+			}
 		}
-		return pendingGymOwnerRequests;
+		return pendingGymOwnerReq;
 	}
-	/**
-	 * Returns a list of pending Gym requests.
-	 * @return List of Gym objects
-	 */
-	public List<Gym> getPendingGymRequests() {
-		List<Gym> pendingGymRequests = new ArrayList<Gym>();
-		for (Gym gym: gyms) {
-			if (!gym.isVerified())
-				pendingGymRequests.add(gym);
-		}
-		return pendingGymRequests;
-	}
+
 	/**
 	 * Accepts one request from a gym owner. 
 	 * @param gymOwnerEmail The request's email that has to be approved
@@ -88,20 +80,7 @@ public class AdminBusiness {
 		}
 		return false;
 	}
-	/**
-	 * Returns all GymOwners object whose requests are pending for approval. 
-	 * @return List of GymOwner objects
-	 */
-	public List<GymOwner> viewAllPendingGymOwnerRequests() {
-		List<GymOwner> pendingGymOwnerReq = new ArrayList<GymOwner>();
-		for (int i = 0; i < gymOwners.size(); i++) {
-			GymOwner owner = gymOwners.get(i);
-			if (!owner.isVerified()) {
-				pendingGymOwnerReq.add(owner);
-			}
-		}
-		return pendingGymOwnerReq;
-	}
+
 	/**
 	 * Approves all GymOwners whose requests are pending for approval. 
 	 */
