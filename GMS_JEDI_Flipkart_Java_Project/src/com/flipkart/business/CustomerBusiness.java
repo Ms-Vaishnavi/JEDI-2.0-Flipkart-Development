@@ -10,7 +10,7 @@ import com.flipkart.utils.IdGenerator;
 import java.util.Date;
 import java.util.*;
 
-public class CustomerBusiness {
+public class CustomerBusiness implements CustomerBusinessInterface {
 
 	List<Customer> customers = new ArrayList<>();
 	List<Booking> bookings = new ArrayList<>();
