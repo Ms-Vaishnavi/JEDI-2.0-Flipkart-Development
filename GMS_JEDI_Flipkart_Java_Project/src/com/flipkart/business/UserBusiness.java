@@ -10,7 +10,7 @@ import com.flipkart.bean.User;
 /**
  * 
  */
-public class UserBusiness {
+public class UserBusiness implements UserBusinessInterface{
 	/**
 	Registers a customer in the system.
 	@param customer The Customer object representing the customer data
