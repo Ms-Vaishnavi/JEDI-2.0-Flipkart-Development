@@ -63,6 +63,11 @@ public class CustomerBusiness {
 		gyms.add(gym4);
 	}
 
+	/**
+	 * Obtains customer's profile details 
+	 * @param customer the Customer object for which the profile details are requested
+	 * @return Customer the Customer's object
+	 */
 	public Customer getProfile(Customer customer) {
 		for (Customer cust : customers) {
 			if (cust.getEmail().equals(customer.getEmail()))
@@ -71,6 +76,10 @@ public class CustomerBusiness {
 		return null;
 	}
 
+	/**
+	 * Gives functionality of updating customer's personal data. 
+	 * @param customer the Customer object for which the profile data needs to be updated
+	 */
 	public void editProfile(Customer customer) {
 		for (Customer cust : customers) {
 			if (cust.getEmail().equals(customer.getEmail())) {
@@ -84,7 +93,11 @@ public class CustomerBusiness {
 			}
 		}
 	}
-
+	/**
+	 * Obtains all the bookings done by the given customer email.
+	 * @param email the Customer email for which the bookings data are requested
+	 * @return List of bookings done by the given customer email
+	 */
 	public List<Booking> getBookings(String email) {
 
 		List<Booking> customerBookings = new ArrayList<Booking>();
@@ -96,7 +109,12 @@ public class CustomerBusiness {
 		}
 		return customerBookings;
 	}
-
+	/**
+	 * Performs booking cancellation operation for the given customer email.
+	 * @param bookingId the id of booking for which cancellation needs to be performed
+	 * @param email the Customer email for which the booking cancellation is requested
+	 * @return returns true of the booking gets cancelled successfully else returns false
+	 */
 	public boolean cancelBooking(String bookingId, String email) {
 
 		for (Booking booking : bookings) {
@@ -108,7 +126,11 @@ public class CustomerBusiness {
 		}
 		return false;
 	}
-
+	/**
+	 * Obtains all the gyms for the given city.
+	 * @param city the city name for which the gym list is requested
+	 * @return returns List of gyms available for the given city
+	 */
 	public List<Gym> getGymInCity(String city) {
 		List<Gym> newGym = new ArrayList<Gym>();
 		for (Gym gym : gyms) {
@@ -118,7 +140,11 @@ public class CustomerBusiness {
 		}
 		return newGym;
 	}
-
+	/**
+	 * Obtains all the slots for the given gymId.
+	 * @param gymId the Gym Id for which the slot details are requested
+	 * @return returns List of available slots for the given gymId
+	 */
 	public List<Slot> getSlotInGym(String gymId) {
 		List<Slot> slotsOfGym = new ArrayList<>();
 		for (Slot s : slots) {
@@ -128,9 +154,15 @@ public class CustomerBusiness {
 		}
 		return slotsOfGym;
 	}
-
+	/**
+	 * Performs booking operation for the given customer email on the given date for the given slotId
+	 * @param email the email of customer who requested the booking operation
+	 * @param slotId the slot id in which the customer wants to book a seat
+	 * @param date the date on which the customer wants to book a seat
+	 * @return returns integer signal based on the customer's booking status
+	 */
 	public int bookSlot(String gymId, String slotId, String email, Date date) {
-		List<Booking> tempBookings = new ArrayList<>();
+		List<Booking> tempBookings = getBookings(email);
 		boolean flag=false;
 		for(Booking booking:bookings)
 		{
@@ -153,7 +185,7 @@ public class CustomerBusiness {
 						if(slot.getSlotId().equals(slotId) && !slot.getGymId().equals(gymId))
 						{
 							int num=slot.getNumOfSeatsBooked();
-							if(num>0)
+							if(!isSlotBooked(slotId,date))
 							{
 								slot.setNumOfSeatsBooked(num--);
 								Booking getBooking = new Booking();
@@ -187,7 +219,7 @@ public class CustomerBusiness {
 						slot.setNumOfSeatsBooked(num--);
 						Booking getBooking = new Booking();
 						getBooking.setBookingId(IdGenerator.generateId("Booking"));
-						if(slot.getNumOfSeatsBooked()>0)
+						if(!isSlotBooked(slotId,date))
 						{
 							Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"confirmed",date,email,slot.getTrainer());
 							bookings.add(tempBooking);
@@ -213,7 +245,7 @@ public class CustomerBusiness {
 					slot.setNumOfSeatsBooked(num--);
 					Booking getBooking = new Booking();
 					getBooking.setBookingId(IdGenerator.generateId("Booking"));
-					if(slot.getNumOfSeatsBooked()>0)
+					if(!isSlotBooked(slotId,date))
 					{
 						Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"confirmed",date,email,slot.getTrainer());
 						bookings.add(tempBooking);
@@ -231,7 +263,12 @@ public class CustomerBusiness {
 		}
 		return 1;
 	}
-
+	/**
+	 * Checks if the slot is already booked or not
+	 * @param slotId the slot id for which the booking status is requested
+	 * @param date the date on which the booking status is requested
+	 * @return returns true if the slot id for the given date is fully booked else returns false
+	 */
 	public boolean isSlotBooked(String slotId, Date date) {
 		for (Slot s : slots) {
 			if (s.getSlotId().equals(slotId)) {
@@ -243,7 +280,13 @@ public class CustomerBusiness {
 		}
 		return false;
 	}
-
+	/**
+	 * Checks if the customer has already booked a seat in the same slot for the given date
+	 * @param slotId the slot id for which the booking status is requested
+	 * @param date the date on which the booking status is requested
+	 * @param customerEmail the email of customer for which the booking status is getting checked
+	 * @return returns true if the customer has already booked a seat on the same date in the same slot
+	 */
 	public boolean hasBookedSlotAlready(String slotId, String customerEmail, Date date) {
 		for (Booking b : bookings) {
 			if (b.getSlotId().equals(slotId)) {
