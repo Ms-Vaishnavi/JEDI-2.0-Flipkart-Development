@@ -129,87 +129,107 @@ public class CustomerBusiness {
 		return slotsOfGym;
 	}
 
-	public int bookSlot(String slotId, String email, Date date) {
-//		for(Booking booking:bookings)
-//		{
-//			if(booking.getCustomerEmail().equals(email) && booking.getDate().equals(date) && booking.getType().equals("confirmed"))
-//			{
-//				for(Slot s:slots)
-//				{
-//					if(s.getSlotId().equals(slotId)) 
-//					{
-//						int num=s.getNumOfSeatsBooked();
-//						s.setNumOfSeatsBooked(num--);
-//						Booking getBooking = new Booking();
-//						getBooking.setBookingId(IdGenerator.generateId("Booking"));
-//						if(s.getNumOfSeatsBooked()>0)
-//						{
-//							Booking b6=new Booking(getBooking.getBookingId(),slotId,s.getGymId(),"confirmed",date,email,s.getTrainer());
-//							bookings.add(b6);
-//							return 0;
-//						}
-//						else
-//						{
-//							Booking b6=new Booking(getBooking.getBookingId(),slotId,s.getGymId(),"waitlisted",date,email,s.getTrainer());
-//							bookings.add(b6);
-//							return 1;
-//						}
-//					}
-//					else return 4;
-//					
-//				}
-//			}
-//			else if(booking.getCustomerEmail().equals(email) && booking.getDate().equals(date) && booking.getType().equals("waitlisted"))
-//			{
-//				for(Slot s:slots)
-//				{
-//					if(s.getSlotId().equals(slotId)) 
-//					{
-//						int num=s.getNumOfSeatsBooked();
-//						s.setNumOfSeatsBooked(num--);
-//						Booking getBooking = new Booking();
-//						getBooking.setBookingId(IdGenerator.generateId("Booking"));
-//						if(s.getNumOfSeatsBooked()>0)
-//						{
-//							Booking b6=new Booking(getBooking.getBookingId(),slotId,s.getGymId(),"confirmed",date,email,s.getTrainer());
-//							bookings.add(b6);
-//							return 2;
-//						}
-//						else
-//						{
-//							Booking b6=new Booking(getBooking.getBookingId(),slotId,s.getGymId(),"waitlisted",date,email,s.getTrainer());
-//							bookings.add(b6);
-//							return 1;
-//						}
-//					}
-//					else return 4;
-//					
-//				}
-//			}
-//			return 0;
-//		}
-//		for(Slot s:slots)
-//		{
-//			if(s.getSlotId().equals(slotId)) 
-//			{
-//				int num=s.getNumOfSeatsBooked();
-//				s.setNumOfSeatsBooked(num--);
-//				Booking booking = new Booking();
-//				booking.setBookingId(IdGenerator.generateId("Booking"));
-//				if(s.getNumOfSeatsBooked()>0)
-//				{
-//					Booking b6=new Booking(booking.getBookingId(),slotId,s.getGymId(),"confirmed",date,email,s.getTrainer());
-//					bookings.add(b6);
-//				}
-//				else
-//				{
-//					Booking b6=new Booking(booking.getBookingId(),slotId,s.getGymId(),"waitlisted",date,email,s.getTrainer());
-//					bookings.add(b6);
-//				}
-//			}
-//			else return 0;
-//		}
-		return 0;
+	public int bookSlot(String gymId, String slotId, String email, Date date) {
+		List<Booking> tempBookings = new ArrayList<>();
+		boolean flag=false;
+		for(Booking booking:bookings)
+		{
+			if(booking.getCustomerEmail().equals(email) && booking.getType().equals("confirmed"))
+			{
+				flag=true;
+				tempBookings.add(booking);
+			}
+		}
+		if(flag)
+		{
+			boolean isDate=false;
+			for(Booking booking:tempBookings)
+			{
+				if(booking.getDate().equals(date))
+				{
+					isDate=true;
+					for(Slot slot:slots)
+					{
+						if(slot.getSlotId().equals(slotId) && !slot.getGymId().equals(gymId))
+						{
+							int num=slot.getNumOfSeatsBooked();
+							if(num>0)
+							{
+								slot.setNumOfSeatsBooked(num--);
+								Booking getBooking = new Booking();
+								getBooking.setBookingId(IdGenerator.generateId("Booking"));
+								Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"confirmed",date,email,slot.getTrainer());
+								bookings.add(tempBooking);
+								bookings.remove(booking);
+								return 0;
+							}
+							else
+							{
+								slot.setNumOfSeatsBooked(num--);
+								Booking getBooking = new Booking();
+								getBooking.setBookingId(IdGenerator.generateId("Booking"));
+								Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"waitlisted",date,email,slot.getTrainer());
+								bookings.add(tempBooking);
+								return 1;
+							}
+						}
+					}
+					return 3;
+				}
+			}
+			if(!isDate)
+			{
+				for(Slot slot:slots)
+				{
+					if(slot.getSlotId().equals(slotId) && slot.getGymId().equals(gymId))
+					{
+						int num=slot.getNumOfSeatsBooked();
+						slot.setNumOfSeatsBooked(num--);
+						Booking getBooking = new Booking();
+						getBooking.setBookingId(IdGenerator.generateId("Booking"));
+						if(slot.getNumOfSeatsBooked()>0)
+						{
+							Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"confirmed",date,email,slot.getTrainer());
+							bookings.add(tempBooking);
+							return 2;
+						}
+						else
+						{
+							Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"waitlisted",date,email,slot.getTrainer());
+							bookings.add(tempBooking);
+							return 1;
+						}
+					}
+				}
+			}
+		}
+		else
+		{
+			for(Slot slot:slots)
+			{
+				if(slot.getSlotId().equals(slotId) && slot.getGymId().equals(gymId))
+				{
+					int num=slot.getNumOfSeatsBooked();
+					slot.setNumOfSeatsBooked(num--);
+					Booking getBooking = new Booking();
+					getBooking.setBookingId(IdGenerator.generateId("Booking"));
+					if(slot.getNumOfSeatsBooked()>0)
+					{
+						Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"confirmed",date,email,slot.getTrainer());
+						bookings.add(tempBooking);
+						return 2;
+					}
+					else
+					{
+						Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"waitlisted",date,email,slot.getTrainer());
+						bookings.add(tempBooking);
+						return 1;
+					}
+				}
+			}
+			return 3;
+		}
+		return 3;
 	}
 
 	public boolean isSlotBooked(String slotId, Date date) {
