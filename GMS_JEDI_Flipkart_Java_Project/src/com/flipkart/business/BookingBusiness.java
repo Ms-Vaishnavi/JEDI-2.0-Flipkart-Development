@@ -6,9 +6,10 @@ package com.flipkart.business;
 import com.flipkart.bean.*;
 import java.util.*;
 import java.util.Date;
+import com.flipkart.DAO.*;
 /**
  * 
- */public class BookingBusiness {
+ */public class BookingBusiness implements BookingBusinessInterface{
 
 	List<Booking> bookings=new ArrayList<>();
 	Date d1=new Date(); //current date
