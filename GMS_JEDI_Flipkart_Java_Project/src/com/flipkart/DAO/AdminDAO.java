@@ -146,21 +146,68 @@ public class AdminDAO {
 		
 	};
 	
-	public void approveSingleOwnerRequest(String requestId) {
-		
+	public void approveSingleOwnerRequest(String gymOwnerEmail) {
+		String SQL_APPROVE_GYM_OWNER_BY_ID="update gymOwner set approved=1 WHERE email=?;";
+		try (Connection connection = DriverManager
+	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+
+	            // Step 2:Create a statement using connection object
+	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_GYM_OWNER_BY_ID);) {
+	            System.out.println(preparedStatement);
+	            // Step 3: Execute the query or update query
+	            preparedStatement.setString(1, gymOwnerEmail);
+	            preparedStatement.executeQuery();	            
+	        } catch (SQLException e) {
+	            printSQLException(e);
+	        }
 	};
 	
 	public void approveAllOwnerRequest() {
-		
+		String SQL_APPROVE_ALL_GYMS="update gymOwner set isApproved=1;";
+		try (Connection connection = DriverManager
+	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+
+	            // Step 2:Create a statement using connection object
+	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);) {
+	            System.out.println(preparedStatement);
+	            // Step 3: Execute the query or update query
+	            preparedStatement.executeQuery();	            
+	        } catch (SQLException e) {
+	            printSQLException(e);
+	        }
 	};
 	
-	public void approveSingleGymRequest(int gymId) {
-		
+	public void approveSingleGymRequest(String gymId) {
+		String SQL_APPROVE_GYM_BY_ID="update gym set isApproved=1 where gymId = ?;";
+		try (Connection connection = DriverManager
+	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+
+	            // Step 2:Create a statement using connection object
+	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_GYM_BY_ID);) {
+	            System.out.println(preparedStatement);
+	            // Step 3: Execute the query or update query
+	            preparedStatement.setString(1, gymId);
+	            preparedStatement.executeQuery();	            
+	        } catch (SQLException e) {
+	            printSQLException(e);
+	        }
 	};
 	
 	public void approveAllGymRequest() {
-		
+		String SQL_APPROVE_ALL_GYMS="update gym set isApproved=1;";
+		try (Connection connection = DriverManager
+	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+
+	            // Step 2:Create a statement using connection object
+	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);) {
+	            System.out.println(preparedStatement);
+	            // Step 3: Execute the query or update query
+	            preparedStatement.executeQuery();	            
+	        } catch (SQLException e) {
+	            printSQLException(e);
+	        }
 	};
+	
 	public static void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
             if (e instanceof SQLException) {
