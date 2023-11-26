@@ -15,56 +15,62 @@ public class GymOwnerClient {
 
 	GymOwner gymOwner = new GymOwner();
 	GymOwnerBusiness gymOwnerBusiness = new GymOwnerBusiness();
+	UserBusiness userBusiness = new UserBusiness();
 
-    public void gymOwnerRegistration(Scanner in) {
-        System.out.println("Enter GymOwner Details: ");
-        System.out.print("Enter Email: ");
-        gymOwner.setEmail(in.next());
-        System.out.print("Enter Password: ");
-        gymOwner.setPassword(in.next());
-        gymOwner.setRoleId("GymOwner");
-        System.out.print("Enter Name: ");
-        gymOwner.setName(in.next());
-        System.out.print("Enter Phone Number: ");
-        gymOwner.setPhoneNumber(in.next());
-        System.out.print("Enter PAN: ");
-        gymOwner.setPanNumber(in.next());
-        System.out.print("Enter Aadhaar: ");
-        gymOwner.setAadharNumber(in.next());
-        
-        UserBusiness userBusiness = new UserBusiness();
-        userBusiness.registerGymOwner(gymOwner);
+	public void gymOwnerRegistration(Scanner in) {
+		System.out.println("\nEnter GymOwner Details: \n");
+		System.out.print("Enter Email: ");
+		gymOwner.setEmail(in.next());
+		System.out.print("Enter Password: ");
+		gymOwner.setPassword(in.next());
+		gymOwner.setRoleId("GymOwner");
+		System.out.print("Enter Name: ");
+		gymOwner.setName(in.next());
+		System.out.print("Enter Phone Number: ");
+		gymOwner.setPhoneNumber(in.next());
+		System.out.print("Enter PAN: ");
+		gymOwner.setPanNumber(in.next());
+		System.out.print("Enter Aadhaar: ");
+		gymOwner.setAadharNumber(in.next());
 
-		System.out.println("\n" + ColorConstants.GREEN + "Gym Owner registered successfully!" + ColorConstants.RESET);
+		UserBusiness userBusiness = new UserBusiness();
+		boolean registerSuccess = userBusiness.registerGymOwner(gymOwner);
+
+		if (registerSuccess)
+			System.out
+					.println("\n" + ColorConstants.GREEN + "Gym Owner registered successfully!" + ColorConstants.RESET);
+		else
+			System.out.println(
+					"\n" + ColorConstants.RED + "Gym Owner registration failed! Try again!" + ColorConstants.RESET);
 	}
 
-    public void editProfile(Scanner in, String email) {
-        System.out.println("Enter Details: ");
-        System.out.print("Enter Email: ");
-        gymOwner.setEmail(in.next());
-        System.out.print("Enter Password: ");
-        gymOwner.setPassword(in.next());
-        gymOwner.setRoleId("GymOwner");
-        System.out.print("Enter Name: ");
-        gymOwner.setName(in.next());
-        System.out.print("Enter Phone Number: ");
-        gymOwner.setPhoneNumber(in.next());
-        System.out.print("Enter PAN: ");
-        gymOwner.setPanNumber(in.next());
-        System.out.print("Enter Aadhaar: ");
-        gymOwner.setAadharNumber(in.next());
+	public void editProfile(Scanner in, String email) {
+		System.out.println("Enter Details: ");
+		System.out.print("Enter Email: ");
+		gymOwner.setEmail(in.next());
+		System.out.print("Enter Password: ");
+		gymOwner.setPassword(in.next());
+		gymOwner.setRoleId("GymOwner");
+		System.out.print("Enter Name: ");
+		gymOwner.setName(in.next());
+		System.out.print("Enter Phone Number: ");
+		gymOwner.setPhoneNumber(in.next());
+		System.out.print("Enter PAN: ");
+		gymOwner.setPanNumber(in.next());
+		System.out.print("Enter Aadhaar: ");
+		gymOwner.setAadharNumber(in.next());
 
 		gymOwnerBusiness.editProfile(gymOwner);
 	}
 
-    public void viewProfile(Scanner in, String email) {
-        gymOwner = gymOwnerBusiness.getProfile(email);
-        System.out.println("______________________________________________________________");
-        System.out.printf("%15s%15s%15s%15s", "Gym Owner Name", "Phone Number", "PAN Number", "Aadhaar Number");
-        System.out.println();
-        System.out.printf("%15s%15s%15s%15s", gymOwner.getName(), gymOwner.getPhoneNumber(),
-                gymOwner.getPanNumber(), gymOwner.getAadharNumber());
-        System.out.println("\n______________________________________________________________");
+	public void viewProfile(Scanner in, String email) {
+		gymOwner = gymOwnerBusiness.getProfile(email);
+		System.out.println("______________________________________________________________");
+		System.out.printf("%15s%15s%15s%15s", "Gym Owner Name", "Phone Number", "PAN Number", "Aadhaar Number");
+		System.out.println();
+		System.out.printf("%15s%15s%15s%15s", gymOwner.getName(), gymOwner.getPhoneNumber(), gymOwner.getPanNumber(),
+				gymOwner.getAadharNumber());
+		System.out.println("\n______________________________________________________________");
 	}
 
 	public void addGym(Scanner in, String email) {
@@ -140,8 +146,9 @@ public class GymOwnerClient {
 			System.out.println("4. Edit Gym");
 			System.out.println("5. Add Slot");
 			System.out.println("6. View All Gym Details");
-			System.out.println("7. Exit\n");
+			System.out.println("7. LogOut\n");
 
+			System.out.print("Enter Your Choice: " );
 			int choice = in.nextInt();
 
 			System.out.println("______________________________________________________________\n");
@@ -172,7 +179,12 @@ public class GymOwnerClient {
 				System.out.println(ColorConstants.RED + "Invalid Choice!" + ColorConstants.RESET);
 			}
 			if (!recur) {
-				System.out.println(ColorConstants.GREEN + "Exited Successfully!" + ColorConstants.RESET);
+				gymOwner = new GymOwner();
+				boolean logOutSuccess = userBusiness.logout(gymOwner);
+				if (logOutSuccess)
+					System.out.println(ColorConstants.GREEN + "Logged Out Successfully!" + ColorConstants.RESET);
+				else
+					System.out.println(ColorConstants.RED + "Logged Out Successfully!" + ColorConstants.RESET);
 			}
 		}
 

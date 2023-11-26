@@ -2,7 +2,7 @@ package com.flipkart.client;
 
 import java.util.*;
 
-import com.flipkart.DAO.UserDAO;
+import com.flipkart.DAO.UserDAOImpl;
 import com.flipkart.bean.User;
 import com.flipkart.business.UserBusiness;
 import com.flipkart.DAO.*;
@@ -71,10 +71,12 @@ public class ApplicationClient {
 			case 2:
 				CustomerClient customer = new CustomerClient();
 				customer.registerCustomer();
+				login();
 				break;
 			case 3:
 				GymOwnerClient owner = new GymOwnerClient();
 				owner.gymOwnerRegistration(in);
+				login();
 				break;
 			case 4:
 				System.out.println(ColorConstants.RED + "Exiting..." + ColorConstants.RESET);

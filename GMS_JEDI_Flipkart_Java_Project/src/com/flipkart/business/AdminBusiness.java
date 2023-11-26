@@ -4,7 +4,7 @@
 package com.flipkart.business;
 import java.util.*;
 
-import com.flipkart.DAO.AdminDAO;
+import com.flipkart.DAO.AdminDAOImpl;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 
@@ -12,7 +12,7 @@ import com.flipkart.bean.GymOwner;
  * This class gives the Gym Management System's admin operations capabilities by implementing the AdminGMSInterface.
  */
 public class AdminBusiness implements AdminBusinessInterface{
-	AdminDAO adminDAO = new AdminDAO();
+	AdminDAOImpl adminDAO = new AdminDAOImpl();
 	/**
 	 * Obtains a list of every gym owner within the system.
 	 * @return List of GymOwner objects

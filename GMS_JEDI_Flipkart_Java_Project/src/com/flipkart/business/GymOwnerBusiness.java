@@ -14,7 +14,7 @@ import java.util.*;
  * 
  */
 public class GymOwnerBusiness implements GymOwnerBusinessInterface {
-	GymOwnerDAO gymOwnerDAO = new GymOwnerDAO();
+	GymOwnerDAOImpl gymOwnerDAO = new GymOwnerDAOImpl();
 
 	/**
 	 * Obtains gym owner's profile details 
