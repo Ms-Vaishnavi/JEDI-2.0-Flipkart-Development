@@ -115,13 +115,9 @@ public class CustomerDAO {
             System.out.println(preparedStatement);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                int rowCount = rs.getInt(1);
-                return rowCount > 0;
-            }
+         return rs.next();
         }
-     catch(
-    SQLException e)
+     catch(SQLException e)
 
     {
         printSQLException(e);
@@ -142,10 +138,8 @@ public class CustomerDAO {
             System.out.println(preparedStatement);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                int rowCount = rs.getInt(1);
-                return rowCount > 0;
-            }
+
+            return rs.next();
         } catch (SQLException e) {
             printSQLException(e);
         }
@@ -180,10 +174,8 @@ public class CustomerDAO {
             System.out.println(preparedStatement);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs.next()) {
-                int rowCount = rs.getInt(1);
-                return rowCount > 0;
-            }
+
+          return rs.next();
         } catch (SQLException e) {
             printSQLException(e);
         }
