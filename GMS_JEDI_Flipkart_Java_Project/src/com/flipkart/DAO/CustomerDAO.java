@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import com.flipkart.bean.Gym;
+import com.flipkart.exception.*;
 
 public class CustomerDAO {
 
