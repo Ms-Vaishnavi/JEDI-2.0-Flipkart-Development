@@ -4,7 +4,6 @@
 package com.flipkart.bean;
 
 import java.util.Date;
-import java.util.*;
 
 /**
  * 

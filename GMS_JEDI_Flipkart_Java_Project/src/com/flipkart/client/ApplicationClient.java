@@ -4,7 +4,6 @@ import java.util.*;
 
 import com.flipkart.DAO.UserDAO;
 import com.flipkart.bean.User;
-import com.flipkart.DAO.*;
 import com.flipkart.constants.*;
 
 public class ApplicationClient {

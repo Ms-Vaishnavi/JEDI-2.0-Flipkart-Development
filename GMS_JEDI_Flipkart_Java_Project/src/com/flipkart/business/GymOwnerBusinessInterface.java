@@ -2,9 +2,6 @@ package com.flipkart.business;
 
 import com.flipkart.bean.*;
 import java.util.*;
-import com.flipkart.exception.*;
-
-
 
 public interface GymOwnerBusinessInterface{
     public GymOwner getProfile(String email);

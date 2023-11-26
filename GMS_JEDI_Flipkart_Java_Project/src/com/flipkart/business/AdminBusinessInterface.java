@@ -4,43 +4,44 @@ import com.flipkart.bean.*;
 import java.util.*;
 
 public interface AdminBusinessInterface{
-
-    public List<GymOwner> getGymOwners();
-    /*
+	 /*
     returns the list of all the gym owners
     */
-
-    public List<Gym> getGym() ;
+    public List<GymOwner> getGymOwners();
+   
     /*
     returns the list of all the gyms
     */
-
-    public List<GymOwner> viewAllPendingGymOwnerRequests();
+    public List<Gym> getGym() ;
+    
     /*
     returns the list of all the gym owners whose requests are pending
     */
-
-    public boolean approveSingleGymOwnerRequest(String gymOwnerEmail);
+    public List<GymOwner> viewAllPendingGymOwnerRequests();
+    
     /*
     approves the gym owner request whose email is passed
     */
-
-    public boolean approveAllPendingGymOwnerRequests();
+    public boolean approveSingleGymOwnerRequest(String gymOwnerEmail);
+   
     /*
     approves all the pending gym owner requests
     */
-    public List<Gym> viewAllPendingGymRequests();
+    public boolean approveAllPendingGymOwnerRequests();
+    
     /*
-     returns the list of all the gyms whose request is pending
-    */
-
-    public boolean approveSingleGymRequest(String gymId);
+    returns the list of all the gyms whose request is pending
+   */
+    public List<Gym> viewAllPendingGymRequests();
+    
     /*
     approves single gym whose gymId is sent
     */
-
-    public boolean approveAllPendingGymRequests();
+    public boolean approveSingleGymRequest(String gymId);
+   
     /*
     approves all the pending gym requests
     */
+    public boolean approveAllPendingGymRequests();
+    
 }

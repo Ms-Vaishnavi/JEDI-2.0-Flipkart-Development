@@ -1,30 +1,30 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.*;
-import java.util.*;
-import com.flipkart.exception.*;
-
-
 
 public interface UserBusinessInterface{
-
-    public boolean registerCustomer(Customer customer);
-    /*
+	 /*
     Registers a new customer
+    @return boolean value indicating success of registration
     */
-
-    public boolean registerGymOwner(GymOwner gymOwner);
+    public boolean registerCustomer(Customer customer);
+   
     /*
     Registers a new Gym Owner
+    @return boolean value indicating success of registration
     */
-
-    public boolean authenticateUser(User user);
+    public boolean registerGymOwner(GymOwner gymOwner);
+  
     /*
     Authenticates a user
+    @return boolean value indicating if user is authenticated
     */
-
-    public boolean logout(User user);
+    public boolean authenticateUser(User user);
+    
     /*
     Logs out a user
+    @return boolean value indicating success of logout
     */
+    public boolean logout(User user);
+    
 }
