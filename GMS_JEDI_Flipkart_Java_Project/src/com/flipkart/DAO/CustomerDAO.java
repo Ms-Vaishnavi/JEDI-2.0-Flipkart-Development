@@ -17,7 +17,7 @@ public class CustomerDAO {
         List<Gym> gyms = new ArrayList<Gym>();
         String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym";
         try (
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "root");
 
                 // Step 2:Create a statement using connection object
                 PreparedStatement statement = connection.prepareStatement(query);) {
@@ -47,7 +47,7 @@ public class CustomerDAO {
     public void fetchSlotList(int gymId) throws NoSlotsFoundException {
         String query = "Select * From Slot Where gymId=?";
         try (
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "root");
                 PreparedStatement statement = connection.prepareStatement(query);) {
             System.out.println(statement);
             statement.setInt(1, gymId);
@@ -72,7 +72,7 @@ public class CustomerDAO {
     public void fetchBookedSlots(String email) {
         String query = "Select * From Booking where customerEmail = ?";
         try (
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "root");
                 PreparedStatement statement = connection.prepareStatement(query);) {
             statement.setString(1, email);
             ResultSet output = statement.executeQuery();
@@ -92,7 +92,7 @@ public class CustomerDAO {
     public void bookSlots(int gymId, String slotId, String email, String date) {
         String query = "INSERT INTO Booking (slotId,gymId,email,date) values(?, ?, ?, ?)";
         try (
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "root");
                 PreparedStatement statement = connection.prepareStatement(query);) {
             statement.setString(1, slotId);
             statement.setInt(2, gymId);
@@ -138,7 +138,7 @@ public class CustomerDAO {
     public void cancelBooking(String slotId, String email, String date) {
         String query = "Delete from Booking where email = ? and slotId = ? and date = ?";
         try (
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "root");
                 PreparedStatement statement = connection.prepareStatement(query);) {
             statement.setString(1, email);
             statement.setString(2, slotId);
