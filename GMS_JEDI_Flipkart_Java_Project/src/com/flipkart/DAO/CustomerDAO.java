@@ -117,10 +117,7 @@ public class CustomerDAO {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 int rowCount = rs.getInt(1);
-                if (rowCount > 0)
-                    return true;
-                else
-                    return false;
+                return rowCount > 0;
             }
         }
      catch(
@@ -147,10 +144,7 @@ public class CustomerDAO {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 int rowCount = rs.getInt(1);
-                if (rowCount > 0)
-                    return true;
-                else
-                    return false;
+                return rowCount > 0;
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -188,10 +182,7 @@ public class CustomerDAO {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 int rowCount = rs.getInt(1);
-                if (rowCount > 0)
-                    return true;
-                else
-                    return false;
+                return rowCount > 0;
             }
         } catch (SQLException e) {
             printSQLException(e);
