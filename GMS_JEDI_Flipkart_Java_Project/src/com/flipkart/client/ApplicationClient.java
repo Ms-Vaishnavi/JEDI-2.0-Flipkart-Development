@@ -4,6 +4,8 @@ import java.util.*;
 
 import com.flipkart.DAO.UserDAO;
 import com.flipkart.bean.User;
+import com.flipkart.business.UserBusiness;
+import com.flipkart.DAO.*;
 import com.flipkart.constants.*;
 
 public class ApplicationClient {
@@ -19,8 +21,8 @@ public class ApplicationClient {
 		System.out.print("Enter Role Name: ");
 		String roleId = in.next();
 		User user = new User(userEmail, password, roleId);
-		UserDAO authicated = new UserDAO();
-		if (authicated.isAuthenticated(user)) {
+		UserBusiness userBusiness = new UserBusiness();
+		if (userBusiness.authenticateUser(user)) {
 			System.out.println("__________________________________________________________________________________\n");
 			System.out.println(
 					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in." + ColorConstants.RESET);
@@ -39,45 +41,50 @@ public class ApplicationClient {
 				AdminClient admin = new AdminClient();
 				admin.adminMenu(in);
 
+			} else {
+				System.out.println(ColorConstants.RED + "Wrong Choice!" + ColorConstants.RESET);
 			}
 		} else {
-			System.out.println("Sorry! You are not Registered!");
-			applicationMenu();
+			System.out.println(ColorConstants.RED + "\nSorry! You are not Registered! Please Register Yourself!" + ColorConstants.RESET);
 		}
 	}
 
 	public static void applicationMenu() throws Exception {
-		System.out.println(ColorConstants.GREEN + "Welcome to FlipFit Application!" + ColorConstants.RESET);
-		System.out.println("\nChoose your action:");
-		System.out.println("1. Login");
-		System.out.println("2. Customer Registration");
-		System.out.println("3. Gym Owner Registration");
-		System.out.println("4. exit");
-		System.out.print("\nEnter Your Choice: ");
+		boolean recur = true;
+		System.out.println(ColorConstants.GREEN + "Welcome to the FlipFit Application!" + ColorConstants.RESET);
 
-		Scanner in = new Scanner(System.in);
+		while (recur) {
+			System.out.println("\nChoose your action:");
+			System.out.println("1. Login");
+			System.out.println("2. Customer Registration");
+			System.out.println("3. Gym Owner Registration");
+			System.out.println("4. Exit");
+			System.out.print("\nEnter Your Choice: ");
 
-		int choice = in.nextInt();
-		switch (choice) {
-		case 1:
-			login();
+			Scanner in = new Scanner(System.in);
 
-			break;
-		case 2:
-			CustomerClient customer = new CustomerClient();
-			customer.registerCustomer();
-			break;
-		case 3:
-			GymOwnerClient owner = new GymOwnerClient();
-			owner.gymOwnerRegistration(in);
-			break;
-		case 4:
-			System.out.println("Exiting.....");
-			System.exit(0);
-			break;
-		default:
-			System.out.println("Wrong choice");
-			applicationMenu();
+			int choice = in.nextInt();
+			switch (choice) {
+			case 1:
+				login();
+				break;
+			case 2:
+				CustomerClient customer = new CustomerClient();
+				customer.registerCustomer();
+				break;
+			case 3:
+				GymOwnerClient owner = new GymOwnerClient();
+				owner.gymOwnerRegistration(in);
+				break;
+			case 4:
+				System.out.println(ColorConstants.RED + "Exiting..." + ColorConstants.RESET);
+				System.out.println(ColorConstants.GREEN + "Exited Successfully" + ColorConstants.RESET);
+				recur = false;
+				System.exit(0);
+				break;
+			default:
+				System.out.println(ColorConstants.RED + "Wrong choice" + ColorConstants.RESET);
+			}
 		}
 
 	}

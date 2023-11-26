@@ -3,6 +3,8 @@
  */
 package com.flipkart.business;
 
+import com.flipkart.DAO.GymOwnerDAO;
+import com.flipkart.DAO.UserDAO;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
@@ -11,19 +13,26 @@ import com.flipkart.bean.User;
  * 
  */
 public class UserBusiness implements UserBusinessInterface{
+	
+	GymOwnerDAO gymOwnerDao = new GymOwnerDAO();
+	UserDAO userDao = new UserDAO();
 	/**
 	Registers a customer in the system.
 	@param customer The Customer object representing the customer data
 	*/
 	public boolean registerCustomer(Customer customer) {
-		return false;
+		boolean registerSuccess = false;
+		registerSuccess = userDao.registerCustomer(customer);
+		return registerSuccess;
 	}
 	/**
 	Registers a gym owner in the system.
 	@param gymOwner The gym owner object representing the gym owner data
 	*/
 	public boolean registerGymOwner(GymOwner gymOwner) {
-		return false;
+		boolean registerSuccess = false;
+		registerSuccess = userDao.registerGymOwner(gymOwner);
+		return registerSuccess;
 	}
 	/**
 	Verifies a user's data.
@@ -31,7 +40,9 @@ public class UserBusiness implements UserBusinessInterface{
 	@return true if the user's data are valid else returns false
 	*/
 	public boolean authenticateUser(User user) {
-		return false;
+		boolean authenticateSuccess = false;
+		authenticateSuccess = userDao.authenticateUser(user);
+		return authenticateSuccess;
 	}
 	/**
 	Logs out a user.
