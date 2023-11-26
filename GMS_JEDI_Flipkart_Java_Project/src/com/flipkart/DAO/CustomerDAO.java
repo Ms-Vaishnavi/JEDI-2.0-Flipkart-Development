@@ -107,11 +107,10 @@ public class CustomerDAO {
 
     public boolean isFull(String slotId, String date) {
         String query = "Select * slot where slotId=? and (numOfSeatsBooked>=numOfSeats)";
-        try (Connection connection = DriverManager
-                .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
+        try (
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
+                PreparedStatement preparedStatement = connection.prepareStatement(query);) {
 
-
-             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
             preparedStatement.setString(1, slotId);
             System.out.println(preparedStatement);
 
@@ -124,7 +123,7 @@ public class CustomerDAO {
                     return false;
             }
         }
-    } catch(
+     catch(
     SQLException e)
 
     {
