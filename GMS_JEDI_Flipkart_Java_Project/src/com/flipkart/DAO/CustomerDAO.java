@@ -14,7 +14,8 @@ public class CustomerDAO {
 	public List<Gym> fetchGymList(){
 		List<Gym> gyms = new ArrayList<Gym>();
 		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+		try (
+				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement statement = connection.prepareStatement(query);) {
@@ -41,7 +42,31 @@ public class CustomerDAO {
 		return gyms;
 	}
 	
-	public void fetchSlotList(int gymId) {}
+	public void fetchSlotList(int gymId) throws NoSlotsFoundException{
+		String query = "Select * From Slot Where gymId=?";
+		try (
+			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+			PreparedStatement statement = connection.prepareStatement(query);)
+		{
+			System.out.println(statement);
+			statement.setInt(1, gymId); 
+		    ResultSet output = statement.executeQuery();
+		    if(!output.next()) {
+		    	throw new NoSlotsFoundException();
+		    }
+		    System.out.println("SlotId \t Capacity \t SlotTime \t GymId");
+		    do {
+		    	System.out.printf("%-7s\t", output.getString(1) );
+				System.out.printf("  %-9s\t",output.getString(2));
+				System.out.printf("  %-9s\t", output.getString(3) );
+				System.out.printf("  %-9s\t", output.getString(4) );
+		    	System.out.println("");
+		    }while(output.next());
+		    System.out.println("-----------------------------------------------");
+	    } catch(SQLException sqlExcep) {
+		       System.out.println(sqlExcep);
+	    }
+	}
 	
 	public void fetchBookedSlots(String email) {}
 	
