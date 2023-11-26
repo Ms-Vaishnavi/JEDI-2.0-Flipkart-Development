@@ -110,7 +110,29 @@ public class CustomerDAO {
     }
 
     public boolean alreadyBooked(String slotId, String email, String date) {
-        return true;
+        String query = "select isVerified from Booking where slotId=? and customerEmail =  ?";
+        try (Connection connection = DriverManager
+                .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
+
+
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+            preparedStatement.setString(1, slotId);
+            preparedStatement.setString(2, email);
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                int rowCount = rs.getInt(1);
+                if (rowCount > 0)
+                    return true;
+                else
+                    return false;
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return false;
     }
 
     public void cancelBooking(String slotId, String email, String date) {
