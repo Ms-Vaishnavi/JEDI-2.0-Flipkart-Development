@@ -53,7 +53,7 @@ public class CustomerDAO {
 			statement.setInt(1, gymId); 
 		    ResultSet output = statement.executeQuery();
 		    if(!output.next()) {
-		    	throw new NoSlotsFoundException();
+		    	throw new NoSlotsFoundException("No slot found");
 		    }
 		    System.out.println("SlotId \t Capacity \t SlotTime \t GymId");
 		    do {
@@ -69,7 +69,27 @@ public class CustomerDAO {
 	    }
 	}
 	
-	public void fetchBookedSlots(String email) {}
+	public void fetchBookedSlots(String email) {
+		String query = "Select * From Booking where customerEmail = ?";
+		try (
+				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+				PreparedStatement statement = connection.prepareStatement(query);)
+		{
+			statement.setString(1, email); 
+		    ResultSet output = statement.executeQuery();
+		    System.out.println("BookingId \t Date \t    GymId");
+		    while(output.next()) {
+		    	System.out.printf("%-12s\t", output.getInt(1) );
+				System.out.printf("  %-7s\t",output.getString(5));
+				System.out.printf("%-8s\t", output.getString(3) );
+		    	System.out.println("");
+		    }
+		    System.out.println("-----------------------------------------------");
+		}
+		catch(SQLException sqlExcep) {
+		       System.out.println(sqlExcep);
+	    }
+	}
 	
 	public void bookSlots(int gymId, String slotId,String email,String date) {}
 	
