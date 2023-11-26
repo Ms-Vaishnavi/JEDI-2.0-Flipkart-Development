@@ -118,7 +118,20 @@ public class CustomerDAO {
 	}
 
 	public void cancelBooking(String slotId, String email, String date) {
-		
+		String query = "Delete from Booking where email = ? and slotId = ? and date = ?";
+		try (
+				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+				PreparedStatement statement = connection.prepareStatement(query);)
+		{
+			statement.setString(1, email); 
+			statement.setString(2, slotId);
+			statement.setString(3, date);
+			statement.executeUpdate();
+		    System.out.println("-----------------------------------------------");
+		}
+		catch(SQLException sqlExcep) {
+		       System.out.println(sqlExcep);
+	    }
 	}
 
 	public boolean checkSlotExists(String slotId, int gymId) {
