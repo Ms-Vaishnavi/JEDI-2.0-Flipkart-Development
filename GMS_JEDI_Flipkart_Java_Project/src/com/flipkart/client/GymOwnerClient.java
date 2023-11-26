@@ -49,7 +49,7 @@ public class GymOwnerClient {
         System.out.print("Enter Aadhaar: ");
         gymOwner.setAadharNumber(in.next());
 
-        gymOwnerBusiness.editProfile(gymOwner, email);
+        gymOwnerBusiness.editProfile(gymOwner);
     }
 
     public void viewProfile(Scanner in, String email) {

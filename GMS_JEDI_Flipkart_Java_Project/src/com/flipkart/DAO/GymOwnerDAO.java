@@ -16,7 +16,7 @@ public class GymOwnerDAO {
 		GymOwner gymOwner = new GymOwner();
 		String query = "select email, name, phoneNum, aadharNum, panNum from gymOwner where email = ?";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -49,7 +49,7 @@ public class GymOwnerDAO {
         System.out.println(INSERT_GYM_OWNER_SQL);
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager
-            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_OWNER_SQL)) {
@@ -70,11 +70,38 @@ public class GymOwnerDAO {
         }
 	}
 	
+	public void editGymOwnerDetails(GymOwner gymOwnerDetails) {
+		String UPDATE_GYM_OWNER_SQL = "update gymOwner set email = ?, password = ?, name = ?, phoneNum = ?, aadharNum = ?, panNum = ?, isVerified = ?" +
+    	        "where email = ?;";
+        System.out.println(UPDATE_GYM_OWNER_SQL);
+        // Step 1: Establishing a Connection
+        try (Connection connection = DriverManager
+            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
+
+            // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_GYM_OWNER_SQL)) {
+            preparedStatement.setString(1, gymOwnerDetails.getEmail());
+            preparedStatement.setString(2, gymOwnerDetails.getPassword());
+            preparedStatement.setString(3, gymOwnerDetails.getName());
+            preparedStatement.setString(4, gymOwnerDetails.getPhoneNumber());
+            preparedStatement.setString(5, gymOwnerDetails.getAadharNumber());
+            preparedStatement.setString(6, gymOwnerDetails.getPanNumber());
+            preparedStatement.setBoolean(7, gymOwnerDetails.isVerified());
+            preparedStatement.setString(8, gymOwnerDetails.getEmail());
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+	}
+	
 	public Gym getGym(String gymId) {
 		Gym gym = new Gym();
 		String query = "select gymId, gymName, gymOwnerEmail, address, slotCount, seatsPerSlot, isVerified from gym where gymId = ?";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -103,6 +130,7 @@ public class GymOwnerDAO {
 		return gym;
 	}
 	
+	
 	public void addGym(Gym gymDetails) {
 		String INSERT_GYM_SQL = "INSERT INTO gym" +
     	        "  (gymId, gymName, gymOwnerEmail, address, slotCount, seatsPerSlot, isVerified) VALUES " +
@@ -110,7 +138,7 @@ public class GymOwnerDAO {
         System.out.println(INSERT_GYM_SQL);
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager
-            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_SQL)) {
@@ -131,11 +159,39 @@ public class GymOwnerDAO {
         }
 	}
 	
+	public void editGym(Gym gymDetails) {
+		String INSERT_GYM_SQL = "update gym" +
+    	        "  set gymId = ?, gymName = ?, gymOwnerEmail = ?, address = ?, slotCount = ?, seatsPerSlot = ?, isVerified = ? where gymId = ?;";
+        System.out.println(INSERT_GYM_SQL);
+        // Step 1: Establishing a Connection
+        try (Connection connection = DriverManager
+            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
+
+            // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_SQL)) {
+            preparedStatement.setString(1, gymDetails.getGymId());
+            preparedStatement.setString(2, gymDetails.getGymName());
+            preparedStatement.setString(3, gymDetails.getOwnerEmail());
+            preparedStatement.setString(4, gymDetails.getAddress());
+            preparedStatement.setInt(5, gymDetails.getSlotCount());
+            preparedStatement.setInt(6,  gymDetails.getSeatsPerSlotCount());
+            preparedStatement.setBoolean(7,  gymDetails.isVerified());
+            preparedStatement.setString(8, gymDetails.getGymId());
+
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+	}
+	
 	public List<Gym> getGymsOfGymOwner(String gymOwnerId) {
 		List<Gym> gyms = new ArrayList<Gym>();
 		String query = "select gymId, gymName, gymOwnerEmail, address, slotCount, seatsPerSlot, isVerified from gym where gymOwnerEmail =  ?";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -168,7 +224,7 @@ public class GymOwnerDAO {
 		List<Slot> slots = new ArrayList<Slot>();
 		String query = "select slotId, gymId, startTime, endTime, trainer from slot where gymId =  ?";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -202,7 +258,7 @@ public class GymOwnerDAO {
         System.out.println(INSERT_SLOT_SQL);
         // Step 1: Establishing a Connection
         try (Connection connection = DriverManager
-            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SLOT_SQL)) {
@@ -225,7 +281,7 @@ public class GymOwnerDAO {
 	public boolean checkOwnerApproval(String email) {
 		String query = "select isVerified from gymOwner where email =  ?";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -246,7 +302,7 @@ public class GymOwnerDAO {
 	public boolean checkGymApproval(String gymId) {
 		String query = "select isVerified from gym where gymId =  ?";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {

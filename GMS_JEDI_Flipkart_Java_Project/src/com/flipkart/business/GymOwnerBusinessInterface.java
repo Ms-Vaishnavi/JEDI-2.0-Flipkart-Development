@@ -11,7 +11,7 @@ public interface GymOwnerBusinessInterface{
     /*
   returns the gym owner's profile
     */
-    public void editProfile(GymOwner gymOwnerNew, String email);
+    public void editProfile(GymOwner gymOwnerNews);
     /*
 allows the gym owner to edit profile
      */

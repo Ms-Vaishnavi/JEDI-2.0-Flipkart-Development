@@ -20,7 +20,7 @@ public class AdminDAO {
 		List<GymOwner> gymOwners = new ArrayList<GymOwner>();
 		String query = "select email, name, phoneNum, aadharNum, panNum, isVerified from gymOwner";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -51,7 +51,7 @@ public class AdminDAO {
 		List<Gym> gyms = new ArrayList<Gym>();
 		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -83,7 +83,7 @@ public class AdminDAO {
 		List<GymOwner> gymOwners = new ArrayList<GymOwner>();
 		String query = "select email, name, phoneNum, aadharNum, panNum, isVerified from gymOwner where isVerified = ?;";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -116,7 +116,7 @@ public class AdminDAO {
 		List<Gym> gyms = new ArrayList<Gym>();
 		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where isVerified = ?;";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
@@ -149,7 +149,7 @@ public class AdminDAO {
 	public void approveSingleOwnerRequest(String gymOwnerEmail) {
 		String SQL_APPROVE_GYM_OWNER_BY_ID="update gymOwner set approved=1 WHERE email=?;";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_GYM_OWNER_BY_ID);) {
@@ -165,7 +165,7 @@ public class AdminDAO {
 	public void approveAllOwnerRequest() {
 		String SQL_APPROVE_ALL_GYMS="update gymOwner set isApproved=1;";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);) {
@@ -180,7 +180,7 @@ public class AdminDAO {
 	public void approveSingleGymRequest(String gymId) {
 		String SQL_APPROVE_GYM_BY_ID="update gym set isApproved=1 where gymId = ?;";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_GYM_BY_ID);) {
@@ -196,7 +196,7 @@ public class AdminDAO {
 	public void approveAllGymRequest() {
 		String SQL_APPROVE_ALL_GYMS="update gym set isApproved=1;";
 		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS?JEDI20Flip", "root", "root");
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 	            // Step 2:Create a statement using connection object
 	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);) {
