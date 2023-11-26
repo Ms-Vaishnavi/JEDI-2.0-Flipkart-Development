@@ -6,6 +6,7 @@ package com.flipkart.business;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.DAO.*;
+import com.flipkart.constants.ColorConstants;
 
 import java.util.*;
 
@@ -31,7 +32,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 */
 	public void editProfile(GymOwner gymOwnerNew) {
 		gymOwnerDAO.editGymOwnerDetails(gymOwnerNew);
-		System.out.println("Edited Gym Owner Details successfully! " + gymOwnerNew.getEmail());
+		System.out.println(ColorConstants.GREEN + "\nEdited your profile Successfully!" + ColorConstants.RESET);
 	}
 	/**
 	 * This method allows a gym owner to add details of a particular gym.
@@ -39,7 +40,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 */
 	public boolean addGym(Gym gym) {
 		gymOwnerDAO.addGym(gym);
-		System.out.println("Added Gym successfully! " + gym.getGymId());
+		System.out.println(ColorConstants.GREEN + "\nAdded Gym Successfully!" + gym.getGymId() + ColorConstants.RESET );
 		return true;
 	}
 	/**
@@ -48,7 +49,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 */
 	public void editGym(Gym gym) {
 		gymOwnerDAO.editGym(gym);
-		System.out.println("Edited gym successfully! " + gym.getGymId());
+		System.out.println(ColorConstants.GREEN + "Edited Gym Details Successfully! " + gym.getGymId()+ ColorConstants.RESET );
 	}
 	/**
 	 * Obtains all the gyms that owned by the given gym owner.

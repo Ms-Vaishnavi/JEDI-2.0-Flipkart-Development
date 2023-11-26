@@ -86,6 +86,7 @@ public class Gym {
 	}
 	
 	public String toString() {
+		
 		String s = "Gym Id : " + this.gymId + 
 				"\nGym Name : " + this.gymName + 
 				"\nGym Owner Email : " + this.getOwnerEmail() + 

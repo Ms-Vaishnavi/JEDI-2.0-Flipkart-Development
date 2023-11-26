@@ -15,9 +15,9 @@ public class ApplicationClient {
 		System.out.println("Enter LogIn Details\n");
 		System.out.print("Enter Email: ");
 		String userEmail = in.next();
-		System.out.print("Enter password: ");
+		System.out.print("Enter Password: ");
 		String password = in.next();
-		System.out.print("Enter role Id: ");
+		System.out.print("Enter Role Name: ");
 		String roleId = in.next();
 		User user = new User(userEmail, password, roleId);
 		UserDAO authicated = new UserDAO();
