@@ -25,7 +25,6 @@ public class ApplicationClient {
 			System.out.println("__________________________________________________________________________________\n");
 			System.out.println(
 					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in." + ColorConstants.RESET);
-			String role = user.getRoleId();
 
 			if (roleId.equalsIgnoreCase("Customer")) {
 

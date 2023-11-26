@@ -147,7 +147,7 @@ public class AdminDAO {
 	};
 	
 	public void approveSingleOwnerRequest(String gymOwnerEmail) {
-		String SQL_APPROVE_GYM_OWNER_BY_ID="update gymOwner set approved=1 WHERE email=?;";
+		String SQL_APPROVE_GYM_OWNER_BY_ID="update gymOwner set isVerified=1 WHERE email=?;";
 		try (Connection connection = DriverManager
 	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
@@ -156,14 +156,14 @@ public class AdminDAO {
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
 	            preparedStatement.setString(1, gymOwnerEmail);
-	            preparedStatement.executeQuery();	            
+	            preparedStatement.executeUpdate();	            
 	        } catch (SQLException e) {
 	            printSQLException(e);
 	        }
 	};
 	
 	public void approveAllOwnerRequest() {
-		String SQL_APPROVE_ALL_GYMS="update gymOwner set isApproved=1;";
+		String SQL_APPROVE_ALL_GYMS="update gymOwner set isVerified=1;";
 		try (Connection connection = DriverManager
 	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
@@ -171,14 +171,14 @@ public class AdminDAO {
 	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);) {
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
-	            preparedStatement.executeQuery();	            
+	            preparedStatement.executeUpdate();	            
 	        } catch (SQLException e) {
 	            printSQLException(e);
 	        }
 	};
 	
 	public void approveSingleGymRequest(String gymId) {
-		String SQL_APPROVE_GYM_BY_ID="update gym set isApproved=1 where gymId = ?;";
+		String SQL_APPROVE_GYM_BY_ID="update gym set isVerified=1 where gymId = ?;";
 		try (Connection connection = DriverManager
 	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
@@ -187,14 +187,14 @@ public class AdminDAO {
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
 	            preparedStatement.setString(1, gymId);
-	            preparedStatement.executeQuery();	            
+	            preparedStatement.executeUpdate();	            
 	        } catch (SQLException e) {
 	            printSQLException(e);
 	        }
 	};
 	
 	public void approveAllGymRequest() {
-		String SQL_APPROVE_ALL_GYMS="update gym set isApproved=1;";
+		String SQL_APPROVE_ALL_GYMS="update gym set isVerified=1;";
 		try (Connection connection = DriverManager
 	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
@@ -202,7 +202,7 @@ public class AdminDAO {
 	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);) {
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
-	            preparedStatement.executeQuery();	            
+	            preparedStatement.executeUpdate();	            
 	        } catch (SQLException e) {
 	            printSQLException(e);
 	        }

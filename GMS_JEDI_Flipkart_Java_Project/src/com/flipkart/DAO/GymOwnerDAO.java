@@ -71,7 +71,7 @@ public class GymOwnerDAO {
 	}
 	
 	public void editGymOwnerDetails(GymOwner gymOwnerDetails) {
-		String UPDATE_GYM_OWNER_SQL = "update gymOwner set email = ?, password = ?, name = ?, phoneNum = ?, aadharNum = ?, panNum = ?, isVerified = ?" +
+		String UPDATE_GYM_OWNER_SQL = "update gymOwner set email = ?, password = ?, name = ?, phoneNum = ?, aadharNum = ?, panNum = ?, isVerified = ? " +
     	        "where email = ?;";
         System.out.println(UPDATE_GYM_OWNER_SQL);
         // Step 1: Establishing a Connection

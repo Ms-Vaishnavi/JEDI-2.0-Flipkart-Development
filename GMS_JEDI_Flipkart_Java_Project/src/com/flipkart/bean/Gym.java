@@ -93,7 +93,7 @@ public class Gym {
 				"\nGym Address : " + this.getAddress() + 
 				"\nGym Slotcount : " + this.getSlotCount() + 
 				"\nSeat per slot count : " + this.getSeatsPerSlotCount() + 
-				"\n Verification : " + (this.isVerified() ? "Yes" : "No");	
+				"\nVerification : " + (this.isVerified() ? "Yes" : "No");	
 		return s;
 		
 	}
