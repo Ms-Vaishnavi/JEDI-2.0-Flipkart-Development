@@ -129,24 +129,23 @@ public class CustomerDAO {
     }
 
     public boolean checkSlotExists(String slotId, String gymId) {
-            String query = "select isVerified from slot where slotId=? and gymId =  ?";
+        String query = "select isVerified from slot where slotId=? and gymId =  ?";
         try (Connection connection = DriverManager
                 .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
 
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
             preparedStatement.setString(1, slotId);
-            preparedStatement.setString(2,gymId);
+            preparedStatement.setString(2, gymId);
             System.out.println(preparedStatement);
 
             ResultSet rs = preparedStatement.executeQuery();
-            if(rs.next())
-            {
-                int rowCount=rs.getInt(1);
-                if(rowCount>0)
+            if (rs.next()) {
+                int rowCount = rs.getInt(1);
+                if (rowCount > 0)
                     return true;
                 else
-                    return false
+                    return false;
             }
         } catch (SQLException e) {
             printSQLException(e);
