@@ -15,6 +15,7 @@ import com.flipkart.exception.UserNotFoundException;
 public class UserDAO {
 
 	public boolean authenticateUser(User user) {
+		//to run without authentication, make isUserValid = true
 		boolean isUserValid = false;
 		String query = "select email, password, role from user where email = ?";
 		try (Connection connection = DriverManager
@@ -38,12 +39,43 @@ public class UserDAO {
 		return isUserValid;
 	}
 
-	public boolean registerCustomer(Customer customerData) {
-		return false;
+	//Bug here
+	public boolean registerCustomer(Customer customer) {
+		boolean registerSuccess = false;
+		String query = "INSERT INTO ";
+		try (Connection connection = DriverManager
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "");
+			PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+			
+			preparedStatement.setString(1, customer.getEmail());
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		
+		return registerSuccess;
 	}
 
-	public boolean registerGymOwner(GymOwner ownerData) {
-		return false;
+	public boolean registerGymOwner(GymOwner gymOwner) {
+		boolean registerSuccess = false;
+		String query = "INSERT INTO ";
+		try (Connection connection = DriverManager
+	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "");
+			PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+			
+			preparedStatement.setString(1, gymOwner.getEmail());
+			
+			ResultSet rs = preparedStatement.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		
+		return registerSuccess;
 	}
 
 	public void registerUser(User userData) {
