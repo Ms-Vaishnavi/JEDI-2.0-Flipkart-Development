@@ -17,7 +17,7 @@ public class CustomerDAO {
         List<Gym> gyms = new ArrayList<Gym>();
         String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym";
         try (
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "root");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
 
                 // Step 2:Create a statement using connection object
                 PreparedStatement statement = connection.prepareStatement(query);) {
@@ -47,7 +47,7 @@ public class CustomerDAO {
     public void fetchSlotList(int gymId) throws NoSlotsFoundException {
         String query = "Select * From Slot Where gymId=?";
         try (
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "root");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
                 PreparedStatement statement = connection.prepareStatement(query);) {
             System.out.println(statement);
             statement.setInt(1, gymId);
@@ -72,7 +72,7 @@ public class CustomerDAO {
     public void fetchBookedSlots(String email) {
         String query = "Select * From Booking where customerEmail = ?";
         try (
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "root");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
                 PreparedStatement statement = connection.prepareStatement(query);) {
             statement.setString(1, email);
             ResultSet output = statement.executeQuery();
@@ -92,7 +92,7 @@ public class CustomerDAO {
     public void bookSlots(int gymId, String slotId, String email, String date) {
         String query = "INSERT INTO Booking (slotId,gymId,email,date) values(?, ?, ?, ?)";
         try (
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "root");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
                 PreparedStatement statement = connection.prepareStatement(query);) {
             statement.setString(1, slotId);
             statement.setInt(2, gymId);
@@ -106,8 +106,33 @@ public class CustomerDAO {
     }
 
     public boolean isFull(String slotId, String date) {
-        return false;
+        String query = "Select * slot where slotId=? and (numOfSeatsBooked>=numOfSeats)";
+        try (Connection connection = DriverManager
+                .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
+
+
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+            preparedStatement.setString(1, slotId);
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                int rowCount = rs.getInt(1);
+                if (rowCount > 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
+    } catch(
+    SQLException e)
+
+    {
+        printSQLException(e);
     }
+
+        return false;
+}
 
     public boolean alreadyBooked(String slotId, String email, String date) {
         String query = "select isVerified from Booking where slotId=? and customerEmail =  ?";
@@ -138,7 +163,7 @@ public class CustomerDAO {
     public void cancelBooking(String slotId, String email, String date) {
         String query = "Delete from Booking where email = ? and slotId = ? and date = ?";
         try (
-                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "root");
+                Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
                 PreparedStatement statement = connection.prepareStatement(query);) {
             statement.setString(1, email);
             statement.setString(2, slotId);
