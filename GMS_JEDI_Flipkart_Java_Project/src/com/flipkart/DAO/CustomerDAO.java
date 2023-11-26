@@ -35,8 +35,8 @@ public class CustomerDAO {
 	                gyms.add(gym);
 //	                System.out.println(id + "," + name + "," + email + "," + country + "," + password);
 	            }
-	        } catch(SQLException sqlExcep) {
-		       System.out.println(sqlExcep);
+	        } catch(SQLException e) {
+		     printSQLException(e);
 	    }
 		return gyms;
 	}
@@ -69,6 +69,21 @@ public class CustomerDAO {
 
 	public boolean checkGymApprove(int gymId) {
 		return true;
+	}
+	public static void printSQLException(SQLException ex) {
+		for (Throwable e: ex) {
+			if (e instanceof SQLException) {
+				e.printStackTrace(System.err);
+				System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+				System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+				System.err.println("Message: " + e.getMessage());
+				Throwable t = ex.getCause();
+				while (t != null) {
+					System.out.println("Cause: " + t);
+					t = t.getCause();
+				}
+			}
+		}
 	}
 
 }
