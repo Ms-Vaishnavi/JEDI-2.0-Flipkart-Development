@@ -23,7 +23,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 * @return GymOwner the gym owner object
 	 */
 	public GymOwner getProfile(String email) {
-		System.out.println("Fetched Gym owner details successfully! " + email);
+		System.out.println(ColorConstants.GREEN +"Fetched Gym owner details successfully! " + email+ColorConstants.RESET);
 		return gymOwnerDAO.getGymOwnerDetails(email);
 	}
 	/**
@@ -50,7 +50,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 */
 	public void editGym(Gym gym) {
 		gymOwnerDAO.editGym(gym);
-		System.out.println(ColorConstants.GREEN + "Edited Gym Details Successfully! " + gym.getGymId()+ ColorConstants.RESET );
+		System.out.println(ColorConstants.GREEN + "\nEdited Gym Details Successfully! " + gym.getGymId()+ ColorConstants.RESET );
 	}
 	/**
 	 * Obtains all the gyms that owned by the given gym owner.
@@ -58,7 +58,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 * @return list of gyms owned by the given gym owner
 	 */
 	public List<Gym> getGymDetail(String gymOwnerEmail) {
-		System.out.println("Fetched gym details successfully! " + gymOwnerEmail);
+		System.out.println(ColorConstants.GREEN +"\nFetched gym details successfully! " + gymOwnerEmail+ ColorConstants.RESET);
 		return gymOwnerDAO.getGymsOfGymOwner(gymOwnerEmail);
 	}
 	/**
@@ -67,7 +67,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 */
 	public void addSlot(Slot slot) {
 		gymOwnerDAO.addSlot(slot);
-		System.out.println("Added slot successfully!");
+		System.out.println(ColorConstants.GREEN + "\nAdded slot successfully!"+ ColorConstants.RESET);
 	}
 	/**
 	 * Checks if the gym owner is verified or not.
