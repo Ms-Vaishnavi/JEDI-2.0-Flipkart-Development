@@ -3,12 +3,7 @@ package com.flipkart.client;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.*;
-<<<<<<< HEAD
 import com.flipkart.constants.ColorConstants;
-=======
-import com.flipkart.exception.GymNotFoundException;
-import com.flipkart.exception.GymOwnerNotFoundException;
->>>>>>> 575b7eb (Added Exceptions)
 
 import java.util.*;
 
@@ -52,22 +47,12 @@ public class AdminClient {
 
 	public void approveSingleGymOwnerRequest() {
 		System.out.println("Enter gym owner email: ");
-		try {
-			adminBusiness.approveSingleGymOwnerRequest(sc.next());
-		} catch (GymOwnerNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		adminBusiness.approveSingleGymOwnerRequest(sc.next());
 	}
 
 	public void approveSingleGymRequest() {
 		System.out.println("Enter gym Id: ");
-		try {
-			adminBusiness.approveSingleGymRequest(sc.next());
-		} catch (GymNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		adminBusiness.approveSingleGymRequest(sc.next());
 	}
 
 	public void approvePendingGymOwnerRequests() {

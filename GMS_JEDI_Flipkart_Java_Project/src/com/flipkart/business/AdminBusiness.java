@@ -3,20 +3,16 @@
  */
 package com.flipkart.business;
 import java.util.*;
-import com.flipkart.DAO.*;
 
 import com.flipkart.DAO.AdminDAOImpl;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
-import com.flipkart.exception.GymNotFoundException;
-import com.flipkart.exception.GymOwnerNotFoundException;
 
 /**
  * This class gives the Gym Management System's admin operations capabilities by implementing the AdminGMSInterface.
  */
 public class AdminBusiness implements AdminBusinessInterface{
-	AdminDAO adminDAO = new AdminDAOImpl();
-	GymOwnerDAO gymOwnerDAO = new GymOwnerDAOImpl();
+	AdminDAOImpl adminDAO = new AdminDAOImpl();
 	/**
 	 * Obtains a list of every gym owner within the system.
 	 * @return List of GymOwner objects
@@ -44,24 +40,20 @@ public class AdminBusiness implements AdminBusinessInterface{
 	/**
 	 * Accepts one request from a gym owner. 
 	 * @param gymOwnerEmail The request's email that has to be approved
-	 * @throws GymOwnerNotFoundException 
 	 */
-	public void approveSingleGymOwnerRequest(String gymOwnerEmail) throws GymOwnerNotFoundException {
-		int approvedCount = adminDAO.approveSingleOwnerRequest(gymOwnerEmail);
-		if (approvedCount == 0)
-			throw new GymOwnerNotFoundException();
+	public boolean approveSingleGymOwnerRequest(String gymOwnerEmail) {
+		adminDAO.approveSingleOwnerRequest(gymOwnerEmail);
 		System.out.println("Approved gym owner request! " + gymOwnerEmail);
+		return true;
 	}
 
 	/**
 	 * Approves all GymOwners whose requests are pending for approval. 
 	 */
-	public void approveAllPendingGymOwnerRequests() {
-		int approvedCount = adminDAO.approveAllOwnerRequest();
-		if (approvedCount != 0)
-			System.out.println("Approved all pending gym owner requests!");
-		else
-			System.out.println("No pending gym owner requests!");
+	public boolean approveAllPendingGymOwnerRequests() {
+		adminDAO.approveAllOwnerRequest();
+		System.out.println("Approved all pending gym owner requests!");
+		return true;
 	}
 	/**
 	 * Returns all Gym object whose requests are pending for approval. 
@@ -75,22 +67,18 @@ public class AdminBusiness implements AdminBusinessInterface{
 	 * Approves a single Gym object request. 
 	 * @param gymId the id of a gym that needs to be approved
 	 * @return true if the gymId is valid else returns false
-	 * @throws GymNotFoundException 
 	 */
-	public void approveSingleGymRequest(String gymId) throws GymNotFoundException {
-		int approvedCount = adminDAO.approveSingleGymRequest(gymId);
-		if (approvedCount == 0)
-			throw new GymNotFoundException();
+	public boolean approveSingleGymRequest(String gymId) {
+		adminDAO.approveSingleGymRequest(gymId);
 		System.out.println("Successfully approved gym request! " + gymId);
+		return true;
 	}
 	/**
 	 * Approves all Gym whose requests are pending for approval. 
 	 */
-	public void approveAllPendingGymRequests() {
-		int approvedCount = adminDAO.approveAllGymRequest();
-		if (approvedCount > 0)
-			System.out.println("Successfully approved all pending gym requests!");
-		else 
-			System.out.println("No pending gym requests");
+	public boolean approveAllPendingGymRequests() {
+		adminDAO.approveAllGymRequest();
+		System.out.println("Successfully approved all pending gym requests!");
+		return true;
 	}
 }

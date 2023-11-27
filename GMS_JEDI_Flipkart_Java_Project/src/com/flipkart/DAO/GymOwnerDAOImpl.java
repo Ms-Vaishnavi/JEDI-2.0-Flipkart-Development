@@ -14,7 +14,6 @@ import com.flipkart.utils.DBUtils;
 
 public class GymOwnerDAOImpl implements GymOwnerDAO {
 
-<<<<<<< HEAD
     /**
      * Retrieves gym owner details from the database
      * @param gymOwnerEmail The Email Id of the gym owner
@@ -31,8 +30,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
-            if (rs == null)
-				return null;
+
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 gymOwner.setEmail(rs.getString("email"));
@@ -40,6 +38,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
                 gymOwner.setPhoneNumber(rs.getString("phoneNum"));
                 gymOwner.setAadharNumber(rs.getString("aadharNum"));
                 gymOwner.setPanNumber(rs.getString("panNum"));
+
                 // System.out.println(id + "," + name + "," + email + "," + country + "," + password);
             }
         } catch (SQLException e) {
@@ -87,6 +86,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             preparedStatement.setString(6, gymOwnerDetails.getPanNumber());
             preparedStatement.setBoolean(7, gymOwnerDetails.isVerified());
 
+            System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -105,34 +105,6 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
-				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_GYM_OWNER);
-			preparedStatement.setString(1, gymOwnerDetails.getEmail());
-			preparedStatement.setString(2, gymOwnerDetails.getName());
-			preparedStatement.setString(3, gymOwnerDetails.getPhoneNumber());
-			preparedStatement.setString(4, gymOwnerDetails.getAadharNumber());
-			preparedStatement.setString(5, gymOwnerDetails.getPanNumber());
-			preparedStatement.setBoolean(6, gymOwnerDetails.isVerified());
-			preparedStatement.setString(7, gymOwnerDetails.getEmail());
-			//System.out.println(preparedStatement);
-			// Step 3: Execute the query or update query
-			return preparedStatement.executeUpdate();
-		} catch (SQLException e) {
-			// print SQL exception information
-			printSQLException(e);
-			return 0;
-		}
-	}
-	
-	/**
-	 * Retrieves gym details from the database
-	 * @param gymId The Id of the gym
-	 * @return Gym object
-	 */
-	public Gym getGym(String gymId) {
-		Connection connection = null;
-		Gym gym = new Gym();
-		try {connection = DBUtils.getConnection();
 
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_USER);

@@ -8,7 +8,6 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slot;
 import com.flipkart.DAO.*;
 import com.flipkart.constants.ColorConstants;
-import com.flipkart.exception.GymOwnerNotFoundException;
 
 import java.util.*;
 
@@ -22,25 +21,18 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 * Obtains gym owner's profile details 
 	 * @param email the email of the gym owner whose profile details are requested
 	 * @return GymOwner the gym owner object
-	 * @throws GymOwnerNotFoundException 
 	 */
-	public GymOwner getProfile(String email) throws GymOwnerNotFoundException {
-		GymOwner gymOwner = gymOwnerDAO.getGymOwnerDetails(email);
-		if (gymOwner == null)
-			throw new GymOwnerNotFoundException();
+	public GymOwner getProfile(String email) {
 		System.out.println(ColorConstants.GREEN +"Fetched Gym owner details successfully! " + email+ColorConstants.RESET);
-		return gymOwner;
+		return gymOwnerDAO.getGymOwnerDetails(email);
 	}
 	/**
 	 * Gives functionality of updating gym onwer's personal data. 
 	 * @param gymOwnerNew the gymOwner object in which the profile data needs to be updated
 	 * @param email the gymOwner email for which the profile data needs to be update
-	 * @throws GymOwnerNotFoundException 
 	 */
-	public void editProfile(GymOwner gymOwnerNew) throws GymOwnerNotFoundException {
-		int updatedCount = gymOwnerDAO.editGymOwnerDetails(gymOwnerNew);
-		if (updatedCount == 0)
-			throw new GymOwnerNotFoundException();
+	public void editProfile(GymOwner gymOwnerNew) {
+		gymOwnerDAO.editGymOwnerDetails(gymOwnerNew);
 		System.out.println(ColorConstants.GREEN + "\nEdited your profile Successfully!" + ColorConstants.RESET);
 	}
 	/**

@@ -1,16 +1,14 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.*;
-import com.flipkart.exception.GymOwnerNotFoundException;
-
 import java.util.*;
 
 public interface GymOwnerBusinessInterface{
-    public GymOwner getProfile(String email) throws GymOwnerNotFoundException;
+    public GymOwner getProfile(String email);
     /*
   returns the gym owner's profile
     */
-    public void editProfile(GymOwner gymOwnerNews) throws GymOwnerNotFoundException;
+    public void editProfile(GymOwner gymOwnerNews);
     /*
 allows the gym owner to edit profile
      */

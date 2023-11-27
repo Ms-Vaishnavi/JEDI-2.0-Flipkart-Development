@@ -86,7 +86,6 @@ public class AdminDAOImpl implements AdminDAO {
         return gyms;
     }
 
-<<<<<<< HEAD
     /**
      * Retrieves a list of all pending gym owner requests from the database
      *
@@ -160,84 +159,81 @@ public class AdminDAOImpl implements AdminDAO {
 
     }
 
-  	
-	/**
-	 * Approves a single gym owner request
-	 * @param gymOwnerEmail The Email of the gym owner
-	 */
-	public int approveSingleOwnerRequest(String gymOwnerEmail) {
-		Connection connection = null;
-		String SQL_APPROVE_GYM_OWNER_BY_ID="update gymOwner set isVerified=1 WHERE email=?;";
-		try {connection = DBUtils.getConnection();
-	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_GYM_OWNER_BY_ID);
-	            System.out.println(preparedStatement);
-	            // Step 3: Execute the query or update query
-	            preparedStatement.setString(1, gymOwnerEmail);
-	            return preparedStatement.executeUpdate();	            
-	        } catch (SQLException e) {
-	            printSQLException(e);
-	            return 0;
-	        }
-	};
-	
-	/**
-	 * Approves all pending gym owner requests
-	 */
-	public int approveAllOwnerRequest() {
-		Connection connection = null;
-		String SQL_APPROVE_ALL_GYMS="update gymOwner set isVerified=1;";
-		try {connection = DBUtils.getConnection();
-	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);
-	            System.out.println(preparedStatement);
-	            // Step 3: Execute the query or update query
-	            return preparedStatement.executeUpdate();	            
-	        } catch (SQLException e) {
-	            printSQLException(e);
-	            return 0;
-	        }
-	};
-	
-	/**
-	 * Approves a single gym request
-	 * @param gymId The Id of the gym
-	 */
-	public int approveSingleGymRequest(String gymId) {
-		Connection connection = null;
-		String SQL_APPROVE_GYM_BY_ID="update gym set isVerified=1 where gymId = ?;";
-		try {connection = DBUtils.getConnection();
-	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_GYM_BY_ID);
-	            System.out.println(preparedStatement);
-	            // Step 3: Execute the query or update query
-	            preparedStatement.setString(1, gymId);
-	            return preparedStatement.executeUpdate();	            
-	        } catch (SQLException e) {
-	            printSQLException(e);
-	            return 0;
-	        }
-	};
-	
-	/**
-	 * Approves all pending gym requests
-	 */
-	public int approveAllGymRequest() {
-		Connection connection = null;
-		String SQL_APPROVE_ALL_GYMS="update gym set isVerified=1;";
-		try {connection = DBUtils.getConnection();
-	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);
-	            System.out.println(preparedStatement);
-	            // Step 3: Execute the query or update query
-	            return preparedStatement.executeUpdate();	            
-	        } catch (SQLException e) {
-	            printSQLException(e);
-	            return 0;
-	        }
-	};
-	
-	public static void printSQLException(SQLException ex) {
+    /**
+     * Approves a single gym owner request
+     *
+     * @param gymOwnerEmail The Email of the gym owner
+     */
+    public void approveSingleOwnerRequest(String gymOwnerEmail) {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            // Step 2: Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_APPROVE_GYM_OWNER_BY_ID);
+            //System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.setString(1, gymOwnerEmail);
+            preparedStatement.executeUpdate();            
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+    }
+
+    /**
+     * Approves all pending gym owner requests
+     */
+    public void approveAllOwnerRequest() {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            // Step 2: Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_APPROVE_ALL_GYMS_OWNERS);
+            //System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();            
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+    }
+
+    /**
+     * Approves a single gym request
+     *
+     * @param gymId The Id of the gym
+     */
+    public void approveSingleGymRequest(String gymId) {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            // Step 2: Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_APPROVE_GYM_BY_ID);
+            //System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.setString(1, gymId);
+            preparedStatement.executeUpdate();            
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+    }
+
+    /**
+     * Approves all pending gym requests
+     */
+    public void approveAllGymRequest() {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            // Step 2: Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_APPROVE_ALL_GYMS);
+            //System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();            
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+    }
+
+    public static void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
             if (e instanceof SQLException) {
                 e.printStackTrace(System.err);

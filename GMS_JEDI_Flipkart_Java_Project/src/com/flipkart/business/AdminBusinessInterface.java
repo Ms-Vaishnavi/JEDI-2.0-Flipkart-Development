@@ -1,9 +1,6 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.*;
-import com.flipkart.exception.GymNotFoundException;
-import com.flipkart.exception.GymOwnerNotFoundException;
-
 import java.util.*;
 
 public interface AdminBusinessInterface{
@@ -25,12 +22,12 @@ public interface AdminBusinessInterface{
     /*
     approves the gym owner request whose email is passed
     */
-    public void approveSingleGymOwnerRequest(String gymOwnerEmail) throws GymOwnerNotFoundException;
+    public boolean approveSingleGymOwnerRequest(String gymOwnerEmail);
    
     /*
     approves all the pending gym owner requests
     */
-    public void approveAllPendingGymOwnerRequests();
+    public boolean approveAllPendingGymOwnerRequests();
     
     /*
     returns the list of all the gyms whose request is pending
@@ -40,11 +37,11 @@ public interface AdminBusinessInterface{
     /*
     approves single gym whose gymId is sent
     */
-    public void approveSingleGymRequest(String gymId) throws GymNotFoundException;
+    public boolean approveSingleGymRequest(String gymId);
    
     /*
     approves all the pending gym requests
     */
-    public void approveAllPendingGymRequests();
+    public boolean approveAllPendingGymRequests();
     
 }

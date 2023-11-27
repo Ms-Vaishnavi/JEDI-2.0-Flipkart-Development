@@ -47,6 +47,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         return gyms;
     }
     
+
     // shows all the slots in the provided gym
     public List<Slot> fetchSlotList(String gymId) throws NoSlotsFoundException {
     	   Connection connection = null;
