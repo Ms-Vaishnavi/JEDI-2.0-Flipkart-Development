@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.flipkart.bean.*;
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.DBUtils;
 
 public class GymOwnerDAOImpl implements GymOwnerDAO{
@@ -37,7 +39,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 				gymOwner.setAadharNumber(rs.getString("aadharNum"));
 				gymOwner.setPanNumber(rs.getString("panNum"));
 
-//	                System.out.println(id + "," + name + "," + email + "," + country + "," + password);
+	                // System.out.println(id + "," + name + "," + email + "," + country + "," + password);
 			}
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -52,11 +54,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	 */
 	public void addGymOwnerDetails(GymOwner gymOwnerDetails) {
 		Connection connection = null;
-		String INSERT_USER_SQL = "INSERT INTO user" + " (email, password, role) VALUES " + "(?, ?, ?);";
 		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER_SQL);
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_INSERT_USER);
 			preparedStatement.setString(1, gymOwnerDetails.getEmail());
 			preparedStatement.setString(2, gymOwnerDetails.getPassword());
 			preparedStatement.setString(3, "GymOwner");
@@ -69,15 +70,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 			printSQLException(e);
 		}
 		
-		String INSERT_GYM_OWNER_SQL = "INSERT INTO gymOwner"
-				+ "  (email, password, name, phoneNum, aadharNum, panNum, isVerified) VALUES "
-				+ " (?, ?, ?, ?, ?, ?, ?);";
-		System.out.println(INSERT_GYM_OWNER_SQL);
+		System.out.println(SQLConstants.SQL_INSERT_GYM_OWNER);
 		// Step 1: Establishing a Connection
 		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_OWNER_SQL);
+				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_INSERT_GYM_OWNER);
 			preparedStatement.setString(1, gymOwnerDetails.getEmail());
 			preparedStatement.setString(2, gymOwnerDetails.getPassword());
 			preparedStatement.setString(3, gymOwnerDetails.getName());
@@ -101,11 +99,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	 */
 	public void editGymOwnerDetails(GymOwner gymOwnerDetails) {
 		Connection connection = null;
-		String UPDATE_USER_SQL = "update user set email = ?, password = ?, role = ?" + " where email = ?;";
 		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_SQL);
+				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_USER);
 			preparedStatement.setString(1, gymOwnerDetails.getEmail());
 			preparedStatement.setString(2, gymOwnerDetails.getPassword());
 			preparedStatement.setString(3, "GymOwner");
@@ -118,14 +115,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 			printSQLException(e);
 		}
 		
-		String UPDATE_GYM_OWNER_SQL = "update gymOwner set email = ?, name = ?, phoneNum = ?, aadharNum = ?, panNum = ?, isVerified = ? "
-				+ "where email = ?;";
-		System.out.println(UPDATE_GYM_OWNER_SQL);
+		System.out.println(SQLConstants.SQL_UPDATE_GYM_OWNER);
 		// Step 1: Establishing a Connection
 		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_GYM_OWNER_SQL);
+				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_GYM_OWNER);
 			preparedStatement.setString(1, gymOwnerDetails.getEmail());
 			preparedStatement.setString(2, gymOwnerDetails.getName());
 			preparedStatement.setString(3, gymOwnerDetails.getPhoneNumber());
@@ -150,11 +145,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	public Gym getGym(String gymId) {
 		Connection connection = null;
 		Gym gym = new Gym();
-		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where gymId = ?";
 		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
+				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_READ_GYM);
 			preparedStatement.setString(1, gymId);
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
@@ -185,15 +179,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	 */
 	public void addGym(Gym gymDetails) {
 		Connection connection = null;
-		String INSERT_GYM_SQL = "INSERT INTO gym"
-				+ "  (gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified) VALUES "
-				+ " (?, ?, ?, ?, ?, ?, ?);";
-		System.out.println(INSERT_GYM_SQL);
+		System.out.println(SQLConstants.SQL_INSERT_GYM);
 		// Step 1: Establishing a Connection
 		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_SQL);
+				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_INSERT_GYM);
 			preparedStatement.setString(1, gymDetails.getGymId());
 			preparedStatement.setString(2, gymDetails.getGymName());
 			preparedStatement.setString(3, gymDetails.getOwnerEmail());
@@ -217,14 +208,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	 */
 	public void editGym(Gym gymDetails) {
 		Connection connection = null;
-		String INSERT_GYM_SQL = "update gym"
-				+ "  set gymId = ?, gymName = ?, ownerEmail = ?, address = ?, slotCount = ?, seatsPerSlotCount = ?, isVerified = ? where gymId = ?;";
-		System.out.println(INSERT_GYM_SQL);
+		System.out.println(SQLConstants.SQL_UPDATE_GYM);
 		// Step 1: Establishing a Connection
 		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_SQL);
+				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_GYM);
 			preparedStatement.setString(1, gymDetails.getGymId());
 			preparedStatement.setString(2, gymDetails.getGymName());
 			preparedStatement.setString(3, gymDetails.getOwnerEmail());
