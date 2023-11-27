@@ -9,221 +9,204 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.flipkart.bean.Gym;
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.exception.*;
 import com.flipkart.utils.DBUtils;
 
-public class CustomerDAOImpl implements CustomerDAO{
+public class CustomerDAOImpl implements CustomerDAO {
 
-	//returns the list of all the gyms
-	public List<Gym> fetchGymList() {
-		Connection connection = null;
-		List<Gym> gyms = new ArrayList<Gym>();
-		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym";
-		try {connection = DBUtils.getConnection();
-				// Step 2:Create a statement using connection object
-				PreparedStatement statement = connection.prepareStatement(query);
-			System.out.println(statement);
-			// Step 3: Execute the query or update query
-			ResultSet rs = statement.executeQuery();
+    // returns the list of all the gyms
+    public List<Gym> fetchGymList() {
+        Connection connection = null;
+        List<Gym> gyms = new ArrayList<Gym>();
+        try {
+            connection = DBUtils.getConnection();
+            // Step 2: Create a statement using connection object
+            PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_ALL_GYMS);
+            System.out.println(statement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = statement.executeQuery();
 
-			// Step 4: Process the ResultSet object.
-			while (rs.next()) {
-				Gym gym = new Gym();
-				gym.setGymId(rs.getString("gymId"));
-				gym.setGymName(rs.getString("gymName"));
-				gym.setOwnerEmail(rs.getString("ownerEmail"));
-				gym.setAddress(rs.getString("address"));
-				gym.setSlotCount(rs.getInt("slotCount"));
-				gym.setSeatsPerSlotCount(rs.getInt("seatsPerSlotCount"));
-				gym.setVerified(rs.getBoolean("isVerified"));
-				gyms.add(gym);
-//	                System.out.println(id + "," + name + "," + email + "," + country + "," + password);
-			}
-		} catch (SQLException e) {
-			printSQLException(e);
-		}
-		return gyms;
-	}
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                Gym gym = new Gym();
+                gym.setGymId(rs.getString("gymId"));
+                gym.setGymName(rs.getString("gymName"));
+                gym.setOwnerEmail(rs.getString("ownerEmail"));
+                gym.setAddress(rs.getString("address"));
+                gym.setSlotCount(rs.getInt("slotCount"));
+                gym.setSeatsPerSlotCount(rs.getInt("seatsPerSlotCount"));
+                gym.setVerified(rs.getBoolean("isVerified"));
+                gyms.add(gym);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return gyms;
+    }
 
-	//shows all the slots in the provided gym
-	public void fetchSlotList(int gymId) throws NoSlotsFoundException {
-		Connection connection = null;
-		String query = "Select * From Slot Where gymId=?";
-		try {connection = DBUtils.getConnection();
-		PreparedStatement statement = connection.prepareStatement(query);
-			System.out.println(statement);
-			statement.setInt(1, gymId);
-			ResultSet output = statement.executeQuery();
-			if (!output.next()) {
-				throw new NoSlotsFoundException("No slot found");
-			}
-			System.out.println("SlotId \t Capacity \t SlotTime \t GymId");
-			do {
-				System.out.printf("%-7s\t", output.getString(1));
-				System.out.printf("  %-9s\t", output.getString(2));
-				System.out.printf("  %-9s\t", output.getString(3));
-				System.out.printf("  %-9s\t", output.getString(4));
-				System.out.println("");
-			} while (output.next());
-			System.out.println("-----------------------------------------------");
-		} catch (SQLException sqlExcep) {
-			printSQLException(sqlExcep);
-		}
-	}
+    // shows all the slots in the provided gym
+    public void fetchSlotList(int gymId) throws NoSlotsFoundException {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_SLOTS_BY_GYM);
+            System.out.println(statement);
+            statement.setInt(1, gymId);
+            ResultSet output = statement.executeQuery();
+            if (!output.next()) {
+                throw new NoSlotsFoundException("No slot found");
+            }
+            System.out.println("SlotId \t Capacity \t SlotTime \t GymId");
+            do {
+                System.out.printf("%-7s\t", output.getString(1));
+                System.out.printf("  %-9s\t", output.getString(2));
+                System.out.printf("  %-9s\t", output.getString(3));
+                System.out.printf("  %-9s\t", output.getString(4));
+                System.out.println("");
+            } while (output.next());
+            System.out.println("-----------------------------------------------");
+        } catch (SQLException sqlExcep) {
+            printSQLException(sqlExcep);
+        }
+    }
 
-	//shows all the bookings of the slots made by the customer
-	public void fetchBookedSlots(String email) {
-		Connection connection = null;
-		String query = "Select * From Booking where customerEmail = ?";
-		try {connection = DBUtils.getConnection();
-			PreparedStatement statement = connection.prepareStatement(query);
-		
-			statement.setString(1, email);
-			ResultSet output = statement.executeQuery();
-			System.out.println("BookingId \t Date \t    GymId");
-			while (output.next()) {
-				System.out.printf("%-12s\t", output.getInt(1));
-				System.out.printf("  %-7s\t", output.getString(5));
-				System.out.printf("%-8s\t", output.getString(3));
-				System.out.println("");
-			}
-			System.out.println("-----------------------------------------------");
-		} catch (SQLException sqlExcep) {
-			printSQLException(sqlExcep);
-		}
-	}
+    // shows all the bookings of the slots made by the customer
+    public void fetchBookedSlots(String email) {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_BOOKED_SLOTS_BY_CUSTOMER);
+            statement.setString(1, email);
+            ResultSet output = statement.executeQuery();
+            System.out.println("BookingId \t Date \t    GymId");
+            while (output.next()) {
+                System.out.printf("%-12s\t", output.getInt(1));
+                System.out.printf("  %-7s\t", output.getString(5));
+                System.out.printf("%-8s\t", output.getString(3));
+                System.out.println("");
+            }
+            System.out.println("-----------------------------------------------");
+        } catch (SQLException sqlExcep) {
+            printSQLException(sqlExcep);
+        }
+    }
 
-	//books the slot with the given slotId for the customer
-	public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail) {
-		Connection connection = null;
-		String query = "INSERT INTO Booking (bookingId,slotId,gymId,type,date,customerEmail) values(?, ?, ?, ?, ?, ?)";
-		try {connection = DBUtils.getConnection();
-		PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, bookingId);
-			statement.setString(2, slotId);
-			statement.setString(3, gymId);
-			statement.setString(4, type);
-			statement.setDate(5, (java.sql.Date)date);
-			statement.setString(6, customerEmail);
-			statement.executeUpdate();
-			System.out.println("-----------------------------------------------");
-		} catch (SQLException sqlExcep) {
-			printSQLException(sqlExcep);
-		}
-	}
+    // books the slot with the given slotId for the customer
+    public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail) {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_INSERT_BOOKING);
+            statement.setString(1, bookingId);
+            statement.setString(2, slotId);
+            statement.setString(3, gymId);
+            statement.setString(4, type);
+            statement.setDate(5, (java.sql.Date) date);
+            statement.setString(6, customerEmail);
+            statement.executeUpdate();
+            System.out.println("-----------------------------------------------");
+        } catch (SQLException sqlExcep) {
+            printSQLException(sqlExcep);
+        }
+    }
 
-	//returns true if the slot is fully booked
-	public boolean isFull(String slotId, String date) {
-		Connection connection = null;
-		String query = "Select * slot where slotId=? and (numOfSeatsBooked>=numOfSeats)";
-		try {connection = DBUtils.getConnection(); 
-		PreparedStatement preparedStatement = connection.prepareStatement(query);
+    // returns true if the slot is fully booked
+    public boolean isFull(String slotId, String date) {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_FULL_SLOT);
+            preparedStatement.setString(1, slotId);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return false;
+    }
 
-			preparedStatement.setString(1, slotId);
-			System.out.println(preparedStatement);
+    // checks if the slot is already booked by the customer
+    public boolean alreadyBooked(String slotId, String email, String date) {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_ALREADY_BOOKED);
+            preparedStatement.setString(1, slotId);
+            preparedStatement.setString(2, email);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return false;
+    }
 
-			ResultSet rs = preparedStatement.executeQuery();
-			return rs.next();
-		} catch (SQLException e)
-		{
-			printSQLException(e);
-		}
+    // cancels the booking of the customer made earlier
+    public void cancelBooking(String slotId, String email, String date) {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_DELETE_BOOKING);
+            statement.setString(1, email);
+            statement.setString(2, slotId);
+            statement.setString(3, date);
+            statement.executeUpdate();
+            System.out.println("-----------------------------------------------");
+        } catch (SQLException sqlExcep) {
+            printSQLException(sqlExcep);
+        }
+    }
 
-		return false;
-	}
+    // checks if the slot exists or not
+    public boolean checkSlotExists(String slotId, String gymId) {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_SLOT_EXISTS);
+            preparedStatement.setString(1, slotId);
+            preparedStatement.setString(2, gymId);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return false;
+    }
 
-//checks if the slot is already booked by the customer
-	public boolean alreadyBooked(String slotId, String email, String date) {
-		Connection connection = null;
-		String query = "select isVerified from Booking where slotId=? and customerEmail =  ?";
-		try {connection = DBUtils.getConnection();
+    // checks if the gym is approved
+    public boolean checkGymApprove(String gymId) {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_GYM_APPROVAL);
+            preparedStatement.setString(1, gymId);
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return false;
+    }
 
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, slotId);
-			preparedStatement.setString(2, email);
-			System.out.println(preparedStatement);
-
-			ResultSet rs = preparedStatement.executeQuery();
-
-			return rs.next();
-		} catch (SQLException e) {
-			printSQLException(e);
-		}
-
-		return false;
-	}
-
-	//cancels the booking of the customer made earlier
-	public void cancelBooking(String slotId, String email, String date) {
-		Connection connection = null;
-		String query = "Delete from Booking where email = ? and slotId = ? and date = ?";
-		try {connection = DBUtils.getConnection(); PreparedStatement statement = connection.prepareStatement(query);
-			statement.setString(1, email);
-			statement.setString(2, slotId);
-			statement.setString(3, date);
-			statement.executeUpdate();
-			System.out.println("-----------------------------------------------");
-		} catch (SQLException sqlExcep) {
-			printSQLException(sqlExcep);
-		}
-	}
-
-	//checks if the slot exists or not
-	public boolean checkSlotExists(String slotId, String gymId) {
-		Connection connection = null;
-		String query = "select isVerified from slot where slotId=? and gymId =  ?";
-		try {connection = DBUtils.getConnection();
-
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, slotId);
-			preparedStatement.setString(2, gymId);
-			System.out.println(preparedStatement);
-
-			ResultSet rs = preparedStatement.executeQuery();
-
-			return rs.next();
-		} catch (SQLException e) {
-			printSQLException(e);
-		}
-
-		return false;
-	}
-
-	//checks if the gym is approved
-	public boolean checkGymApprove(String gymId) {
-		Connection connection = null;
-		String query = "select isVerified from gym where gymId =  ?";
-		try {connection = DBUtils.getConnection();
-
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, gymId);
-			System.out.println(preparedStatement);
-
-			ResultSet rs = preparedStatement.executeQuery();
-
-			return rs.next();
-		} catch (SQLException e) {
-			printSQLException(e);
-		}
-
-		return false;
-	}
-
-	//prints the SQL Exception
-	public static void printSQLException(SQLException ex) {
-		for (Throwable e : ex) {
-			if (e instanceof SQLException) {
-				e.printStackTrace(System.err);
-				System.err.println("SQLState: " + ((SQLException) e).getSQLState());
-				System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
-				System.err.println("Message: " + e.getMessage());
-				Throwable t = ex.getCause();
-				while (t != null) {
-					System.out.println("Cause: " + t);
-					t = t.getCause();
-				}
-			}
-		}
-	}
-
+    // prints the SQL Exception
+    public static void printSQLException(SQLException ex) {
+        for (Throwable e : ex) {
+            if (e instanceof SQLException) {
+                e.printStackTrace(System.err);
+                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                Throwable t = ex.getCause();
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+        }
+    }
 }
