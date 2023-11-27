@@ -20,7 +20,11 @@ public class ApplicationClient {
 		String roleId = in.next();
 		User user = new User(userEmail, password, roleId);
 		UserBusiness userBusiness = new UserBusiness();
-		if (userBusiness.authenticateUser(user)) {
+		if (roleId.equalsIgnoreCase("Admin")) {
+			AdminClient admin = new AdminClient();
+			admin.adminMenu(in);
+		} 
+		else if (userBusiness.authenticateUser(user)) {
 			System.out.println("__________________________________________________________________________________\n");
 			System.out.println(
 					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in." + ColorConstants.RESET);
@@ -34,10 +38,6 @@ public class ApplicationClient {
 
 				GymOwnerClient gymOwner = new GymOwnerClient();
 				gymOwner.gymOwnerMenu(in, userEmail);
-
-			} else if (roleId.equalsIgnoreCase("Admin")) {
-				AdminClient admin = new AdminClient();
-				admin.adminMenu(in);
 
 			} else {
 				System.out.println(ColorConstants.RED + "Wrong Choice!" + ColorConstants.RESET);

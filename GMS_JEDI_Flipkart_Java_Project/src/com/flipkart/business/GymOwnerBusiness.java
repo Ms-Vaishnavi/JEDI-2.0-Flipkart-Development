@@ -5,6 +5,7 @@ package com.flipkart.business;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.bean.Slot;
 import com.flipkart.DAO.*;
 import com.flipkart.constants.ColorConstants;
 
@@ -59,6 +60,14 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	public List<Gym> getGymDetail(String gymOwnerEmail) {
 		System.out.println("Fetched gym details successfully! " + gymOwnerEmail);
 		return gymOwnerDAO.getGymsOfGymOwner(gymOwnerEmail);
+	}
+	/**
+	 * This method allows a gym owner to add details of a slot.
+	 * @param slot the slot object representing the slot details
+	 */
+	public void addSlot(Slot slot) {
+		gymOwnerDAO.addSlot(slot);
+		System.out.println("Added slot successfully!");
 	}
 	/**
 	 * Checks if the gym owner is verified or not.

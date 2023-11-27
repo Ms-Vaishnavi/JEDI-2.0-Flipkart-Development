@@ -133,6 +133,9 @@ public class GymOwnerClient {
 		slot.setNumOfSeats(in.nextInt());
 		System.out.print("Enter Trainer: ");
 		slot.setTrainer(in.next());
+		slot.setNumOfSeatsBooked(0);
+		
+		gymOwnerBusiness.addSlot(slot);
 	}
 
 	public void gymOwnerMenu(Scanner in, String email) {
