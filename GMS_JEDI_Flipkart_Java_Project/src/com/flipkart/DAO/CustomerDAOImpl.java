@@ -98,7 +98,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 			statement.executeUpdate();
 			System.out.println("-----------------------------------------------");
 		} catch (SQLException sqlExcep) {
-			System.out.println(sqlExcep);
+			printSQLException(sqlExcep);
 		}
 	}
 
@@ -113,7 +113,6 @@ public class CustomerDAOImpl implements CustomerDAO{
 			ResultSet rs = preparedStatement.executeQuery();
 			return rs.next();
 		} catch (SQLException e)
-
 		{
 			printSQLException(e);
 		}
