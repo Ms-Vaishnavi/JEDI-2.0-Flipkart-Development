@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.flipkart.bean.Gym;
+import com.flipkart.bean.Slot;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.exception.*;
 import com.flipkart.utils.DBUtils;
@@ -16,13 +17,13 @@ import com.flipkart.utils.DBUtils;
 public class CustomerDAOImpl implements CustomerDAO {
 
     // returns the list of all the gyms
-    public List<Gym> fetchGymList() {
+	public List<Gym> fetchGymList(String city) {
         Connection connection = null;
         List<Gym> gyms = new ArrayList<Gym>();
-        try {
-            connection = DBUtils.getConnection();
-            // Step 2: Create a statement using connection object
-            PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_ALL_GYMS);
+        try {connection = DBUtils.getConnection();
+                // Step 2:Create a statement using connection object
+        	PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_ALL_GYMS);
+            statement.setString(1, city);
             System.out.println(statement);
             // Step 3: Execute the query or update query
             ResultSet rs = statement.executeQuery();
@@ -38,39 +39,44 @@ public class CustomerDAOImpl implements CustomerDAO {
                 gym.setSeatsPerSlotCount(rs.getInt("seatsPerSlotCount"));
                 gym.setVerified(rs.getBoolean("isVerified"));
                 gyms.add(gym);
+//                    System.out.println(id + "," + name + "," + email + "," + country + "," + password);
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
         return gyms;
     }
+    
 
     // shows all the slots in the provided gym
-    public void fetchSlotList(int gymId) throws NoSlotsFoundException {
-        Connection connection = null;
-        try {
-            connection = DBUtils.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_SLOTS_BY_GYM);
-            System.out.println(statement);
-            statement.setInt(1, gymId);
-            ResultSet output = statement.executeQuery();
-            if (!output.next()) {
-                throw new NoSlotsFoundException("No slot found");
-            }
-            System.out.println("SlotId \t Capacity \t SlotTime \t GymId");
-            do {
-                System.out.printf("%-7s\t", output.getString(1));
-                System.out.printf("  %-9s\t", output.getString(2));
-                System.out.printf("  %-9s\t", output.getString(3));
-                System.out.printf("  %-9s\t", output.getString(4));
-                System.out.println("");
-            } while (output.next());
-            System.out.println("-----------------------------------------------");
-        } catch (SQLException sqlExcep) {
-            printSQLException(sqlExcep);
-        }
-    }
-
+    public List<Slot> fetchSlotList(String gymId) throws NoSlotsFoundException {
+    	   Connection connection = null;
+    	   List<Slot> slots=new ArrayList<>();
+    	   String query = "Select * From Slot Where gymId=?";
+    	   try {connection = DBUtils.getConnection();
+    	   PreparedStatement statement = connection.prepareStatement(query);
+    	      System.out.println(statement);
+    	      statement.setString(1, gymId);
+    	      //executing the query
+    	      ResultSet rs = statement.executeQuery();
+    	      while(rs.next())
+    	      {
+    	         Slot s=new Slot();
+    	         s.setSlotId(rs.getString("slotId"));
+    	         s.setTrainer(rs.getString("trainer"));
+    	         s.setGymId(rs.getString("gymId"));
+    	         s.setNumOfSeatsBooked(rs.getInt("numOfSeatsBooked"));
+    	         s.setNumOfSeats(rs.getInt("numOfSeats"));
+    	         s.setStartTime(rs.getString("startTime"));
+    	         s.setEndTime(rs.getString("endTime"));
+    	         slots.add(s);
+    	      }
+    	      
+    	   } catch (SQLException sqlExcep) {
+    	      printSQLException(sqlExcep);
+    	   }
+    	   return slots;
+    	}
     // shows all the bookings of the slots made by the customer
     public void fetchBookedSlots(String email) {
         Connection connection = null;

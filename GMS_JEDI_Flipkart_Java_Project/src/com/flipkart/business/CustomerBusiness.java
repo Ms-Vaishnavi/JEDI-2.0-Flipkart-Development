@@ -3,65 +3,24 @@
  */
 package com.flipkart.business;
 
+import com.flipkart.DAO.*;
 import com.flipkart.bean.*;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.exception.NoSlotsFoundException;
 import com.flipkart.utils.IdGenerator;
-
 import java.util.Date;
 import java.util.*;
 
 public class CustomerBusiness implements CustomerBusinessInterface {
 
+	CustomerDAOImpl customerDAO = new CustomerDAOImpl();
 	List<Customer> customers = new ArrayList<>();
 	List<Booking> bookings = new ArrayList<>();
 
 	List<Slot> slots = new ArrayList<>();
 	List<Gym> gyms = new ArrayList<>();
-
-	Date d1 = new Date();
-	Customer customer1 = new Customer("c1@gmail.com", "c1", "Customer", "Vaishnavi", "0000", 22, "Kanpur");
-	Customer customer2 = new Customer("c2@gmail.com", "c2", "Customer", "Anjali", "0000", 32, "Vadodara");
-	Customer customer3 = new Customer("c3@gmail.com", "c3", "Customer", "Sudha", "0000", 42, "Kolkata");
-	Customer customer4 = new Customer("c4@gmail.com", "c4", "Customer", "Aaishu", "0000", 52, "Mumbai");
-
-
-	Booking b1 = new Booking("123", "121", "171", "confirmed", d1, "c1@gmail.com", "John");
-	Booking b2 = new Booking("173", "191", "131", "waitlisted", d1, "c2@gmail.com", "Jack");
-	Booking b3 = new Booking("113", "129", "173", "confirmed", d1, "c3@gmail.com", "Johnathon");
-	Booking b4 = new Booking("193", "127", "971", "waitlisted", d1, "c4@gmail.com", "J");
-
-	Slot s1 = new Slot("900", "1400", "1500", 100, "John", "g1");
-	Slot s2 = new Slot("910", "1500", "1600", 100, "J", "g2");
-	Slot s3 = new Slot("930", "1600", "1700", 100, "Jack", "g3");
-	Slot s4 = new Slot("950", "1700", "1800", 100, "Johnny", "g4");
-
-
-	Gym gym1 = new Gym("g1", "gym1", "gymowner1@gmail.com", "Kanpur", 2, 5, true);
-	Gym gym2 = new Gym("g2", "gym2", "gymowner2@gmail.com", "Hyderabad", 3, 5, true);
-	Gym gym3 = new Gym("g3", "gym3", "gymowner3@gmail.com", "Bangalore", 2, 3, true);
-	Gym gym4 = new Gym("g4", "gym4", "gymowner4@gmail.com", "Cochin", 6, 5, true);
-
-	public CustomerBusiness() {
-		customers.add(customer1);
-		customers.add(customer2);
-		customers.add(customer3);
-		customers.add(customer4);
-
-		bookings.add(b1);
-		bookings.add(b2);
-		bookings.add(b3);
-		bookings.add(b4);
-
-		slots.add(s1);
-		slots.add(s2);
-		slots.add(s3);
-		slots.add(s4);
-
-		gyms.add(gym1);
-		gyms.add(gym2);
-		gyms.add(gym3);
-		gyms.add(gym4);
-	}
+	//Date d1 = new Date();
+	
 
 	/**
 	 * Obtains customer's profile details 
@@ -132,13 +91,9 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @return returns List of gyms available for the given city
 	 */
 	public List<Gym> getGymInCity(String city) {
-		List<Gym> newGym = new ArrayList<Gym>();
-		for (Gym gym : gyms) {
-			if (gym.getAddress().equals(city)) {
-				newGym.add(gym);
-			}
-		}
-		return newGym;
+		System.out.println(ColorConstants.GREEN+"Successfully fetched the gyms in city "+city+ColorConstants.RESET);
+		return customerDAO.fetchGymList(city);
+		
 	}
 	/**
 	 * Obtains all the slots for the given gymId.
@@ -146,13 +101,13 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @return returns List of available slots for the given gymId
 	 */
 	public List<Slot> getSlotInGym(String gymId) {
-		List<Slot> slotsOfGym = new ArrayList<>();
-		for (Slot s : slots) {
-			if (s.getGymId().equals(gymId)) {
-				slotsOfGym.add(s);
-			}
+		try {
+			List<Slot> slotsOfGym = customerDAO.fetchSlotList(gymId);
+			return slotsOfGym;
+		} catch(NoSlotsFoundException ex) {
+			System.out.println(ex.getMessage());
 		}
-		return slotsOfGym;
+		return null;
 	}
 	/**
 	 * Performs booking operation for the given customer email on the given date for the given slotId
@@ -296,6 +251,14 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * Checks if a gym is approved for a specified gym ID.
+	 * @param gymId The ID of the gym
+	 * @return true if the gym is approved, false otherwise
+	 */
+	public boolean checkGymApprove(String gymId) {
+		return customerDAO.checkGymApprove(gymId);
+	}
 
 }
