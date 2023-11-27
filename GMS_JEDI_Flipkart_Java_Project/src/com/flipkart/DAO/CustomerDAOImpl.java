@@ -14,6 +14,7 @@ import com.flipkart.utils.DBUtils;
 
 public class CustomerDAOImpl implements CustomerDAO{
 
+	//returns the list of all the gyms
 	public List<Gym> fetchGymList() {
 		Connection connection = null;
 		List<Gym> gyms = new ArrayList<Gym>();
@@ -44,6 +45,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return gyms;
 	}
 
+	//shows all the slots in the provided gym
 	public void fetchSlotList(int gymId) throws NoSlotsFoundException {
 		Connection connection = null;
 		String query = "Select * From Slot Where gymId=?";
@@ -69,6 +71,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		}
 	}
 
+	//shows all the bookings of the slots made by the customer
 	public void fetchBookedSlots(String email) {
 		Connection connection = null;
 		String query = "Select * From Booking where customerEmail = ?";
@@ -89,7 +92,8 @@ public class CustomerDAOImpl implements CustomerDAO{
 			printSQLException(sqlExcep);
 		}
 	}
-	
+
+	//books the slot with the given slotId for the customer
 	public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail) {
 		Connection connection = null;
 		String query = "INSERT INTO Booking (bookingId,slotId,gymId,type,date,customerEmail) values(?, ?, ?, ?, ?, ?)";
@@ -108,6 +112,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		}
 	}
 
+	//returns true if the slot is fully booked
 	public boolean isFull(String slotId, String date) {
 		Connection connection = null;
 		String query = "Select * slot where slotId=? and (numOfSeatsBooked>=numOfSeats)";
@@ -127,6 +132,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return false;
 	}
 
+//checks if the slot is already booked by the customer
 	public boolean alreadyBooked(String slotId, String email, String date) {
 		Connection connection = null;
 		String query = "select isVerified from Booking where slotId=? and customerEmail =  ?";
@@ -147,6 +153,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return false;
 	}
 
+	//cancels the booking of the customer made earlier
 	public void cancelBooking(String slotId, String email, String date) {
 		Connection connection = null;
 		String query = "Delete from Booking where email = ? and slotId = ? and date = ?";
@@ -161,6 +168,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		}
 	}
 
+	//checks if the slot exists or not
 	public boolean checkSlotExists(String slotId, String gymId) {
 		Connection connection = null;
 		String query = "select isVerified from slot where slotId=? and gymId =  ?";
@@ -181,6 +189,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return false;
 	}
 
+	//checks if the gym is approved
 	public boolean checkGymApprove(String gymId) {
 		Connection connection = null;
 		String query = "select isVerified from gym where gymId =  ?";
@@ -200,6 +209,7 @@ public class CustomerDAOImpl implements CustomerDAO{
 		return false;
 	}
 
+	//prints the SQL Exception
 	public static void printSQLException(SQLException ex) {
 		for (Throwable e : ex) {
 			if (e instanceof SQLException) {
