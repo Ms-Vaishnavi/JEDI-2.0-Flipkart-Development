@@ -3,9 +3,9 @@
  */
 package com.flipkart.DAO;
 import com.flipkart.bean.*;
+import com.flipkart.utils.DBUtils;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,14 +16,13 @@ import java.util.List;
  * 
  */
 public class AdminDAOImpl implements AdminDAO {
+	Connection connection = null;
 	public List<GymOwner> getAllGymOwners() {
 		List<GymOwner> gymOwners = new ArrayList<GymOwner>();
 		String query = "select email, name, phoneNum, aadharNum, panNum, isVerified from gymOwner";
-		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
-
+		try {connection = DBUtils.getConnection();
 	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+	            PreparedStatement preparedStatement = connection.prepareStatement(query);
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
 	            ResultSet rs = preparedStatement.executeQuery();
@@ -48,13 +47,12 @@ public class AdminDAOImpl implements AdminDAO {
 	};
 	
 	public List<Gym> getAllGyms() {
+		Connection connection = null;
 		List<Gym> gyms = new ArrayList<Gym>();
 		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym";
-		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
-
+		try {connection = DBUtils.getConnection();
 	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+	            PreparedStatement preparedStatement = connection.prepareStatement(query);
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
 	            ResultSet rs = preparedStatement.executeQuery();
@@ -80,13 +78,12 @@ public class AdminDAOImpl implements AdminDAO {
 	};
 	
 	public List<GymOwner> getPendingGymOwnerRequests() {
+		Connection connection = null;
 		List<GymOwner> gymOwners = new ArrayList<GymOwner>();
 		String query = "select email, name, phoneNum, aadharNum, panNum, isVerified from gymOwner where isVerified = ?;";
-		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
-
+		try {connection = DBUtils.getConnection();
 	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+	            PreparedStatement preparedStatement = connection.prepareStatement(query);
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
 	            preparedStatement.setBoolean(1, false);
@@ -113,13 +110,12 @@ public class AdminDAOImpl implements AdminDAO {
 	};
 	
 	public List<Gym> getPendingGymRequests() {
+		Connection connection = null;
 		List<Gym> gyms = new ArrayList<Gym>();
 		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where isVerified = ?;";
-		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
-
+		try {connection = DBUtils.getConnection();
 	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+	            PreparedStatement preparedStatement = connection.prepareStatement(query);
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
 	            preparedStatement.setBoolean(1, false);
@@ -147,12 +143,11 @@ public class AdminDAOImpl implements AdminDAO {
 	};
 	
 	public void approveSingleOwnerRequest(String gymOwnerEmail) {
+		Connection connection = null;
 		String SQL_APPROVE_GYM_OWNER_BY_ID="update gymOwner set isVerified=1 WHERE email=?;";
-		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
-
+		try {connection = DBUtils.getConnection();
 	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_GYM_OWNER_BY_ID);) {
+	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_GYM_OWNER_BY_ID);
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
 	            preparedStatement.setString(1, gymOwnerEmail);
@@ -163,12 +158,11 @@ public class AdminDAOImpl implements AdminDAO {
 	};
 	
 	public void approveAllOwnerRequest() {
+		Connection connection = null;
 		String SQL_APPROVE_ALL_GYMS="update gymOwner set isVerified=1;";
-		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
-
+		try {connection = DBUtils.getConnection();
 	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);) {
+	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
 	            preparedStatement.executeUpdate();	            
@@ -178,12 +172,11 @@ public class AdminDAOImpl implements AdminDAO {
 	};
 	
 	public void approveSingleGymRequest(String gymId) {
+		Connection connection = null;
 		String SQL_APPROVE_GYM_BY_ID="update gym set isVerified=1 where gymId = ?;";
-		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
-
+		try {connection = DBUtils.getConnection();
 	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_GYM_BY_ID);) {
+	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_GYM_BY_ID);
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
 	            preparedStatement.setString(1, gymId);
@@ -194,12 +187,11 @@ public class AdminDAOImpl implements AdminDAO {
 	};
 	
 	public void approveAllGymRequest() {
+		Connection connection = null;
 		String SQL_APPROVE_ALL_GYMS="update gym set isVerified=1;";
-		try (Connection connection = DriverManager
-	            .getConnection("jdbc:mysql://localhost:3306/GMS", "root", "JEDI20Flip");
-
+		try {connection = DBUtils.getConnection();
 	            // Step 2:Create a statement using connection object
-	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);) {
+	            PreparedStatement preparedStatement = connection.prepareStatement(SQL_APPROVE_ALL_GYMS);
 	            System.out.println(preparedStatement);
 	            // Step 3: Execute the query or update query
 	            preparedStatement.executeUpdate();	            
