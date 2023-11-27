@@ -8,6 +8,8 @@ import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slot;
 import com.flipkart.DAO.*;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.exception.GymNotFoundException;
+import com.flipkart.exception.GymOwnerNotFoundException;
 
 import java.util.*;
 
@@ -21,18 +23,25 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 * Obtains gym owner's profile details 
 	 * @param email the email of the gym owner whose profile details are requested
 	 * @return GymOwner the gym owner object
+	 * @throws GymOwnerNotFoundException 
 	 */
-	public GymOwner getProfile(String email) {
+	public GymOwner getProfile(String email) throws GymOwnerNotFoundException {
+		GymOwner gymOwner = gymOwnerDAO.getGymOwnerDetails(email);
+		if (gymOwner == null)
+			throw new GymOwnerNotFoundException();
 		System.out.println(ColorConstants.GREEN +"Fetched Gym owner details successfully! " + email+ColorConstants.RESET);
-		return gymOwnerDAO.getGymOwnerDetails(email);
+		return gymOwner;
 	}
 	/**
 	 * Gives functionality of updating gym onwer's personal data. 
 	 * @param gymOwnerNew the gymOwner object in which the profile data needs to be updated
 	 * @param email the gymOwner email for which the profile data needs to be update
+	 * @throws GymOwnerNotFoundException 
 	 */
-	public void editProfile(GymOwner gymOwnerNew) {
-		gymOwnerDAO.editGymOwnerDetails(gymOwnerNew);
+	public void editProfile(GymOwner gymOwnerNew) throws GymOwnerNotFoundException {
+		int updatedCount = gymOwnerDAO.editGymOwnerDetails(gymOwnerNew);
+		if (updatedCount == 0)
+			throw new GymOwnerNotFoundException();
 		System.out.println(ColorConstants.GREEN + "\nEdited your profile Successfully!" + ColorConstants.RESET);
 	}
 	/**
@@ -41,15 +50,18 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 */
 	public boolean addGym(Gym gym) {
 		gymOwnerDAO.addGym(gym);
-		System.out.println(ColorConstants.GREEN + "\nAdded Gym Successfully!" + gym.getGymId() + ColorConstants.RESET );
+		System.out.println(ColorConstants.GREEN + "\nAdded Gym Successfully! " + gym.getGymId() + ColorConstants.RESET );
 		return true;
 	}
 	/**
 	 * This method allows a gym owner to edit details of a particular gym.
 	 * @param gym the gym object representing the gym details
+	 * @throws GymNotFoundException 
 	 */
-	public void editGym(Gym gym) {
-		gymOwnerDAO.editGym(gym);
+	public void editGym(Gym gym) throws GymNotFoundException {
+		int updatedCount = gymOwnerDAO.editGym(gym);
+		if (updatedCount == 0)
+			throw new GymNotFoundException();
 		System.out.println(ColorConstants.GREEN + "\nEdited Gym Details Successfully! " + gym.getGymId()+ ColorConstants.RESET );
 	}
 	/**
@@ -64,9 +76,11 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	/**
 	 * This method allows a gym owner to add details of a slot.
 	 * @param slot the slot object representing the slot details
+	 * @throws GymNotFoundException 
 	 */
-	public void addSlot(Slot slot) {
-		gymOwnerDAO.addSlot(slot);
+	public void addSlot(Slot slot) throws GymNotFoundException {
+		if (!(gymOwnerDAO.addSlot(slot)))
+			throw new GymNotFoundException();
 		System.out.println(ColorConstants.GREEN + "\nAdded slot successfully!"+ ColorConstants.RESET);
 	}
 	/**

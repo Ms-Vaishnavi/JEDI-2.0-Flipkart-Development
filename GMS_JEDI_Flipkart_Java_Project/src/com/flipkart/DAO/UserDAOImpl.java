@@ -15,10 +15,12 @@ public class UserDAOImpl implements UserDAO {
 	public boolean authenticateUser(User user) {
 		// to run without authentication, make isUserValid = true
 		Connection connection = null;
-		
+
 		boolean isUserValid = false;
-		try {connection = DBUtils.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_SELECT_USER_LOGIN_CREDENTIAL); 
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection
+					.prepareStatement(SQLConstants.SQL_SELECT_USER_LOGIN_CREDENTIAL);
 
 			preparedStatement.setString(1, user.getEmail());
 
@@ -26,8 +28,6 @@ public class UserDAOImpl implements UserDAO {
 			while (rs.next()) {
 				if (user.getPassword().equals(rs.getString("password"))
 						&& user.getRoleId().equalsIgnoreCase(rs.getString("role"))) {
-					System.out.println(
-							rs.getString("email") + " " + rs.getString("password") + " " + rs.getString("role"));
 					isUserValid = true;
 				}
 			}
@@ -42,11 +42,18 @@ public class UserDAOImpl implements UserDAO {
 	public boolean registerCustomer(Customer customer) {
 		Connection connection = null;
 		boolean registerSuccess = false;
-		String query = "INSERT INTO customer VALUES (?,?,?,?,?)";
-		String queryUser = "INSERT INTO user VALUES (?,?,?)";
-		try {connection = DBUtils.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
-				PreparedStatement preparedStatementUser = connection.prepareStatement(queryUser);
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_INSERT_CUSTOMER);
+			PreparedStatement preparedStatementUser = connection.prepareStatement(SQLConstants.SQL_INSERT_USER);
+			
+			preparedStatementUser.setString(1, customer.getEmail());
+			preparedStatementUser.setString(2, customer.getPassword());
+			preparedStatementUser.setString(3, "Customer");
+
+			int rowsAffected = preparedStatementUser.executeUpdate();
+			if (rowsAffected != 0)
+				registerSuccess = true;
 
 			preparedStatement.setString(1, customer.getEmail());
 			preparedStatement.setString(2, customer.getName());
@@ -54,17 +61,10 @@ public class UserDAOImpl implements UserDAO {
 			preparedStatement.setInt(4, customer.getAge());
 			preparedStatement.setString(5, customer.getAddress());
 
-			int rowsAffected = preparedStatement.executeUpdate();
+			rowsAffected = preparedStatement.executeUpdate();
 			if (rowsAffected != 0)
 				registerSuccess = true;
 
-			preparedStatementUser.setString(1, customer.getEmail());
-			preparedStatementUser.setString(2, customer.getPassword());
-			preparedStatementUser.setString(3, "Customer");
-
-			rowsAffected = preparedStatementUser.executeUpdate();
-			if (rowsAffected != 0)
-				registerSuccess = true;
 
 		} catch (SQLException e) {
 			printSQLException(e);
@@ -77,11 +77,19 @@ public class UserDAOImpl implements UserDAO {
 	public boolean registerGymOwner(GymOwner gymOwner) {
 		Connection connection = null;
 		boolean registerSuccess = false;
-		String query = "INSERT INTO gymOwner VALUES (?,?,?,?,?,?)";
-		String queryOwner = "INSERT INTO user VALUES (?,?,?)";
-		try {connection = DBUtils.getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
-				PreparedStatement preparedStatementOwner = connection.prepareStatement(queryOwner);
+
+		try {
+			connection = DBUtils.getConnection();
+			PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_INSERT_GYM_OWNER);
+			PreparedStatement preparedStatementOwner = connection.prepareStatement(SQLConstants.SQL_INSERT_USER);
+
+			preparedStatementOwner.setString(1, gymOwner.getEmail());
+			preparedStatementOwner.setString(2, gymOwner.getPassword());
+			preparedStatementOwner.setString(3, "GymOwner");
+
+			int rowsAffected = preparedStatementOwner.executeUpdate();
+			if (rowsAffected != 0)
+				registerSuccess = true;
 
 			preparedStatement.setString(1, gymOwner.getEmail());
 			preparedStatement.setString(2, gymOwner.getName());
@@ -90,15 +98,7 @@ public class UserDAOImpl implements UserDAO {
 			preparedStatement.setString(5, gymOwner.getPanNumber());
 			preparedStatement.setBoolean(6, gymOwner.isVerified());
 
-			int rowsAffected = preparedStatement.executeUpdate();
-			if (rowsAffected != 0)
-				registerSuccess = true;
-
-			preparedStatementOwner.setString(1, gymOwner.getEmail());
-			preparedStatementOwner.setString(2, gymOwner.getPassword());
-			preparedStatementOwner.setString(3, "GymOwner");
-
-			rowsAffected = preparedStatementOwner.executeUpdate();
+			rowsAffected = preparedStatement.executeUpdate();
 			if (rowsAffected != 0)
 				registerSuccess = true;
 

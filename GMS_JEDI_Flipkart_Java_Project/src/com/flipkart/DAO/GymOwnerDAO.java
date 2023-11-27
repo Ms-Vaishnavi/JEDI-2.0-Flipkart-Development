@@ -23,8 +23,9 @@ public interface GymOwnerDAO {
 	/**
 	 * Edits gym owner details in the database
 	 * @param GymOwner object
+	 * @return 
 	 */
-	public void editGymOwnerDetails(GymOwner gymOwnerDetails);
+	public int editGymOwnerDetails(GymOwner gymOwnerDetails);
 
 	/**
 	 * Retrieves gym details from the database
@@ -42,8 +43,9 @@ public interface GymOwnerDAO {
 	/**
 	 * Edits a gym in the database
 	 * @param Gym object
+	 * @return 
 	 */
-	public void editGym(Gym gymDetails);
+	public int editGym(Gym gymDetails);
 	
 	/**
 	 * Retrieves all gym details of a gym owner from the database
@@ -62,8 +64,9 @@ public interface GymOwnerDAO {
 	/**
 	 * Adds a slot in the database
 	 * @param Slot object
+	 * @return if slot is generated
 	 */
-	public void addSlot(Slot slot);
+	public boolean addSlot(Slot slot);
 
 	/**
 	 * Checks if a gym owner is verified by the Administrator

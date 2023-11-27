@@ -21,29 +21,37 @@ public class AdminClient {
 
 	public void viewAllPendingGymOwnerRequests() {
 		List<GymOwner> gymOwners = adminBusiness.viewAllPendingGymOwnerRequests();
+		if (gymOwners.size() == 0) {
+			System.out.println(ColorConstants.GREEN + "No pending Gym Owner requests!" + ColorConstants.RESET);
+			return;
+		}
 
 		System.out.printf("%20s%15s%15s%15s%15s%15s", "GymOwner Email", "GymOwner Name", "Phone Number", "Aadhaar",
 				"PAN number", "Verification");
-		for (GymOwner gymOwner : gymOwners) {
-			System.out.println();
-			System.out.printf("%20s%15s%15s%15s%15s%15s", gymOwner.getEmail(), gymOwner.getName(),
-					gymOwner.getPhoneNumber(), gymOwner.getAadharNumber(), gymOwner.getPanNumber(),
-					gymOwner.isVerified() ? "Verified" : "Not Verified");
-		}
+		gymOwners.forEach(gymOwner -> {
+		    System.out.println();
+		    System.out.printf("%20s%15s%15s%15s%15s%15s", gymOwner.getEmail(), gymOwner.getName(),
+		            gymOwner.getPhoneNumber(), gymOwner.getAadharNumber(), gymOwner.getPanNumber(),
+		            gymOwner.isVerified() ? "Verified" : "Not Verified");
+		});
 	}
 
 	public void viewAllPendingGymRequests() {
 
 		List<Gym> gyms = adminBusiness.viewAllPendingGymRequests();
+		if (gyms.size() == 0) {
+			System.out.println(ColorConstants.GREEN + "No pending Gym requests!" + ColorConstants.RESET);
+			return;
+		}
 
 		System.out.printf("%15s%15s%15s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Gym Owner", "Address", "SlotCount",
 				"SeatsPerSlot", "Verification");
-		for (Gym gym : gyms) {
-			System.out.println();
-			System.out.printf("%15s%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(),
-					gym.getAddress(), gym.getSlotCount(), gym.getSeatsPerSlotCount(),
-					gym.isVerified() ? "Verified" : "Not Verified");
-		}
+		gyms.forEach(gym -> {
+		    System.out.println();
+		    System.out.printf("%15s%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(),
+		            gym.getAddress(), gym.getSlotCount(), gym.getSeatsPerSlotCount(),
+		            gym.isVerified() ? "Verified" : "Not Verified");
+		});
 		System.out.println();
 	}
 
@@ -53,7 +61,7 @@ public class AdminClient {
 			adminBusiness.approveSingleGymOwnerRequest(sc.next());
 		} catch (GymOwnerNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 		}
 	}
 
@@ -63,7 +71,7 @@ public class AdminClient {
 			adminBusiness.approveSingleGymRequest(sc.next());
 		} catch (GymNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 		}
 	}
 
@@ -132,14 +140,14 @@ public class AdminClient {
 
 		System.out.printf("%15s%15s%15s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Gym Owner", "Address", "SlotCount",
 				"SeatsPerSlot", "Verification");
-		for (Gym gym : gyms) {
-			System.out.println();
-			System.out.printf("%15s%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(),
-					gym.getAddress(), gym.getSlotCount(), gym.getSeatsPerSlotCount(),
-					gym.isVerified() ? "Verified" : "Not Verified");
-		}
+		gyms.forEach(gym -> {
+		    System.out.println();
+		    System.out.printf("%15s%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(),
+		            gym.getAddress(), gym.getSlotCount(), gym.getSeatsPerSlotCount(),
+		            gym.isVerified() ? "Verified" : "Not Verified");
+		});
 		System.out.println();
-		System.out.println("Fetched gym owner details successfully!\n");
+		System.out.println(ColorConstants.GREEN + "Fetched gym owner details successfully!\n" + ColorConstants.RESET);
 	}
 
 	public void viewAllGymOwners() {
@@ -148,12 +156,12 @@ public class AdminClient {
 
 		System.out.printf("%20s%15s%15s%15s%15s%15s", "GymOwner Email", "GymOwner Name", "Phone Number", "Aadhaar",
 				"PAN number", "Verification");
-		for (GymOwner gymOwner : gymOwners) {
-			System.out.println();
-			System.out.printf("%20s%15s%15s%15s%15s%15s", gymOwner.getEmail(), gymOwner.getName(),
-					gymOwner.getPhoneNumber(), gymOwner.getAadharNumber(), gymOwner.getPanNumber(),
-					gymOwner.isVerified() ? "Verified" : "Not Verified");
-		}
+		gymOwners.forEach(gymOwner -> {
+		    System.out.println();
+		    System.out.printf("%20s%15s%15s%15s%15s%15s", gymOwner.getEmail(), gymOwner.getName(),
+		            gymOwner.getPhoneNumber(), gymOwner.getAadharNumber(), gymOwner.getPanNumber(),
+		            gymOwner.isVerified() ? "Verified" : "Not Verified");
+		});
 
 	}
 }

@@ -8,6 +8,8 @@ import com.flipkart.DAO.UserDAOImpl;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.User;
+import com.flipkart.exception.UserAlreadyExistsException;
+import com.flipkart.exception.UserNotFoundException;
 
 /**
  * 
@@ -19,30 +21,30 @@ public class UserBusiness implements UserBusinessInterface{
 	/**
 	Registers a customer in the system.
 	@param customer The Customer object representing the customer data
+	 * @throws UserAlreadyExistsException 
 	*/
-	public boolean registerCustomer(Customer customer) {
-		boolean registerSuccess = false;
-		registerSuccess = userDao.registerCustomer(customer);
-		return registerSuccess;
+	public void registerCustomer(Customer customer) throws UserAlreadyExistsException {
+		if (!(userDao.registerCustomer(customer)))
+			throw new UserAlreadyExistsException();
 	}
 	/**
 	Registers a gym owner in the system.
 	@param gymOwner The gym owner object representing the gym owner data
+	 * @throws UserAlreadyExistsException 
 	*/
-	public boolean registerGymOwner(GymOwner gymOwner) {
-		boolean registerSuccess = false;
-		registerSuccess = userDao.registerGymOwner(gymOwner);
-		return registerSuccess;
+	public void registerGymOwner(GymOwner gymOwner) throws UserAlreadyExistsException {
+		if (!(userDao.registerGymOwner(gymOwner)))
+			throw new UserAlreadyExistsException();
 	}
 	/**
 	Verifies a user's data.
 	@param user The user object representing the user data
 	@return true if the user's data are valid else returns false
+	 * @throws UserNotFoundException 
 	*/
-	public boolean authenticateUser(User user) {
-		boolean authenticateSuccess = false;
-		authenticateSuccess = userDao.authenticateUser(user);
-		return authenticateSuccess;
+	public void authenticateUser(User user) throws UserNotFoundException {
+		if (!(userDao.authenticateUser(user)))
+			throw new UserNotFoundException();
 	}
 	/**
 	Logs out a user.

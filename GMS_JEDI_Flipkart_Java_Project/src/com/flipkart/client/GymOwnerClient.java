@@ -1,5 +1,6 @@
 package com.flipkart.client;
 
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,6 +10,10 @@ import com.flipkart.bean.Slot;
 import com.flipkart.business.GymOwnerBusiness;
 import com.flipkart.business.UserBusiness;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.exception.GymNotFoundException;
+import com.flipkart.exception.GymOwnerNotFoundException;
+import com.flipkart.exception.InvalidInputException;
+import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.utils.IdGenerator;
 
 public class GymOwnerClient {
@@ -34,14 +39,15 @@ public class GymOwnerClient {
 		gymOwner.setAadharNumber(in.next());
 
 		UserBusiness userBusiness = new UserBusiness();
-		boolean registerSuccess = userBusiness.registerGymOwner(gymOwner);
-
-		if (registerSuccess)
+		try {
+			userBusiness.registerGymOwner(gymOwner);
 			System.out
-					.println("\n" + ColorConstants.GREEN + "Gym Owner registered successfully!" + ColorConstants.RESET);
-		else
+			.println("\n" + ColorConstants.GREEN + "Gym Owner registered successfully!" + ColorConstants.RESET);
+		} catch (UserAlreadyExistsException e) {
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 			System.out.println(
 					"\n" + ColorConstants.RED + "Gym Owner registration failed! Try again!" + ColorConstants.RESET);
+		}
 	}
 
 	public void editProfile(Scanner in, String email) {
@@ -60,11 +66,22 @@ public class GymOwnerClient {
 		System.out.print("Enter Aadhaar: ");
 		gymOwner.setAadharNumber(in.next());
 
-		gymOwnerBusiness.editProfile(gymOwner);
+		try {
+			gymOwnerBusiness.editProfile(gymOwner);
+		} catch (GymOwnerNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+		}
 	}
 
 	public void viewProfile(Scanner in, String email) {
-		gymOwner = gymOwnerBusiness.getProfile(email);
+		try {
+			gymOwner = gymOwnerBusiness.getProfile(email);
+		} catch (GymOwnerNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+			return;
+		}
 		System.out.println("______________________________________________________________");
 		System.out.printf("%15s%15s%15s%15s", "Gym Owner Name", "Phone Number", "PAN Number", "Aadhaar Number");
 		System.out.println();
@@ -84,7 +101,12 @@ public class GymOwnerClient {
 		System.out.print("Address: ");
 		gym.setAddress(in.next());
 		System.out.print("SlotCount: ");
-		gym.setSlotCount(in.nextInt());
+		try {
+			gym.setSlotCount(in.nextInt());
+		} catch (InputMismatchException e) {
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+			return;
+		}
 		System.out.print("SeatsPerSlotCount: ");
 		gym.setSeatsPerSlotCount(in.nextInt());
 		gym.setVerified(false);
@@ -104,21 +126,33 @@ public class GymOwnerClient {
 		System.out.print("Address: ");
 		gym.setAddress(in.next());
 		System.out.print("SlotCount: ");
-		gym.setSlotCount(in.nextInt());
-		System.out.print("SeatsPerSlotCount: ");
-		gym.setSeatsPerSlotCount(in.nextInt());
+		try {
+			gym.setSlotCount(in.nextInt());
+			System.out.print("SeatsPerSlotCount: ");
+			gym.setSeatsPerSlotCount(in.nextInt());
+		} catch (InputMismatchException e) {
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+			return;
+		}
 		gym.setVerified(false);
 
-		gymOwnerBusiness.editGym(gym);
+		try {
+			gymOwnerBusiness.editGym(gym);
+		} catch (GymNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+		}
 	}
 
 	public void getGymDetails(Scanner in, String email) {
 		List<Gym> gymDetails = gymOwnerBusiness.getGymDetail(email);
 		System.out.printf("%15s%15s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Address", "SlotCount", "SeatsPerSlot", "Verification");
-		for (Gym gym : gymDetails) {
-			System.out.println();
-			System.out.printf("%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getAddress(), gym.getSlotCount(), gym.getSeatsPerSlotCount(), gym.isVerified() ? "Verified" : "Not Verified");
-		}
+		gymDetails.forEach(gym -> {
+		    System.out.println();
+		    System.out.printf("%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getAddress(),
+		            gym.getSlotCount(), gym.getSeatsPerSlotCount(),
+		            gym.isVerified() ? "Verified" : "Not Verified");
+		});
 	}
 
 	public void addSlot(Scanner in) {
@@ -132,12 +166,22 @@ public class GymOwnerClient {
 		System.out.print("Enter Slot End Time: ");
 		slot.setEndTime(in.next());
 		System.out.print("Enter number of seats in slot: ");
-		slot.setNumOfSeats(in.nextInt());
+		try {
+			slot.setNumOfSeats(in.nextInt());
+		} catch (InputMismatchException e) {
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+			return;
+		}
 		System.out.print("Enter Trainer: ");
 		slot.setTrainer(in.next());
 		slot.setNumOfSeatsBooked(0);
 		
-		gymOwnerBusiness.addSlot(slot);
+		try {
+			gymOwnerBusiness.addSlot(slot);
+		} catch (GymNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+		}
 	}
 
 	public void gymOwnerMenu(Scanner in, String email) {

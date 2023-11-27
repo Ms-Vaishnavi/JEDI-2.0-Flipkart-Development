@@ -5,6 +5,7 @@ import java.util.*;
 import com.flipkart.bean.User;
 import com.flipkart.business.UserBusiness;
 import com.flipkart.constants.*;
+import com.flipkart.exception.UserNotFoundException;
 
 public class ApplicationClient {
 
@@ -23,8 +24,10 @@ public class ApplicationClient {
 		if (roleId.equalsIgnoreCase("Admin")) {
 			AdminClient admin = new AdminClient();
 			admin.adminMenu(in);
+			return;
 		} 
-		else if (userBusiness.authenticateUser(user)) {
+		try {
+			userBusiness.authenticateUser(user);
 			System.out.println("__________________________________________________________________________________\n");
 			System.out.println(
 					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in." + ColorConstants.RESET);
@@ -42,7 +45,8 @@ public class ApplicationClient {
 			} else {
 				System.out.println(ColorConstants.RED + "Wrong Choice!" + ColorConstants.RESET);
 			}
-		} else {
+		} catch(UserNotFoundException e) {
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 			System.out.println(ColorConstants.RED + "\nSorry! You are not Registered! Please Register Yourself!" + ColorConstants.RESET);
 		}
 	}

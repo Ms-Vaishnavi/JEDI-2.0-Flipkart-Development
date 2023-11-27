@@ -10,6 +10,7 @@ import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerBusiness;
 import com.flipkart.business.UserBusiness;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.exception.UserAlreadyExistsException;
 
 public class CustomerClient {
 
@@ -32,16 +33,16 @@ public class CustomerClient {
 		customer.setAddress(sc.next());
 		
 		UserBusiness userBusiness = new UserBusiness();
-		boolean registerSuccess = userBusiness.registerCustomer(customer);
-		
-		
-		if (registerSuccess)
+		try {
+			userBusiness.registerCustomer(customer);
 			System.out
-					.println("\n" + ColorConstants.GREEN + "Customer registered successfully!" + ColorConstants.RESET);
-		else
+			.println("\n" + ColorConstants.GREEN + "Customer registered successfully!" + ColorConstants.RESET);
+		} catch (UserAlreadyExistsException e) {
+			System.out.println(e.getMessage());
 			System.out.println(
 					"\n" + ColorConstants.RED + "Customer registration failed! Try again!" + ColorConstants.RESET);
 
+		}	
 	}
 
 	public void viewGyms(String email) throws ParseException {
@@ -54,10 +55,10 @@ public class CustomerClient {
 		Date date = dateFormat.parse(dateStr);
 
 		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
-		for (Slot slot : slots) {
-			System.out.print("\nSlot Id: " + slot.getSlotId());
-			System.out.print("\nAvailability: " + customerBusiness.isSlotBooked(slot.getSlotId(), date));
-		}
+		slots.forEach(slot -> {
+		    System.out.print("\nSlot Id: " + slot.getSlotId());
+		    System.out.print("\nAvailability: " + customerBusiness.isSlotBooked(slot.getSlotId(), date));
+		});
 		System.out.println("__________________________________________________________________________________\n");
 		System.out.print("Enter the slot ID which you want to book: ");
 		String slotId = sc.next();
@@ -100,12 +101,12 @@ public class CustomerClient {
 	public void getGyms() {
 		System.out.print("\nEnter your city: ");
 		List<Gym> gyms = customerBusiness.getGymInCity(sc.next());
-		for (Gym gym : gyms) {
-			System.out.print("Gym Id: " + gym.getGymId());
-			System.out.print("Gym Owner Email: " + gym.getOwnerEmail());
-			System.out.print("Gym Name: " + gym.getGymName());
-			System.out.println();
-		}
+		gyms.forEach(gym -> {
+		    System.out.print("Gym Id: " + gym.getGymId());
+		    System.out.print("Gym Owner Email: " + gym.getOwnerEmail());
+		    System.out.print("Gym Name: " + gym.getGymName());
+		    System.out.println();
+		});
 	}
 
 	public void cancelBooking(String email) {

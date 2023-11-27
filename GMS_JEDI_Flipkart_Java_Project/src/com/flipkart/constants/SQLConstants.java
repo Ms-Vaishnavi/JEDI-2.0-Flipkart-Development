@@ -7,8 +7,8 @@ public class SQLConstants {
     public static final String SQL_INSERT_USER = "INSERT INTO user (email, password, role) VALUES (?, ?, ?);";
 	public static final String SQL_UPDATE_USER = "update user set email = ?, password = ?, role = ?" + " where email = ?;";
     
-	public static final String SQL_INSERT_GYM_OWNER = "INSERT INTO gymOwner (email, password, name, phoneNum, aadharNum, panNum, isVerified) VALUES (?, ?, ?, ?, ?, ?, ?);";
-	public static final String SQL_UPDATE_GYM_OWNER = "UPDATE gymOwner set email = ?, name = ?, phoneNum = ?, aadharNum = ?, panNum = ?, isVerified = ?"; 
+	public static final String SQL_INSERT_GYM_OWNER = "INSERT INTO gymOwner (email, name, phoneNum, aadharNum, panNum, isVerified) VALUES (?, ?, ?, ?, ?, ?);";
+	public static final String SQL_UPDATE_GYM_OWNER = "UPDATE gymOwner set email = ?, name = ?, phoneNum = ?, aadharNum = ?, panNum = ?, isVerified = ? where email = ?;"; 
 
 	public static final String SQL_READ_GYM = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where gymId = ?";
 	public static final String SQL_INSERT_GYM = "INSERT INTO gym"
@@ -21,7 +21,8 @@ public class SQLConstants {
 	public static final String SQL_INSERT_SLOT = "INSERT INTO slot" + "  (slotId, gymId, startTime, endTime, trainer, numOfSeats, numOfSeatsBooked) VALUES "
 					+ " (?, ?, ?, ?, ?, ?, ?);";
 
-	public static final String SQL_SELECT_ALL_GYMS = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where address=";
+	public static final String SQL_SELECT_ALL_GYMS = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where ownerEmail = ?";
+	public static final String SQL_VIEW_ALL_GYMS = "select * from gym";
 	public static final String SQL_SELECT_SLOTS_BY_GYM_ID = "Select * From Slot Where gymId=?";
 	public static final String SQL_SELECT_BOOKINGS_BY_CUSTOMER_EMAIL = "Select * From Booking where customerEmail = ?";
 	public static final String SQL_SELECT_FULL_SLOTS = "Select * from slot where slotId=? and (numOfSeatsBooked>=numOfSeats)";
@@ -46,5 +47,6 @@ public class SQLConstants {
     public static final String SQL_DELETE_BOOKING = "Delete from Booking where email = ? and bookingId = ?";
     public static final String SQL_CHECK_SLOT_EXISTS = "select isVerified from slot where slotId=? and gymId = ?";
     public static final String SQL_CHECK_GYM_APPROVAL = "select isVerified from gym where gymId = ?";
+    public static final String SQL_INSERT_CUSTOMER = "INSERT INTO customer VALUES (?,?,?,?,?)";
 }
 

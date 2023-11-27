@@ -7,6 +7,7 @@ import java.util.*;
 import com.flipkart.DAO.AdminDAOImpl;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
+import com.flipkart.constants.ColorConstants;
 import com.flipkart.exception.GymNotFoundException;
 import com.flipkart.exception.GymOwnerNotFoundException;
 
@@ -47,7 +48,7 @@ public class AdminBusiness implements AdminBusinessInterface{
 		int approvedCount = adminDAO.approveSingleOwnerRequest(gymOwnerEmail);
 		if (approvedCount == 0)
 			throw new GymOwnerNotFoundException();
-		System.out.println("Approved gym owner request! " + gymOwnerEmail);
+		System.out.println(ColorConstants.GREEN + "Approved gym owner request! " + gymOwnerEmail + ColorConstants.RESET);
 	}
 
 	/**
@@ -56,16 +57,16 @@ public class AdminBusiness implements AdminBusinessInterface{
 	public void approveAllPendingGymOwnerRequests() {
 		int approvedCount = adminDAO.approveAllOwnerRequest();
 		if (approvedCount == 0)
-			System.out.println("No pending Gym Owner Requests");
+			System.out.println(ColorConstants.GREEN + "No pending Gym Owner Requests" + ColorConstants.RESET);
 		else
-			System.out.println("Approved all pending gym owner requests!");
+			System.out.println(ColorConstants.GREEN + "Approved all pending gym owner requests!" + ColorConstants.RESET);
 	}
 	/**
 	 * Returns all Gym object whose requests are pending for approval. 
 	 * @return List of Gym objects
 	 */
 	public List<Gym> viewAllPendingGymRequests() {
-		System.out.println("Fetched pending gym requests successfully!");
+		System.out.println(ColorConstants.GREEN + "Fetched pending gym requests successfully!" + ColorConstants.RESET);
 		return adminDAO.getPendingGymRequests();
 	}
 	/**
@@ -78,7 +79,7 @@ public class AdminBusiness implements AdminBusinessInterface{
 		int approvedCount = adminDAO.approveSingleGymRequest(gymId);
 		if (approvedCount == 0)
 			throw new GymNotFoundException();
-		System.out.println("Successfully approved gym request! " + gymId);
+		System.out.println(ColorConstants.GREEN + "Successfully approved gym request! " + gymId + ColorConstants.RESET);
 	}
 	/**
 	 * Approves all Gym whose requests are pending for approval. 
@@ -86,8 +87,8 @@ public class AdminBusiness implements AdminBusinessInterface{
 	public void approveAllPendingGymRequests() {
 		int approvedCount = adminDAO.approveAllGymRequest();
 		if (approvedCount == 0)
-			System.out.println("No pending Gym Requests");
+			System.out.println(ColorConstants.GREEN + "No pending Gym Requests" + ColorConstants.RESET);
 		else
-			System.out.println("Successfully approved all pending gym requests!");
+			System.out.println(ColorConstants.GREEN + "Successfully approved all pending gym requests!" + ColorConstants.RESET);
 	}
 }
