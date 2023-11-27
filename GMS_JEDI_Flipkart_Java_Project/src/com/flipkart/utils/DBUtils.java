@@ -27,7 +27,11 @@ private static Connection connection = null;
             try {
             	Properties prop = new Properties();
                 //InputStream inputStream = DBUtils.class.getClassLoader().getResourceAsStream("./config.properties");
+<<<<<<< Updated upstream
             	FileInputStream fileInputStream = new FileInputStream("/Users/ksai.sudha/JEDI-2.0-Flipkart-Development/GMS_JEDI_Flipkart_Java_Project/src/config.properties");
+=======
+            	FileInputStream fileInputStream = new FileInputStream("/Users/vaishnavi.sahu1/GMS/JEDI-2.0-Flipkart-Development/GMS_JEDI_Flipkart_Java_Project/src/config.properties");
+>>>>>>> Stashed changes
                 prop.load(fileInputStream);
                 //String driver = prop.getProperty("driver");
                 String url = prop.getProperty("url");

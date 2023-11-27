@@ -56,7 +56,7 @@ public class AdminClient {
 	}
 
 	public void approveSingleGymOwnerRequest() {
-		System.out.println("Enter gym owner email: ");
+		System.out.print("Enter gym owner email: ");
 		try {
 			adminBusiness.approveSingleGymOwnerRequest(sc.next());
 		} catch (GymOwnerNotFoundException e) {
@@ -66,7 +66,7 @@ public class AdminClient {
 	}
 
 	public void approveSingleGymRequest() {
-		System.out.println("Enter gym Id: ");
+		System.out.print("Enter gym Id: ");
 		try {
 			adminBusiness.approveSingleGymRequest(sc.next());
 		} catch (GymNotFoundException e) {
@@ -127,6 +127,7 @@ public class AdminClient {
 				approveSingleGymRequest();
 				break;
 			case 9:
+				System.out.println(ColorConstants.RED + "Exiting..." + ColorConstants.RESET);
 				return;
 			// Default case statement
 			default:
@@ -137,9 +138,11 @@ public class AdminClient {
 
 	public void viewAllGyms() {
 		List<Gym> gyms = adminBusiness.getGym();
-
-		System.out.printf("%15s%15s%15s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Gym Owner", "Address", "SlotCount",
+		
+		System.out.println();
+		System.out.printf("%15s%15s%20s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Gym Owner", "Address", "SlotCount",
 				"SeatsPerSlot", "Verification");
+<<<<<<< Updated upstream
 		gyms.forEach(gym -> {
 		    System.out.println();
 		    System.out.printf("%15s%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(),
@@ -148,6 +151,16 @@ public class AdminClient {
 		});
 		System.out.println();
 		System.out.println(ColorConstants.GREEN + "Fetched gym owner details successfully!\n" + ColorConstants.RESET);
+=======
+		for (Gym gym : gyms) {
+			System.out.println();
+			System.out.printf("%15s%15s%20s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(),
+					gym.getAddress(), gym.getSlotCount(), gym.getSeatsPerSlotCount(),
+					gym.isVerified() ? "Verified" : "Not Verified");
+		}
+		System.out.println();
+		System.out.println(ColorConstants.GREEN + "\nFetched Gym details successfully!" + ColorConstants.RESET);
+>>>>>>> Stashed changes
 	}
 
 	public void viewAllGymOwners() {

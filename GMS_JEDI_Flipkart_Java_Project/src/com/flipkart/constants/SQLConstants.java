@@ -21,8 +21,13 @@ public class SQLConstants {
 	public static final String SQL_INSERT_SLOT = "INSERT INTO slot" + "  (slotId, gymId, startTime, endTime, trainer, numOfSeats, numOfSeatsBooked) VALUES "
 					+ " (?, ?, ?, ?, ?, ?, ?);";
 
+<<<<<<< Updated upstream
 	public static final String SQL_SELECT_ALL_GYMS = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where ownerEmail = ?";
 	public static final String SQL_VIEW_ALL_GYMS = "select * from gym";
+=======
+	public static final String SQL_SELECT_ALL_GYMS = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where address=";
+	public static final String SQL_SELECT_ALL_GYMS_WITHOUT_FILTER = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym";
+>>>>>>> Stashed changes
 	public static final String SQL_SELECT_SLOTS_BY_GYM_ID = "Select * From Slot Where gymId=?";
 	public static final String SQL_SELECT_BOOKINGS_BY_CUSTOMER_EMAIL = "Select * From Booking where customerEmail = ?";
 	public static final String SQL_SELECT_FULL_SLOTS = "Select * from slot where slotId=? and (numOfSeatsBooked>=numOfSeats)";
@@ -35,9 +40,9 @@ public class SQLConstants {
     public static final String SQL_SELECT_PENDING_GYM_OWNERS = "select email, name, phoneNum, aadharNum, panNum, isVerified from gymOwner where isVerified = ?";
     public static final String SQL_SELECT_PENDING_GYMS = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where isVerified = ?";
     public static final String SQL_APPROVE_GYM_OWNER_BY_ID = "update gymOwner set isVerified=1 WHERE email=?";
-    public static final String SQL_APPROVE_ALL_GYMS_OWNERS = "update gymOwner set isVerified=1;";
+	public static final String SQL_APPROVE_ALL_GYMS_OWNERS = "update gymOwner set isVerified=1 WHERE isVerified=0;";
     public static final String SQL_APPROVE_GYM_BY_ID = "update gym set isVerified=1 where gymId = ?";
-    public static final String SQL_APPROVE_ALL_GYMS = "update gym set isVerified=1;";
+    public static final String SQL_APPROVE_ALL_GYMS = "update gym set isVerified=1 WHERE isVerified=0;";
 
     public static final String SQL_SELECT_SLOTS_BY_GYM = "Select * From Slot Where gymId=?";
     public static final String SQL_SELECT_BOOKED_SLOTS_BY_CUSTOMER = "Select * From Booking where customerEmail = ?";
