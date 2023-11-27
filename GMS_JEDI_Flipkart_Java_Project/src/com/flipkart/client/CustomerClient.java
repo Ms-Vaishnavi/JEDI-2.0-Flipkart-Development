@@ -4,12 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerBusiness;
 import com.flipkart.business.UserBusiness;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.exception.CustomerNotFoundException;
 import com.flipkart.exception.SlotNotFoundException;
 import com.flipkart.exception.UserAlreadyExistsException;
 
@@ -85,8 +87,7 @@ public class CustomerClient {
 
 	public void editProfile(String email) {
 		System.out.println("Enter Details: ");
-		System.out.print("Enter Email: ");
-		customer.setEmail(sc.next());
+		customer.setEmail(email);
 		System.out.print("Enter password: ");
 		customer.setPassword(sc.next());
 		System.out.print("Enter Name: ");
@@ -97,7 +98,12 @@ public class CustomerClient {
 		customer.setAge(Integer.valueOf(sc.next()));
 		System.out.print("Enter Address: ");
 		customer.setAddress(sc.next());
+		try {
+		customerBusiness.editProfile(customer);
 		System.out.println(ColorConstants.GREEN +"\nSuccessfully edited your profile"+ColorConstants.RESET);
+		} catch(CustomerNotFoundException e) {
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+		}
 	}
 
 	public void getGyms() {
@@ -116,13 +122,23 @@ public class CustomerClient {
 		String bookingId = sc.next();
 		customerBusiness.cancelBooking(bookingId, email);
 	}
+	
+	public void viewBookings(String email) {
+		List<Booking> bookings = customerBusiness.getBookings(email);
+		System.out.printf("%15s%15s%15s%15s%15s", "Booking Id", "Slot Id", "Gym Id", "Booking Type", "Date");
+		System.out.println();
+		bookings.forEach(booking -> {
+			System.out.printf("%15s%15s%15s%15s%15s", booking.getBookingId(), booking.getSlotId(), booking.getGymId(), booking.getType(), booking.getDate());
+			System.out.println();
+		});
+	}
 
 	public void customerMenu(String email) throws ParseException {
 		int choice = 0;
 
 		while (choice != 5) {
 			System.out.println("\nMenu:-");
-			System.out.println("1.Book Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4. Edit Profile \n5.Exit");
+			System.out.println("1.Book Gyms \n2.View Bookings \n3.Cancel Booked Slots \n4.Edit Profile \n5.Exit");
 			System.out.print("\nEnter your choice: ");
 			choice = sc.nextInt();
 
@@ -131,7 +147,7 @@ public class CustomerClient {
 				viewGyms(email);
 				break;
 			case 2:
-				customerBusiness.getBookings(email);
+				viewBookings(email);
 				break;
 			case 3:
 				cancelBooking(email);
