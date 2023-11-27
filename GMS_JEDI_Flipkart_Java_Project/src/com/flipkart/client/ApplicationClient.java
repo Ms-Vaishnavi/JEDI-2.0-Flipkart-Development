@@ -30,7 +30,7 @@ public class ApplicationClient {
 			userBusiness.authenticateUser(user);
 			System.out.println("__________________________________________________________________________________\n");
 			System.out.println(
-					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in." + ColorConstants.RESET);
+					ColorConstants.GREEN + "Welcome " + userEmail + "! You are logged in. " + "(" + new Date() + ")" + ColorConstants.RESET);
 
 			if (roleId.equalsIgnoreCase("Customer")) {
 
