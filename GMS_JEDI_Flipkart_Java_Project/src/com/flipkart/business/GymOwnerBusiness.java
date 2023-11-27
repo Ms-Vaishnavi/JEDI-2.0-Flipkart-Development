@@ -70,7 +70,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 * @return list of gyms owned by the given gym owner
 	 */
 	public List<Gym> getGymDetail(String gymOwnerEmail) {
-		System.out.println(ColorConstants.GREEN +"\nFetched gym details successfully! " + gymOwnerEmail+ ColorConstants.RESET);
+		System.out.println(ColorConstants.GREEN +"\nFetched gym details successfully! \n" + ColorConstants.RESET);
 		return gymOwnerDAO.getGymsOfGymOwner(gymOwnerEmail);
 	}
 	/**

@@ -45,15 +45,12 @@ public class GymOwnerClient {
 			.println("\n" + ColorConstants.GREEN + "Gym Owner registered successfully!" + ColorConstants.RESET);
 		} catch (UserAlreadyExistsException e) {
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
-			System.out.println(
-					"\n" + ColorConstants.RED + "Gym Owner registration failed! Try again!" + ColorConstants.RESET);
-		}
+			}
 	}
 
 	public void editProfile(Scanner in, String email) {
-		System.out.println("Enter Details: ");
-		System.out.print("Enter Email: ");
-		gymOwner.setEmail(in.next());
+		System.out.println("Enter Details ");
+		gymOwner.setEmail(email);
 		System.out.print("Enter Password: ");
 		gymOwner.setPassword(in.next());
 		gymOwner.setRoleId("GymOwner");
@@ -153,6 +150,7 @@ public class GymOwnerClient {
 		            gym.getSlotCount(), gym.getSeatsPerSlotCount(),
 		            gym.isVerified() ? "Verified" : "Not Verified");
 		});
+		System.out.println();
 	}
 
 	public void addSlot(Scanner in) {

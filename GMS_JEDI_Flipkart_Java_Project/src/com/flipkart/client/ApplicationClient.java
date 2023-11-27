@@ -47,8 +47,7 @@ public class ApplicationClient {
 			}
 		} catch(UserNotFoundException e) {
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
-			System.out.println(ColorConstants.RED + "\nSorry! You are not Registered! Please Register Yourself!" + ColorConstants.RESET);
-		}
+			}
 	}
 
 	public static void applicationMenu() throws Exception {

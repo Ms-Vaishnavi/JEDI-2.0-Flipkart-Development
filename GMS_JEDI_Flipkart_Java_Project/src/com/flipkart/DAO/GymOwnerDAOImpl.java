@@ -117,7 +117,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             printSQLException(e);
         }
 
-        System.out.println(SQLConstants.SQL_UPDATE_GYM_OWNER);
+        //System.out.println(SQLConstants.SQL_UPDATE_GYM_OWNER);
         // Step 1: Establishing a Connection
         try {
             connection = DBUtils.getConnection();
@@ -183,7 +183,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
      */
     public void addGym(Gym gymDetails) {
         Connection connection = null;
-        System.out.println(SQLConstants.SQL_INSERT_GYM);
+        //System.out.println(SQLConstants.SQL_INSERT_GYM);
         // Step 1: Establishing a Connection
         try {
             connection = DBUtils.getConnection();

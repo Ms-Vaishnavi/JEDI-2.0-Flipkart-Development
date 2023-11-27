@@ -67,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
 
 
 		} catch (SQLException e) {
-			printSQLException(e);
+			//printSQLException(e);
 			return false;
 		}
 
@@ -103,7 +103,7 @@ public class UserDAOImpl implements UserDAO {
 				registerSuccess = true;
 
 		} catch (SQLException e) {
-			printSQLException(e);
+			//printSQLException(e);
 			return false;
 		}
 
