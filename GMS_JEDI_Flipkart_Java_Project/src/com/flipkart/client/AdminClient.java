@@ -20,11 +20,11 @@ public class AdminClient {
 	public void viewAllPendingGymOwnerRequests() {
 		List<GymOwner> gymOwners = adminBusiness.viewAllPendingGymOwnerRequests();
 
-		System.out.printf("%15s%15s%15s%15s%15s%15s", "GymOwner Email", "GymOwner Name", "Phone Number", "Aadhaar",
+		System.out.printf("%20s%15s%15s%15s%15s%15s", "GymOwner Email", "GymOwner Name", "Phone Number", "Aadhaar",
 				"PAN number", "Verification");
 		for (GymOwner gymOwner : gymOwners) {
 			System.out.println();
-			System.out.printf("%15s%15s%15s%15s%15s%15s", gymOwner.getEmail(), gymOwner.getName(),
+			System.out.printf("%20s%15s%15s%15s%15s%15s", gymOwner.getEmail(), gymOwner.getName(),
 					gymOwner.getPhoneNumber(), gymOwner.getAadharNumber(), gymOwner.getPanNumber(),
 					gymOwner.isVerified() ? "Verified" : "Not Verified");
 		}
@@ -64,8 +64,9 @@ public class AdminClient {
 	}
 
 	public void adminMenu(Scanner in) throws Exception {
-		System.out.println("________________________________________________________________________________\n");
+		
 		while (true) {
+			System.out.println("\n________________________________________________________________________________\n");
 			System.out.println("Here are the actions you can perform!");
 			System.out.println("1. View All Gym ");
 			System.out.println("2. View All Gym Owners");
@@ -126,18 +127,18 @@ public class AdminClient {
 					gym.isVerified() ? "Verified" : "Not Verified");
 		}
 		System.out.println();
-		System.out.println("Fetched gym owner details successfully!");
+		System.out.println("Fetched gym owner details successfully!\n");
 	}
 
 	public void viewAllGymOwners() {
 
 		List<GymOwner> gymOwners = adminBusiness.getGymOwners();
 
-		System.out.printf("%15s%15s%15s%15s%15s%15s", "GymOwner Email", "GymOwner Name", "Phone Number", "Aadhaar",
+		System.out.printf("%20s%15s%15s%15s%15s%15s", "GymOwner Email", "GymOwner Name", "Phone Number", "Aadhaar",
 				"PAN number", "Verification");
 		for (GymOwner gymOwner : gymOwners) {
 			System.out.println();
-			System.out.printf("%15s%15s%15s%15s%15s%15s", gymOwner.getEmail(), gymOwner.getName(),
+			System.out.printf("%20s%15s%15s%15s%15s%15s", gymOwner.getEmail(), gymOwner.getName(),
 					gymOwner.getPhoneNumber(), gymOwner.getAadharNumber(), gymOwner.getPanNumber(),
 					gymOwner.isVerified() ? "Verified" : "Not Verified");
 		}

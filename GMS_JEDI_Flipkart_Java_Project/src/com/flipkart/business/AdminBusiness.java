@@ -26,7 +26,6 @@ public class AdminBusiness implements AdminBusinessInterface{
 	 * @return List of Gym objects
 	 */
 	public List<Gym> getGym() {
-		System.out.println("Fetched gym details successfully!");
 		return adminDAO.getAllGyms();
 	}
 
@@ -35,7 +34,6 @@ public class AdminBusiness implements AdminBusinessInterface{
 	 * @return List of GymOwner objects
 	 */
 	public List<GymOwner> viewAllPendingGymOwnerRequests() {
-		System.out.println("Fetched pending gym owner details successfully!");
 		return adminDAO.getPendingGymOwnerRequests();
 	}
 
