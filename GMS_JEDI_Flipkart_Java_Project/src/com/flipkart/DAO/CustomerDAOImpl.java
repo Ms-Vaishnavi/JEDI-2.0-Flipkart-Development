@@ -117,7 +117,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     // returns true if the slot is fully booked
-    public boolean isFull(String slotId, String date) {
+    public boolean isFull(String slotId, Date date) {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
@@ -133,7 +133,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     // checks if the slot is already booked by the customer
-    public boolean alreadyBooked(String slotId, String email, String date) {
+    public boolean alreadyBooked(String slotId, String email, Date date) {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
@@ -150,19 +150,20 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     // cancels the booking of the customer made earlier
-    public void cancelBooking(String slotId, String email, String date) {
+    public boolean cancelBooking(String bookingId, String email) {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_DELETE_BOOKING);
-            statement.setString(1, email);
-            statement.setString(2, slotId);
-            statement.setString(3, date);
+            statement.setString(1, bookingId);
+            statement.setString(2, email);
             statement.executeUpdate();
             System.out.println("-----------------------------------------------");
+            return true;
         } catch (SQLException sqlExcep) {
             printSQLException(sqlExcep);
         }
+        return false;
     }
 
     // checks if the slot exists or not

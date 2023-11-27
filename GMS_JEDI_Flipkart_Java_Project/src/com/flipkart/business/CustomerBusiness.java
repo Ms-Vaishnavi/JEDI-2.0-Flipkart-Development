@@ -74,16 +74,9 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @param email the Customer email for which the booking cancellation is requested
 	 * @return returns true of the booking gets cancelled successfully else returns false
 	 */
-	public boolean cancelBooking(String bookingId, String email) {
-
-		for (Booking booking : bookings) {
-			if (booking.getBookingId().equals(bookingId)) {
-				bookings.remove(booking);
-				System.out.println(ColorConstants.GREEN + "Successfully cancelled your booking" + ColorConstants.RESET);
-				return true;
-			}
-		}
-		return false;
+	public boolean cancelBooking(String bookingId, String email)  {
+		System.out.println(ColorConstants.GREEN+"Successfully deleted the booking "+ColorConstants.RESET);
+		return customerDAO.cancelBooking(bookingId, email);
 	}
 	/**
 	 * Obtains all the gyms for the given city.
@@ -225,15 +218,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @return returns true if the slot id for the given date is fully booked else returns false
 	 */
 	public boolean isSlotBooked(String slotId, Date date) {
-		for (Slot s : slots) {
-			if (s.getSlotId().equals(slotId)) {
-				if (s.getNumOfSeats() <= s.getNumOfSeatsBooked())
-					return true;
-				else
-					return false;
-			}
-		}
-		return false;
+		return customerDAO.isFull(slotId, date);
 	}
 	/**
 	 * Checks if the customer has already booked a seat in the same slot for the given date
@@ -243,13 +228,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @return returns true if the customer has already booked a seat on the same date in the same slot
 	 */
 	public boolean hasBookedSlotAlready(String slotId, String customerEmail, Date date) {
-		for (Booking b : bookings) {
-			if (b.getSlotId().equals(slotId)) {
-				if (b.getCustomerEmail().equals(customerEmail))
-					return true;
-			}
-		}
-		return false;
+		return customerDAO.alreadyBooked(slotId, customerEmail, date);
 	}
 	
 	/**

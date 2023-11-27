@@ -18,4 +18,6 @@ public interface CustomerBusinessInterface{
    
     public List<Gym> getGymInCity(String city);
     public List<Slot> getSlotInGym(String gymId);
+    public boolean isSlotBooked(String slotId, Date date);
+    public boolean cancelBooking(String bookingId, String email);
 }

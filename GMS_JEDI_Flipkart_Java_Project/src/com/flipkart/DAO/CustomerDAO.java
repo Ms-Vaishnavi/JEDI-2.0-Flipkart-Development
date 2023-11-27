@@ -19,11 +19,11 @@ public interface CustomerDAO {
 
 	public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail);
 
-	public boolean isFull(String slotId, String date);
+	public boolean isFull(String slotId, Date date);
 
-	public boolean alreadyBooked(String slotId, String email, String date);
+	public boolean alreadyBooked(String slotId, String email, Date date);
 
-	public void cancelBooking(String slotId, String email, String date);
+	public boolean cancelBooking(String bookingId, String email);
 
 	public boolean checkSlotExists(String slotId, String gymId);
 
