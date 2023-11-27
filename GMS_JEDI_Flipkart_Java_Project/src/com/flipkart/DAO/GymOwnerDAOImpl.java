@@ -1,7 +1,6 @@
 package com.flipkart.DAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,17 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.flipkart.bean.*;
+import com.flipkart.utils.DBUtils;
 
 public class GymOwnerDAOImpl implements GymOwnerDAO{
 
 	public GymOwner getGymOwnerDetails(String gymOwnerEmailId) {
+		Connection connection = null;
 		GymOwner gymOwner = new GymOwner();
 		String query = "select email, name, phoneNum, aadharNum, panNum from gymOwner where email = ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, gymOwnerEmailId);
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
@@ -43,12 +43,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	}
 
 	public void addGymOwnerDetails(GymOwner gymOwnerDetails) {
+		Connection connection = null;
 		String INSERT_USER_SQL = "INSERT INTO user" + " (email, password, role) VALUES " + "(?, ?, ?);";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER_SQL)) {
+			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USER_SQL);
 			preparedStatement.setString(1, gymOwnerDetails.getEmail());
 			preparedStatement.setString(2, gymOwnerDetails.getPassword());
 			preparedStatement.setString(3, "GymOwner");
@@ -66,11 +66,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 				+ " (?, ?, ?, ?, ?, ?, ?);";
 		System.out.println(INSERT_GYM_OWNER_SQL);
 		// Step 1: Establishing a Connection
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_OWNER_SQL)) {
+				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_OWNER_SQL);
 			preparedStatement.setString(1, gymOwnerDetails.getEmail());
 			preparedStatement.setString(2, gymOwnerDetails.getPassword());
 			preparedStatement.setString(3, gymOwnerDetails.getName());
@@ -89,12 +88,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	}
 
 	public void editGymOwnerDetails(GymOwner gymOwnerDetails) {
+		Connection connection = null;
 		String UPDATE_USER_SQL = "update user set email = ?, password = ?, role = ?" + " where email = ?;";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_SQL)) {
+				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_SQL);
 			preparedStatement.setString(1, gymOwnerDetails.getEmail());
 			preparedStatement.setString(2, gymOwnerDetails.getPassword());
 			preparedStatement.setString(3, "GymOwner");
@@ -111,11 +110,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 				+ "where email = ?;";
 		System.out.println(UPDATE_GYM_OWNER_SQL);
 		// Step 1: Establishing a Connection
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_GYM_OWNER_SQL)) {
+				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_GYM_OWNER_SQL);
 			preparedStatement.setString(1, gymOwnerDetails.getEmail());
 			preparedStatement.setString(2, gymOwnerDetails.getName());
 			preparedStatement.setString(3, gymOwnerDetails.getPhoneNumber());
@@ -133,13 +131,13 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	}
 
 	public Gym getGym(String gymId) {
+		Connection connection = null;
 		Gym gym = new Gym();
 		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where gymId = ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, gymId);
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
@@ -165,16 +163,16 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	}
 
 	public void addGym(Gym gymDetails) {
+		Connection connection = null;
 		String INSERT_GYM_SQL = "INSERT INTO gym"
 				+ "  (gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified) VALUES "
 				+ " (?, ?, ?, ?, ?, ?, ?);";
 		System.out.println(INSERT_GYM_SQL);
 		// Step 1: Establishing a Connection
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_SQL)) {
+				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_SQL);
 			preparedStatement.setString(1, gymDetails.getGymId());
 			preparedStatement.setString(2, gymDetails.getGymName());
 			preparedStatement.setString(3, gymDetails.getOwnerEmail());
@@ -193,15 +191,15 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	}
 
 	public void editGym(Gym gymDetails) {
+		Connection connection = null;
 		String INSERT_GYM_SQL = "update gym"
 				+ "  set gymId = ?, gymName = ?, ownerEmail = ?, address = ?, slotCount = ?, seatsPerSlotCount = ?, isVerified = ? where gymId = ?;";
 		System.out.println(INSERT_GYM_SQL);
 		// Step 1: Establishing a Connection
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_SQL)) {
+				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_GYM_SQL);
 			preparedStatement.setString(1, gymDetails.getGymId());
 			preparedStatement.setString(2, gymDetails.getGymName());
 			preparedStatement.setString(3, gymDetails.getOwnerEmail());
@@ -221,13 +219,13 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	}
 
 	public List<Gym> getGymsOfGymOwner(String gymOwnerId) {
+		Connection connection = null;
 		List<Gym> gyms = new ArrayList<Gym>();
 		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where gymOwnerEmail =  ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, gymOwnerId);
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
@@ -254,13 +252,13 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	}
 
 	public List<Slot> getPossibleSlots(String gymId) {
+		Connection connection = null;
 		List<Slot> slots = new ArrayList<Slot>();
 		String query = "select slotId, gymId, startTime, endTime, trainer, numOfSeats, numOfSeatsBooked from slot where gymId =  ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, gymId);
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
@@ -285,15 +283,15 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	}
 
 	public void addSlot(Slot slot) {
+		Connection connection = null;
 		String INSERT_SLOT_SQL = "INSERT INTO slot" + "  (slotId, gymId, startTime, endTime, trainer, numOfSeats, numOfSeatsBooked) VALUES "
 				+ " (?, ?, ?, ?, ?, ?, ?);";
 		System.out.println(INSERT_SLOT_SQL);
 		// Step 1: Establishing a Connection
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SLOT_SQL)) {
+				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SLOT_SQL);
 			preparedStatement.setString(1, slot.getSlotId());
 			preparedStatement.setString(2, slot.getGymId());
 			preparedStatement.setString(3, slot.getStartTime());
@@ -313,12 +311,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	}
 
 	public boolean checkOwnerApproval(String email) {
+		Connection connection = null;
 		String query = "select isVerified from gymOwner where email =  ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, email);
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
@@ -334,12 +332,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	}
 
 	public boolean checkGymApproval(String gymId) {
+		Connection connection = null;
 		String query = "select isVerified from gym where gymId =  ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, gymId);
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query

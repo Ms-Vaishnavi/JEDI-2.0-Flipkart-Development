@@ -1,7 +1,6 @@
 package com.flipkart.DAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +8,6 @@ import java.sql.SQLException;
 import com.flipkart.bean.*;
 import com.flipkart.bean.User;
 import com.flipkart.constants.SQLConstants;
-import com.flipkart.exception.UserNotFoundException;
 import com.flipkart.utils.DBUtils;
 
 public class UserDAOImpl implements UserDAO {
