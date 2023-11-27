@@ -164,7 +164,7 @@ public class AdminDAOImpl implements AdminDAO {
      *
      * @param gymOwnerEmail The Email of the gym owner
      */
-    public void approveSingleOwnerRequest(String gymOwnerEmail) {
+    public int approveSingleOwnerRequest(String gymOwnerEmail) {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
@@ -173,16 +173,17 @@ public class AdminDAOImpl implements AdminDAO {
             //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.setString(1, gymOwnerEmail);
-            preparedStatement.executeUpdate();            
+            return preparedStatement.executeUpdate();            
         } catch (SQLException e) {
             printSQLException(e);
         }
+		return 0;
     }
 
     /**
      * Approves all pending gym owner requests
      */
-    public void approveAllOwnerRequest() {
+    public int approveAllOwnerRequest() {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
@@ -190,10 +191,11 @@ public class AdminDAOImpl implements AdminDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_APPROVE_ALL_GYMS_OWNERS);
             //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
-            preparedStatement.executeUpdate();            
+            return preparedStatement.executeUpdate();            
         } catch (SQLException e) {
             printSQLException(e);
         }
+        return 0;
     }
 
     /**
@@ -201,7 +203,7 @@ public class AdminDAOImpl implements AdminDAO {
      *
      * @param gymId The Id of the gym
      */
-    public void approveSingleGymRequest(String gymId) {
+    public int approveSingleGymRequest(String gymId) {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
@@ -210,16 +212,17 @@ public class AdminDAOImpl implements AdminDAO {
             //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.setString(1, gymId);
-            preparedStatement.executeUpdate();            
+            return preparedStatement.executeUpdate();            
         } catch (SQLException e) {
             printSQLException(e);
         }
+        return 0;
     }
 
     /**
      * Approves all pending gym requests
      */
-    public void approveAllGymRequest() {
+    public int approveAllGymRequest() {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
@@ -227,10 +230,11 @@ public class AdminDAOImpl implements AdminDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_APPROVE_ALL_GYMS);
             //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
-            preparedStatement.executeUpdate();            
+            return preparedStatement.executeUpdate();            
         } catch (SQLException e) {
             printSQLException(e);
         }
+        return 0;
     }
 
     public static void printSQLException(SQLException ex) {
