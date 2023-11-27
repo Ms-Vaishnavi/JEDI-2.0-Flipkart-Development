@@ -9,6 +9,7 @@ import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerBusiness;
 import com.flipkart.business.UserBusiness;
+import com.flipkart.constants.ColorConstants;
 
 public class CustomerClient {
 
@@ -32,7 +33,7 @@ public class CustomerClient {
 		UserBusiness userBusiness = new UserBusiness();
 		userBusiness.registerCustomer(customer);
 
-		System.out.println("Customer registered successfully!");
+		System.out.println(ColorConstants.GREEN +"Customer registered successfully!"+ColorConstants.RESET);
 
 	}
 
@@ -40,38 +41,42 @@ public class CustomerClient {
 		getGyms();
 		System.out.print("Enter gym ID: ");
 		String gymId = sc.next();
-		System.out.print("Enter Date (yyyy-mm-dd): ");
+		System.out.print("\nEnter Date (yyyy-mm-dd): ");
 		String dateStr = sc.next();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = dateFormat.parse(dateStr);
 
 		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
 		for (Slot slot : slots) {
-			System.out.print("Slot Id: " + slot.getSlotId());
-			System.out.print("Availability: " + customerBusiness.isSlotBooked(slot.getSlotId(), date));
+			System.out.print("\nSlot Id: " + slot.getSlotId());
+			System.out.print("\nAvailability: " + customerBusiness.isSlotBooked(slot.getSlotId(), date));
 		}
+		System.out.println("__________________________________________________________________________________\n");
 		System.out.print("Enter the slot ID which you want to book: ");
 		String slotId = sc.next();
 		int bookingResponse = customerBusiness.bookSlot(gymId,slotId, email, date);
 		switch (bookingResponse) {
 		case 0:
-			System.out.println("You have already booked this time. Cancelling the previous one and booking this slot");
+			System.out.println(ColorConstants.GREEN +"You have already booked this time. Cancelling the previous one and booking this slot"+ColorConstants.RESET);
 			break;
 		case 1:
-			System.out.println("Slot is already booked, added to the waiting list");
+			System.out.println(ColorConstants.GREEN +"Slot is already booked, added to the waiting list"+ColorConstants.RESET);
 			break;
 		case 2:
-			System.out.println("Successfully booked the slot");
+			System.out.println(ColorConstants.GREEN +"Successfully booked the slot"+ColorConstants.RESET);
 			break;
 		case 3:
-			System.out.println("Slot not found");
+			System.out.println(ColorConstants.RED +"Slot not found"+ColorConstants.RESET);
 			break;
 		default:
-			System.out.println("Booking failed");
+			System.out.println(ColorConstants.RED +"Booking failed"+ColorConstants.RESET);
 		}
 	}
 
 	public void editProfile(String email) {
+		System.out.println("Enter Details: ");
+		System.out.print("Enter Email: ");
+		customer.setEmail(sc.next());
 		System.out.print("Enter password: ");
 		customer.setPassword(sc.next());
 		System.out.print("Enter Name: ");
@@ -82,11 +87,11 @@ public class CustomerClient {
 		customer.setAge(Integer.valueOf(sc.next()));
 		System.out.print("Enter Address: ");
 		customer.setAddress(sc.next());
-		System.out.println("Successfully edited your profile");
+		System.out.println(ColorConstants.GREEN +"\nSuccessfully edited your profile"+ColorConstants.RESET);
 	}
 
 	public void getGyms() {
-		System.out.print("Enter your city: ");
+		System.out.print("\nEnter your city: ");
 		List<Gym> gyms = customerBusiness.getGymInCity(sc.next());
 		for (Gym gym : gyms) {
 			System.out.print("Gym Id: " + gym.getGymId());
@@ -97,7 +102,7 @@ public class CustomerClient {
 	}
 
 	public void cancelBooking(String email) {
-		System.out.print("Enter booking ID that you want to cancel: ");
+		System.out.print("\nEnter booking ID that you want to cancel: ");
 		String bookingId = sc.next();
 		customerBusiness.cancelBooking(bookingId, email);
 	}
@@ -127,7 +132,7 @@ public class CustomerClient {
 			case 5:
 				break;
 			default:
-				System.out.println("Invalid choice!");
+				System.out.println(ColorConstants.RED +"Invalid choice!"+ColorConstants.RESET);
 			}
 		}
 	}
