@@ -16,11 +16,11 @@ import java.util.*;
 public class CustomerBusiness implements CustomerBusinessInterface {
 
 	CustomerDAOImpl customerDAO = new CustomerDAOImpl();
-	List<Customer> customers = new ArrayList<>();
-	List<Booking> bookings = new ArrayList<>();
-
-	List<Slot> slots = new ArrayList<>();
-	List<Gym> gyms = new ArrayList<>();
+//	List<Customer> customers = new ArrayList<>();
+//	List<Booking> bookings = new ArrayList<>();
+//
+//	List<Slot> slots = new ArrayList<>();
+//	List<Gym> gyms = new ArrayList<>();
 	//Date d1 = new Date();
 	
 
