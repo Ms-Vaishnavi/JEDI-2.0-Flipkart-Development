@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.flipkart.bean.Booking;
+import com.flipkart.bean.Customer;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.constants.SQLConstants;
@@ -204,7 +205,10 @@ public class CustomerDAOImpl implements CustomerDAO {
         }
         return false;
     }
-
+    public Customer getProfile(Customer customer)
+    {
+        return customer;
+    }
     // prints the SQL Exception
     public static void printSQLException(SQLException ex) {
         for (Throwable e : ex) {

@@ -28,11 +28,8 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @return Customer the Customer's object
 	 */
 	public Customer getProfile(Customer customer) {
-		for (Customer cust : customers) {
-			if (cust.getEmail().equals(customer.getEmail()))
-				return cust;
-		}
-		return null;
+		System.out.println(ColorConstants.GREEN+"Successfully fetched the customer profile"+ColorConstants.RESET);
+		return customerDAO.getProfile(customer);
 	}
 
 	/**
