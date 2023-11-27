@@ -278,11 +278,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	public List<Slot> getPossibleSlots(String gymId) {
 		Connection connection = null;
 		List<Slot> slots = new ArrayList<Slot>();
-		String query = "select slotId, gymId, startTime, endTime, trainer, numOfSeats, numOfSeatsBooked from slot where gymId =  ?";
 		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
+				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_READ_SLOT_FROM_GYMID);
 			preparedStatement.setString(1, gymId);
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
@@ -312,14 +311,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	 */
 	public void addSlot(Slot slot) {
 		Connection connection = null;
-		String INSERT_SLOT_SQL = "INSERT INTO slot" + "  (slotId, gymId, startTime, endTime, trainer, numOfSeats, numOfSeatsBooked) VALUES "
-				+ " (?, ?, ?, ?, ?, ?, ?);";
-		System.out.println(INSERT_SLOT_SQL);
+		System.out.println(SQLConstants.SQL_INSERT_SLOT);
 		// Step 1: Establishing a Connection
 		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_SLOT_SQL);
+				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_INSERT_SLOT);
 			preparedStatement.setString(1, slot.getSlotId());
 			preparedStatement.setString(2, slot.getGymId());
 			preparedStatement.setString(3, slot.getStartTime());
