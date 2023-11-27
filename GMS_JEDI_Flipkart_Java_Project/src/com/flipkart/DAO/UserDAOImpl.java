@@ -42,12 +42,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public boolean registerCustomer(Customer customer) {
+		Connection connection = null;
 		boolean registerSuccess = false;
 		String query = "INSERT INTO customer VALUES (?,?,?,?,?)";
 		String queryUser = "INSERT INTO user VALUES (?,?,?)";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS_JEDI_Flip", "root", "");
+		try {connection = DBUtils.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);
-				PreparedStatement preparedStatementUser = connection.prepareStatement(queryUser);) {
+				PreparedStatement preparedStatementUser = connection.prepareStatement(queryUser);
 
 			preparedStatement.setString(1, customer.getEmail());
 			preparedStatement.setString(2, customer.getName());
@@ -75,12 +76,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	public boolean registerGymOwner(GymOwner gymOwner) {
+		Connection connection = null;
 		boolean registerSuccess = false;
 		String query = "INSERT INTO gymOwner VALUES (?,?,?,?,?,?)";
 		String queryOwner = "INSERT INTO user VALUES (?,?,?)";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "");
+		try {connection = DBUtils.getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(query);
-				PreparedStatement preparedStatementOwner = connection.prepareStatement(queryOwner);) {
+				PreparedStatement preparedStatementOwner = connection.prepareStatement(queryOwner);
 
 			preparedStatement.setString(1, gymOwner.getEmail());
 			preparedStatement.setString(2, gymOwner.getName());
