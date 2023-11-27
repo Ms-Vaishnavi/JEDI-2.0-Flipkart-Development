@@ -19,7 +19,7 @@ public class CustomerClient {
 
 	public void registerCustomer() {
 		System.out.print("Enter email: ");
-		customer.setName(sc.next());
+		customer.setEmail(sc.next());
 		System.out.print("Enter password: ");
 		customer.setPassword(sc.next());
 		System.out.print("Enter Name: ");
@@ -30,10 +30,17 @@ public class CustomerClient {
 		customer.setAge(Integer.valueOf(sc.next()));
 		System.out.print("Enter Address: ");
 		customer.setAddress(sc.next());
+		
 		UserBusiness userBusiness = new UserBusiness();
-		userBusiness.registerCustomer(customer);
-
-		System.out.println(ColorConstants.GREEN +"Customer registered successfully!"+ColorConstants.RESET);
+		boolean registerSuccess = userBusiness.registerCustomer(customer);
+		
+		
+		if (registerSuccess)
+			System.out
+					.println("\n" + ColorConstants.GREEN + "Customer registered successfully!" + ColorConstants.RESET);
+		else
+			System.out.println(
+					"\n" + ColorConstants.RED + "Customer registration failed! Try again!" + ColorConstants.RESET);
 
 	}
 
@@ -111,9 +118,9 @@ public class CustomerClient {
 		int choice = 0;
 
 		while (choice != 5) {
-			System.out.println("Menu:-");
+			System.out.println("\nMenu:-");
 			System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4. Edit Profile \n5.Exit");
-			System.out.print("Enter your choice: ");
+			System.out.print("\nEnter your choice: ");
 			choice = sc.nextInt();
 
 			switch (choice) {
@@ -132,7 +139,7 @@ public class CustomerClient {
 			case 5:
 				break;
 			default:
-				System.out.println(ColorConstants.RED +"Invalid choice!"+ColorConstants.RESET);
+				System.out.println(ColorConstants.RED +"\nInvalid choice!\n"+ColorConstants.RESET);
 			}
 		}
 	}
