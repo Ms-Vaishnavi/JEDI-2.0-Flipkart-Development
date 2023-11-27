@@ -156,6 +156,37 @@ public class CustomerDAOImpl implements CustomerDAO {
         return false;
     }
 
+    public int getNumberOfSeatsBooked(String slotId)
+    {
+    	Connection connection = null;
+    	try {
+            connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_GET_NUMBER_OF_BOOKED_SEATS);
+            preparedStatement.setString(1, slotId);
+            ResultSet rs =  preparedStatement.executeQuery(); 
+            return rs.getInt("numOfSeatsBooked");
+    	}
+    	catch (SQLException sqlExcep) {
+            printSQLException(sqlExcep);
+        }
+    	return 0;
+    }
+    public boolean updateNumOfSeats(String slotId, int seats)
+    {
+    	Connection connection = null;
+    	try {
+            connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_NUMBER_OF_BOOKED_SEATS);
+            preparedStatement.setString(1, slotId);
+            preparedStatement.setInt(2, seats);
+            preparedStatement.executeUpdate(); 
+            return true;
+    	}
+    	catch (SQLException sqlExcep) {
+            printSQLException(sqlExcep);
+        }
+    	return false;
+    }
     // cancels the booking of the customer made earlier
     public boolean cancelBooking(String bookingId, String email) {
         Connection connection = null;

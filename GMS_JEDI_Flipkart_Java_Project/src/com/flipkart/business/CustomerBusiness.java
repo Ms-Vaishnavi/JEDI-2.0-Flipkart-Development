@@ -99,108 +99,48 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @param date the date on which the customer wants to book a seat
 	 * @return returns integer signal based on the customer's booking status
 	 */
-	public int bookSlot(String gymId, String slotId, String email, Date date) {
-		List<Booking> tempBookings = getBookings(email);
-		boolean flag=false;
-		for(Booking booking:bookings)
+	public int bookSlot(String gymId, String slotId, String email, Date date)
+	{
+		int num = customerDAO.getNumberOfSeatsBooked(slotId);
+		if(customerDAO.alreadyBooked(slotId, email, date))
 		{
-			if(booking.getCustomerEmail().equals(email) && booking.getType().equals("confirmed"))
+			customerDAO.cancelBooking(slotId, email);
+			customerDAO.updateNumOfSeats(slotId,num++);
+			if(num>0)
 			{
-				flag=true;
-				tempBookings.add(booking);
+				customerDAO.updateNumOfSeats(slotId,num--);
+				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"confirmed",date,email);
 			}
+			else
+			{
+				customerDAO.updateNumOfSeats(slotId,num--);
+				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"waitlisted",date,email);
+			}
+			return 0;
 		}
-		if(flag)
+		if(customerDAO.isFull(slotId, date))
 		{
-			boolean isDate=false;
-			for(Booking booking:tempBookings)
-			{
-				if(booking.getDate().equals(date))
-				{
-					isDate=true;
-					for(Slot slot:slots)
-					{
-						if(slot.getSlotId().equals(slotId) && !slot.getGymId().equals(gymId))
-						{
-							int num=slot.getNumOfSeatsBooked();
-							if(!isSlotBooked(slotId,date))
-							{
-								slot.setNumOfSeatsBooked(num--);
-								Booking getBooking = new Booking();
-								getBooking.setBookingId(IdGenerator.generateId("Booking"));
-								Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"confirmed",date,email,slot.getTrainer());
-								bookings.add(tempBooking);
-								bookings.remove(booking);
-								return 0;
-							}
-							else
-							{
-								slot.setNumOfSeatsBooked(num--);
-								Booking getBooking = new Booking();
-								getBooking.setBookingId(IdGenerator.generateId("Booking"));
-								Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"waitlisted",date,email,slot.getTrainer());
-								bookings.add(tempBooking);
-								return 1;
-							}
-						}
-					}
-					return 3;
-				}
-			}
-			if(!isDate)
-			{
-				for(Slot slot:slots)
-				{
-					if(slot.getSlotId().equals(slotId) && slot.getGymId().equals(gymId))
-					{
-						int num=slot.getNumOfSeatsBooked();
-						slot.setNumOfSeatsBooked(num--);
-						Booking getBooking = new Booking();
-						getBooking.setBookingId(IdGenerator.generateId("Booking"));
-						if(!isSlotBooked(slotId,date))
-						{
-							Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"confirmed",date,email,slot.getTrainer());
-							bookings.add(tempBooking);
-							return 2;
-						}
-						else
-						{
-							Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"waitlisted",date,email,slot.getTrainer());
-							bookings.add(tempBooking);
-							return 1;
-						}
-					}
-				}
-			}
+			customerDAO.updateNumOfSeats(slotId,num--);
+			customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"waitlisted",date,email);
+			return 1;
 		}
 		else
 		{
-			for(Slot slot:slots)
+			if(num>0)
 			{
-				if(slot.getSlotId().equals(slotId) && slot.getGymId().equals(gymId))
-				{
-					int num=slot.getNumOfSeatsBooked();
-					slot.setNumOfSeatsBooked(num--);
-					Booking getBooking = new Booking();
-					getBooking.setBookingId(IdGenerator.generateId("Booking"));
-					if(!isSlotBooked(slotId,date))
-					{
-						Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"confirmed",date,email,slot.getTrainer());
-						bookings.add(tempBooking);
-						return 2;
-					}
-					else
-					{
-						Booking tempBooking=new Booking(getBooking.getBookingId(),slotId,slot.getGymId(),"waitlisted",date,email,slot.getTrainer());
-						bookings.add(tempBooking);
-						return 1;
-					}
-				}
+				customerDAO.updateNumOfSeats(slotId,num--);
+				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"confirmed",date,email);
 			}
-			return 3;
+			else
+			{
+				customerDAO.updateNumOfSeats(slotId,num--);
+				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"waitlisted",date,email);
+			}
+			return 2;
 		}
-		return 1;
+		
 	}
+	
 	/**
 	 * Checks if the slot is already booked or not
 	 * @param slotId the slot id for which the booking status is requested

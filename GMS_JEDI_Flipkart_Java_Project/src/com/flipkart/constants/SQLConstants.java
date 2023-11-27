@@ -50,5 +50,7 @@ public class SQLConstants {
     public static final String SQL_CHECK_SLOT_EXISTS = "select isVerified from slot where slotId=? and gymId = ?";
     public static final String SQL_CHECK_GYM_APPROVAL = "select isVerified from gym where gymId = ?";
     public static final String SQL_INSERT_CUSTOMER = "INSERT INTO customer VALUES (?,?,?,?,?)";
+    public static final String SQL_GET_NUMBER_OF_BOOKED_SEATS = "select numOfSeatsBooked from slot where slotId=?";
+    public static final String SQL_UPDATE_NUMBER_OF_BOOKED_SEATS = "UPDATE slot set numOfSeatsBooked=? where slotId=?";
 }
 

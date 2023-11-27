@@ -73,9 +73,6 @@ public class CustomerClient {
 		case 2:
 			System.out.println(ColorConstants.GREEN +"Successfully booked the slot"+ColorConstants.RESET);
 			break;
-		case 3:
-			System.out.println(ColorConstants.RED +"Slot not found"+ColorConstants.RESET);
-			break;
 		default:
 			System.out.println(ColorConstants.RED +"Booking failed"+ColorConstants.RESET);
 		}

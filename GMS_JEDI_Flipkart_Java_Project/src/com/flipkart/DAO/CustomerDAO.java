@@ -28,4 +28,6 @@ public interface CustomerDAO {
 	public boolean checkSlotExists(String slotId, String gymId);
 
 	public boolean checkGymApprove(String gymId);
+	
+	public int getNumberOfSeatsBooked(String slotId);
 }
