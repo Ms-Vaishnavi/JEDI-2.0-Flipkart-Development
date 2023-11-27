@@ -88,7 +88,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 				cust.setAge(customer.getAge());
 				cust.setAddress(customer.getAddress());
 				customers.add(cust);
-				System.out.println("Successfully edited your profile");
+				System.out.println(ColorConstants.GREEN+"Successfully edited your profile\ns"+ColorConstants.RESET);
 				break;
 			}
 		}

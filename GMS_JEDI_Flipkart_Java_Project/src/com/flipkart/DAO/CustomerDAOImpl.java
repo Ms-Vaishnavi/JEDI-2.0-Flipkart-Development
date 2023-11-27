@@ -87,12 +87,12 @@ public class CustomerDAOImpl implements CustomerDAO{
 		}
 	}
 
-	public void bookSlots(int gymId, String slotId, String email, String date) {
+	public void bookSlots(String gymId, String slotId, String email, String date) {
 		String query = "INSERT INTO Booking (slotId,gymId,email,date) values(?, ?, ?, ?)";
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
 				"JEDI20Flip"); PreparedStatement statement = connection.prepareStatement(query);) {
 			statement.setString(1, slotId);
-			statement.setInt(2, gymId);
+			statement.setString(2, gymId);
 			statement.setString(3, email);
 			statement.setString(4, date);
 			statement.executeUpdate();

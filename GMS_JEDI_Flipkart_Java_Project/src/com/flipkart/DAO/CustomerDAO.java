@@ -12,7 +12,7 @@ public interface CustomerDAO {
 
 	public void fetchBookedSlots(String email);
 
-	public void bookSlots(int gymId, String slotId, String email, String date);
+	public void bookSlots(String gymId, String slotId, String email, String date);
 
 	public boolean isFull(String slotId, String date);
 

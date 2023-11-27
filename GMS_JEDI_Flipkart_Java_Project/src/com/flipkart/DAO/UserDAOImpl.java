@@ -44,7 +44,7 @@ public class UserDAOImpl implements UserDAO {
 		boolean registerSuccess = false;
 		String query = "INSERT INTO customer VALUES (?,?,?,?,?)";
 		String queryUser = "INSERT INTO user VALUES (?,?,?)";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "");
+		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS_JEDI_Flip", "root", "");
 				PreparedStatement preparedStatement = connection.prepareStatement(query);
 				PreparedStatement preparedStatementUser = connection.prepareStatement(queryUser);) {
 
