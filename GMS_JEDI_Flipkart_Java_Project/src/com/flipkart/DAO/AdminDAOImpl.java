@@ -62,11 +62,7 @@ public class AdminDAOImpl implements AdminDAO {
         try {
             connection = DBUtils.getConnection();
             // Step 2: Create a statement using connection object
-<<<<<<< Updated upstream
-            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_VIEW_ALL_GYMS);
-=======
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_SELECT_ALL_GYMS_WITHOUT_FILTER);
->>>>>>> Stashed changes
             //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();

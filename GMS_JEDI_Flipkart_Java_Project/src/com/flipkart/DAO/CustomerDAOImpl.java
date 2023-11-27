@@ -24,7 +24,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         List<Gym> gyms = new ArrayList<Gym>();
         try {connection = DBUtils.getConnection();
                 // Step 2:Create a statement using connection object
-        	PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_ALL_GYMS);
+        	PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_ALL_GYMS_BY_ADDRESS);
             statement.setString(1, city);
             System.out.println(statement);
             // Step 3: Execute the query or update query

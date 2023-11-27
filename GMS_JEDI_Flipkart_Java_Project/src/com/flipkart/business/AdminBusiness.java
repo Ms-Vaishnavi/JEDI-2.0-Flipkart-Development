@@ -49,11 +49,7 @@ public class AdminBusiness implements AdminBusinessInterface{
 		int approvedCount = adminDAO.approveSingleOwnerRequest(gymOwnerEmail);
 		if (approvedCount == 0)
 			throw new GymOwnerNotFoundException();
-<<<<<<< Updated upstream
-		System.out.println(ColorConstants.GREEN + "Approved gym owner request! " + gymOwnerEmail + ColorConstants.RESET);
-=======
 		System.out.println(ColorConstants.GREEN + "\nApproved " + gymOwnerEmail + "!" + ColorConstants.RESET);
->>>>>>> Stashed changes
 	}
 
 	/**
@@ -62,11 +58,7 @@ public class AdminBusiness implements AdminBusinessInterface{
 	public void approveAllPendingGymOwnerRequests() {
 		int approvedCount = adminDAO.approveAllOwnerRequest();
 		if (approvedCount == 0)
-<<<<<<< Updated upstream
 			System.out.println(ColorConstants.GREEN + "No pending Gym Owner Requests" + ColorConstants.RESET);
-=======
-			System.out.println(ColorConstants.RED + "No pending Gym Owner Requests" + ColorConstants.RESET);
->>>>>>> Stashed changes
 		else
 			System.out.println(ColorConstants.GREEN + "Approved all pending gym owner requests!" + ColorConstants.RESET);
 	}
@@ -75,10 +67,6 @@ public class AdminBusiness implements AdminBusinessInterface{
 	 * @return List of Gym objects
 	 */
 	public List<Gym> viewAllPendingGymRequests() {
-<<<<<<< Updated upstream
-		System.out.println(ColorConstants.GREEN + "Fetched pending gym requests successfully!" + ColorConstants.RESET);
-=======
->>>>>>> Stashed changes
 		return adminDAO.getPendingGymRequests();
 	}
 	/**
@@ -91,11 +79,7 @@ public class AdminBusiness implements AdminBusinessInterface{
 		int approvedCount = adminDAO.approveSingleGymRequest(gymId);
 		if (approvedCount == 0)
 			throw new GymNotFoundException();
-<<<<<<< Updated upstream
-		System.out.println(ColorConstants.GREEN + "Successfully approved gym request! " + gymId + ColorConstants.RESET);
-=======
 		System.out.println(ColorConstants.GREEN + "\nSuccessfully approved gym " + gymId + "!" + ColorConstants.RESET);
->>>>>>> Stashed changes
 	}
 	/**
 	 * Approves all Gym whose requests are pending for approval. 
@@ -103,11 +87,7 @@ public class AdminBusiness implements AdminBusinessInterface{
 	public void approveAllPendingGymRequests() {
 		int approvedCount = adminDAO.approveAllGymRequest();
 		if (approvedCount == 0)
-<<<<<<< Updated upstream
 			System.out.println(ColorConstants.GREEN + "No pending Gym Requests" + ColorConstants.RESET);
-=======
-			System.out.println(ColorConstants.RED + "No pending Gym Requests" + ColorConstants.RESET);
->>>>>>> Stashed changes
 		else
 			System.out.println(ColorConstants.GREEN + "Successfully approved all pending gym requests!" + ColorConstants.RESET);
 	}
