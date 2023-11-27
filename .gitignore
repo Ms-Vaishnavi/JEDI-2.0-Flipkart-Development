@@ -17,3 +17,7 @@ out/
 *.ipr
 
 *.iws
+
+git rm --cached -r GMS_JEDI_Flipkart_Java_Project/.metadata
+git rm --cached GMS_JEDI_Flipkart_Java_Project/.classpath
+git rm --cached -r .metadata

@@ -181,3 +181,6 @@ nb-configuration.xml
 
 find . -name .DS_Store -print0 | xargs -0 git rm --ignore-unmatch
 
+git rm --cached -r .metadata
+git rm --cached .classpath
+
