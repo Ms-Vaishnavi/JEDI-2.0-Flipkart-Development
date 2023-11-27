@@ -15,7 +15,6 @@ public class Booking {
 	private String type;
 	private Date date;
 	private String customerEmail;
-	private String trainer;
 
 	public Booking() {
 		super();
@@ -29,7 +28,6 @@ public class Booking {
 		this.type=type;
 		this.date=date;
 		this.customerEmail=customerEmail;
-		this.trainer=trainer;
 	}
 
 
@@ -81,11 +79,4 @@ public class Booking {
 		this.customerEmail = customerEmail;
 	}
 
-	public String getTrainer() {
-		return trainer;
-	}
-
-	public void setTrainer(String trainer) {
-		this.trainer = trainer;
-	}
 }
