@@ -2,10 +2,8 @@ package com.flipkart.client;
 
 import java.util.*;
 
-import com.flipkart.DAO.UserDAOImpl;
 import com.flipkart.bean.User;
 import com.flipkart.business.UserBusiness;
-import com.flipkart.DAO.*;
 import com.flipkart.constants.*;
 
 public class ApplicationClient {
