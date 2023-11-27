@@ -12,14 +12,18 @@ import com.flipkart.utils.DBUtils;
 
 public class GymOwnerDAOImpl implements GymOwnerDAO{
 
+	/**
+	 * Retrieves gym owner details from the database
+	 * @param gymOwnerEmail The Email Id of the gym owner
+	 * @return GymOwner object
+	 */
 	public GymOwner getGymOwnerDetails(String gymOwnerEmailId) {
 		Connection connection = null;
 		GymOwner gymOwner = new GymOwner();
 		String query = "select email, name, phoneNum, aadharNum, panNum from gymOwner where email = ?";
 		try {connection = DBUtils.getConnection();
-
-				// Step 2:Create a statement using connection object
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
+			// Step 2:Create a statement using connection object
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, gymOwnerEmailId);
 			System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
@@ -42,6 +46,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 		return gymOwner;
 	}
 
+	/**
+	 * Adds a gym owner to the database
+	 * @param GymOwner object
+	 */
 	public void addGymOwnerDetails(GymOwner gymOwnerDetails) {
 		Connection connection = null;
 		String INSERT_USER_SQL = "INSERT INTO user" + " (email, password, role) VALUES " + "(?, ?, ?);";
@@ -87,6 +95,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 		}
 	}
 
+	/**
+	 * Edits gym owner details in the database
+	 * @param GymOwner object
+	 */
 	public void editGymOwnerDetails(GymOwner gymOwnerDetails) {
 		Connection connection = null;
 		String UPDATE_USER_SQL = "update user set email = ?, password = ?, role = ?" + " where email = ?;";
@@ -129,7 +141,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 			printSQLException(e);
 		}
 	}
-
+	
+	/**
+	 * Retrieves gym details from the database
+	 * @param gymId The Id of the gym
+	 * @return Gym object
+	 */
 	public Gym getGym(String gymId) {
 		Connection connection = null;
 		Gym gym = new Gym();
@@ -161,7 +178,11 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 		// Step 4: try-with-resource statement will auto close the connection.
 		return gym;
 	}
-
+	
+	/**
+	 * Adds a gym to the database
+	 * @param Gym object
+	 */
 	public void addGym(Gym gymDetails) {
 		Connection connection = null;
 		String INSERT_GYM_SQL = "INSERT INTO gym"
@@ -189,7 +210,11 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 			printSQLException(e);
 		}
 	}
-
+	
+	/**
+	 * Edits a gym in the database
+	 * @param Gym object
+	 */
 	public void editGym(Gym gymDetails) {
 		Connection connection = null;
 		String INSERT_GYM_SQL = "update gym"
@@ -217,7 +242,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 			printSQLException(e);
 		}
 	}
-
+	
+	/**
+	 * Retrieves all gym details of a gym owner from the database
+	 * @param gymOwnerId The Email Id of the gym owner
+	 * @return List of Gym objects
+	 */
 	public List<Gym> getGymsOfGymOwner(String gymOwnerId) {
 		Connection connection = null;
 		List<Gym> gyms = new ArrayList<Gym>();
@@ -251,6 +281,11 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 		return gyms;
 	}
 
+	/**
+	 * Retrieves all the possible slots of a gym from the database
+	 * @param gymId The Id of the gym
+	 * @return List of the Slot objects
+	 */
 	public List<Slot> getPossibleSlots(String gymId) {
 		Connection connection = null;
 		List<Slot> slots = new ArrayList<Slot>();
@@ -282,6 +317,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 		return slots;
 	}
 
+	/**
+	 * Adds a slot in the database
+	 * @param Slot object
+	 */
 	public void addSlot(Slot slot) {
 		Connection connection = null;
 		String INSERT_SLOT_SQL = "INSERT INTO slot" + "  (slotId, gymId, startTime, endTime, trainer, numOfSeats, numOfSeatsBooked) VALUES "
@@ -310,6 +349,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 		}
 	}
 
+	/**
+	 * Checks if a gym owner is verified by the Administrator
+	 * @param email The emailId of the gym owner
+	 */
 	public boolean checkOwnerApproval(String email) {
 		Connection connection = null;
 		String query = "select isVerified from gymOwner where email =  ?";
@@ -331,6 +374,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 		return false;
 	}
 
+	/**
+	 * Checks if a gym is verified by the Administrator
+	 * @param gymId The Id of the gym
+	 */
 	public boolean checkGymApproval(String gymId) {
 		Connection connection = null;
 		String query = "select isVerified from gym where gymId =  ?";
