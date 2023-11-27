@@ -1,6 +1,7 @@
 package com.flipkart.DAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -86,15 +87,17 @@ public class CustomerDAOImpl implements CustomerDAO{
 			printSQLException(sqlExcep);
 		}
 	}
-
-	public void bookSlots(String gymId, String slotId, String email, String date) {
-		String query = "INSERT INTO Booking (slotId,gymId,email,date) values(?, ?, ?, ?)";
+	
+	public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail) {
+		String query = "INSERT INTO Booking (bookingId,slotId,gymId,type,date,customerEmail) values(?, ?, ?, ?, ?, ?)";
 		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
 				"JEDI20Flip"); PreparedStatement statement = connection.prepareStatement(query);) {
-			statement.setString(1, slotId);
-			statement.setString(2, gymId);
-			statement.setString(3, email);
-			statement.setString(4, date);
+			statement.setString(1, bookingId);
+			statement.setString(2, slotId);
+			statement.setString(3, gymId);
+			statement.setString(4, type);
+			statement.setDate(5, (java.sql.Date)date);
+			statement.setString(6, customerEmail);
 			statement.executeUpdate();
 			System.out.println("-----------------------------------------------");
 		} catch (SQLException sqlExcep) {

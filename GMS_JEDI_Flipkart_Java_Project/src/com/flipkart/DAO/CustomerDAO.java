@@ -1,5 +1,6 @@
 package com.flipkart.DAO;
 
+import java.util.Date;
 import java.util.List;
 
 import com.flipkart.bean.Gym;
@@ -12,7 +13,7 @@ public interface CustomerDAO {
 
 	public void fetchBookedSlots(String email);
 
-	public void bookSlots(String gymId, String slotId, String email, String date);
+	public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail);
 
 	public boolean isFull(String slotId, String date);
 
