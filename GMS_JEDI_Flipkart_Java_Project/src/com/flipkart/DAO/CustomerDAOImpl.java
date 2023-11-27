@@ -49,7 +49,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     
 
     // shows all the slots in the provided gym
-    public List<Slot> fetchSlotList(String gymId) throws NoSlotsFoundException {
+    public List<Slot> fetchSlotList(String gymId) throws SlotNotFoundException {
     	   Connection connection = null;
     	   List<Slot> slots=new ArrayList<>();
     	   String query = "Select * From Slot Where gymId=?";

@@ -6,7 +6,7 @@ package com.flipkart.business;
 import com.flipkart.DAO.*;
 import com.flipkart.bean.*;
 import com.flipkart.constants.ColorConstants;
-import com.flipkart.exception.NoSlotsFoundException;
+import com.flipkart.exception.SlotNotFoundException;
 import com.flipkart.utils.IdGenerator;
 import java.util.Date;
 import java.util.*;
@@ -97,7 +97,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 		try {
 			List<Slot> slotsOfGym = customerDAO.fetchSlotList(gymId);
 			return slotsOfGym;
-		} catch(NoSlotsFoundException ex) {
+		} catch(SlotNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		}
 		return null;

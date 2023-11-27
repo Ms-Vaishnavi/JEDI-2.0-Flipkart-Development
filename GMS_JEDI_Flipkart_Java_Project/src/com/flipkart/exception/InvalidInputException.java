@@ -1,8 +1,9 @@
 package com.flipkart.exception; 
 
 public class InvalidInputException extends Exception {
-    public InvalidInputException(String message){
-        super(message);
+	@Override
+    public String getMessage(){
+    	return "Input is invalid! Please recheck!";
     }
 }
 

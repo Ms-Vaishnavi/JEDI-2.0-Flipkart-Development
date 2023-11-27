@@ -1,7 +1,6 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.*;
-import com.flipkart.exception.NoSlotsFoundException;
 
 import java.util.*;
 
