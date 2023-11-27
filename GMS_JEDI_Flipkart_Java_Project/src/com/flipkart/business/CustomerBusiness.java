@@ -6,6 +6,8 @@ package com.flipkart.business;
 import com.flipkart.DAO.*;
 import com.flipkart.bean.*;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.exception.CustomerNotFoundException;
+import com.flipkart.exception.GymOwnerNotFoundException;
 import com.flipkart.exception.SlotNotFoundException;
 import com.flipkart.utils.IdGenerator;
 import java.util.Date;
@@ -27,27 +29,24 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @param customer the Customer object for which the profile details are requested
 	 * @return Customer the Customer's object
 	 */
-	public Customer getProfile(Customer customer) {
+	public Customer getProfile(Customer customer) throws CustomerNotFoundException {
 		System.out.println(ColorConstants.GREEN+"Successfully fetched the customer profile"+ColorConstants.RESET);
-		return customerDAO.getProfile(customer);
+			Customer cus=	customerDAO.getProfile(customer);
+		if (cus == null)
+			throw new CustomerNotFoundException();
+		System.out.println(ColorConstants.GREEN +"Fetched Customer details successfully! "+ColorConstants.RESET);
+		return cus;
 	}
 
 	/**
 	 * Gives functionality of updating customer's personal data. 
 	 * @param customer the Customer object for which the profile data needs to be updated
 	 */
-	public void editProfile(Customer customer) {
-		for (Customer cust : customers) {
-			if (cust.getEmail().equals(customer.getEmail())) {
-				cust.setName(customer.getName());
-				cust.setPhoneNumber(customer.getPhoneNumber());
-				cust.setAge(customer.getAge());
-				cust.setAddress(customer.getAddress());
-				customers.add(cust);
-				System.out.println(ColorConstants.GREEN+"Successfully edited your profile\ns"+ColorConstants.RESET);
-				break;
-			}
-		}
+	public void editProfile(Customer customer) throws CustomerNotFoundException{
+		int updatedCount = customerDAO.editCustomerDetails(customer);
+		if (updatedCount == 0)
+			throw new CustomerNotFoundException();
+		System.out.println(ColorConstants.GREEN + "\nEdited your profile Successfully!" + ColorConstants.RESET);
 	}
 	/**
 	 * Obtains all the bookings done by the given customer email.

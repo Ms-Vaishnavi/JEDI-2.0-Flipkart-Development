@@ -8,10 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.flipkart.bean.Booking;
-import com.flipkart.bean.Customer;
-import com.flipkart.bean.Gym;
-import com.flipkart.bean.Slot;
+import com.flipkart.bean.*;
 import com.flipkart.constants.SQLConstants;
 import com.flipkart.exception.*;
 import com.flipkart.utils.DBUtils;
@@ -239,6 +236,10 @@ public class CustomerDAOImpl implements CustomerDAO {
     public Customer getProfile(Customer customer)
     {
         return customer;
+    }
+
+    public int editCustomerDetails(Customer customer) {
+        return 0;
     }
     // prints the SQL Exception
     public static void printSQLException(SQLException ex) {

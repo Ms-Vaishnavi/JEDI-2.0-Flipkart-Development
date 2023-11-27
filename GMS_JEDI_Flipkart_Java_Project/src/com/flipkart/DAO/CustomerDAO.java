@@ -11,6 +11,8 @@ import com.flipkart.exception.*;
 
 public interface CustomerDAO {
 	public Customer getProfile(Customer customer);
+
+	public int editCustomerDetails(Customer customer);
 	public List<Gym> fetchGymList(String city);
 
 	public List<Slot> fetchSlotList(String gymId) throws SlotNotFoundException;
