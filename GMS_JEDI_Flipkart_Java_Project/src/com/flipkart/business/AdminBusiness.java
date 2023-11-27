@@ -18,7 +18,7 @@ public class AdminBusiness implements AdminBusinessInterface{
 	 * @return List of GymOwner objects
 	 */
 	public List<GymOwner> getGymOwners() {
-		System.out.println("Fetched gym owner details successfully!");
+		
 		return adminDAO.getAllGymOwners();
 	}
 	/**

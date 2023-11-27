@@ -29,7 +29,7 @@ public class AdminDAOImpl implements AdminDAO {
             connection = DBUtils.getConnection();
             // Step 2: Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_SELECT_ALL_GYM_OWNERS);
-            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -63,7 +63,7 @@ public class AdminDAOImpl implements AdminDAO {
             connection = DBUtils.getConnection();
             // Step 2: Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_SELECT_ALL_GYMS);
-            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -98,7 +98,7 @@ public class AdminDAOImpl implements AdminDAO {
             connection = DBUtils.getConnection();
             // Step 2: Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_SELECT_PENDING_GYM_OWNERS);
-            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.setBoolean(1, false);
             ResultSet rs = preparedStatement.executeQuery();
@@ -134,7 +134,7 @@ public class AdminDAOImpl implements AdminDAO {
             connection = DBUtils.getConnection();
             // Step 2: Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_SELECT_PENDING_GYMS);
-            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.setBoolean(1, false);
             ResultSet rs = preparedStatement.executeQuery();
@@ -170,7 +170,7 @@ public class AdminDAOImpl implements AdminDAO {
             connection = DBUtils.getConnection();
             // Step 2: Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_APPROVE_GYM_OWNER_BY_ID);
-            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.setString(1, gymOwnerEmail);
             preparedStatement.executeUpdate();            
@@ -188,7 +188,7 @@ public class AdminDAOImpl implements AdminDAO {
             connection = DBUtils.getConnection();
             // Step 2: Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_APPROVE_ALL_GYMS_OWNERS);
-            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();            
         } catch (SQLException e) {
@@ -207,7 +207,7 @@ public class AdminDAOImpl implements AdminDAO {
             connection = DBUtils.getConnection();
             // Step 2: Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_APPROVE_GYM_BY_ID);
-            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.setString(1, gymId);
             preparedStatement.executeUpdate();            
@@ -225,7 +225,7 @@ public class AdminDAOImpl implements AdminDAO {
             connection = DBUtils.getConnection();
             // Step 2: Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_APPROVE_ALL_GYMS);
-            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();            
         } catch (SQLException e) {
