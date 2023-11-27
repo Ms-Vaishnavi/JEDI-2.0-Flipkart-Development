@@ -5,23 +5,22 @@ import java.util.Date;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.flipkart.bean.Gym;
 import com.flipkart.exception.*;
+import com.flipkart.utils.DBUtils;
 
 public class CustomerDAOImpl implements CustomerDAO{
 
 	public List<Gym> fetchGymList() {
+		Connection connection = null;
 		List<Gym> gyms = new ArrayList<Gym>();
 		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
-
+		try {connection = DBUtils.getConnection();
 				// Step 2:Create a statement using connection object
-				PreparedStatement statement = connection.prepareStatement(query);) {
+				PreparedStatement statement = connection.prepareStatement(query);
 			System.out.println(statement);
 			// Step 3: Execute the query or update query
 			ResultSet rs = statement.executeQuery();
@@ -46,9 +45,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	public void fetchSlotList(int gymId) throws NoSlotsFoundException {
+		Connection connection = null;
 		String query = "Select * From Slot Where gymId=?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip"); PreparedStatement statement = connection.prepareStatement(query);) {
+		try {connection = DBUtils.getConnection();
+		PreparedStatement statement = connection.prepareStatement(query);
 			System.out.println(statement);
 			statement.setInt(1, gymId);
 			ResultSet output = statement.executeQuery();
@@ -70,9 +70,11 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	public void fetchBookedSlots(String email) {
+		Connection connection = null;
 		String query = "Select * From Booking where customerEmail = ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip"); PreparedStatement statement = connection.prepareStatement(query);) {
+		try {connection = DBUtils.getConnection();
+			PreparedStatement statement = connection.prepareStatement(query);
+		
 			statement.setString(1, email);
 			ResultSet output = statement.executeQuery();
 			System.out.println("BookingId \t Date \t    GymId");
@@ -89,9 +91,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 	
 	public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail) {
+		Connection connection = null;
 		String query = "INSERT INTO Booking (bookingId,slotId,gymId,type,date,customerEmail) values(?, ?, ?, ?, ?, ?)";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip"); PreparedStatement statement = connection.prepareStatement(query);) {
+		try {connection = DBUtils.getConnection();
+		PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, bookingId);
 			statement.setString(2, slotId);
 			statement.setString(3, gymId);
@@ -106,9 +109,10 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	public boolean isFull(String slotId, String date) {
+		Connection connection = null;
 		String query = "Select * slot where slotId=? and (numOfSeatsBooked>=numOfSeats)";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip"); PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+		try {connection = DBUtils.getConnection(); 
+		PreparedStatement preparedStatement = connection.prepareStatement(query);
 
 			preparedStatement.setString(1, slotId);
 			System.out.println(preparedStatement);
@@ -124,11 +128,11 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	public boolean alreadyBooked(String slotId, String email, String date) {
+		Connection connection = null;
 		String query = "select isVerified from Booking where slotId=? and customerEmail =  ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, slotId);
 			preparedStatement.setString(2, email);
 			System.out.println(preparedStatement);
@@ -144,9 +148,9 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	public void cancelBooking(String slotId, String email, String date) {
+		Connection connection = null;
 		String query = "Delete from Booking where email = ? and slotId = ? and date = ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip"); PreparedStatement statement = connection.prepareStatement(query);) {
+		try {connection = DBUtils.getConnection(); PreparedStatement statement = connection.prepareStatement(query);
 			statement.setString(1, email);
 			statement.setString(2, slotId);
 			statement.setString(3, date);
@@ -158,11 +162,11 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	public boolean checkSlotExists(String slotId, String gymId) {
+		Connection connection = null;
 		String query = "select isVerified from slot where slotId=? and gymId =  ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, slotId);
 			preparedStatement.setString(2, gymId);
 			System.out.println(preparedStatement);
@@ -178,11 +182,11 @@ public class CustomerDAOImpl implements CustomerDAO{
 	}
 
 	public boolean checkGymApprove(String gymId) {
+		Connection connection = null;
 		String query = "select isVerified from gym where gymId =  ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root",
-				"JEDI20Flip");
+		try {connection = DBUtils.getConnection();
 
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, gymId);
 			System.out.println(preparedStatement);
 
