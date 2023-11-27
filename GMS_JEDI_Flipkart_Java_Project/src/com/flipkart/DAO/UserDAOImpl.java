@@ -10,16 +10,19 @@ import java.util.List;
 
 import com.flipkart.bean.*;
 import com.flipkart.bean.User;
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.exception.UserNotFoundException;
+import com.flipkart.utils.DBUtils;
 
 public class UserDAOImpl implements UserDAO {
 
 	public boolean authenticateUser(User user) {
 		// to run without authentication, make isUserValid = true
+		Connection connection = null;
+		
 		boolean isUserValid = false;
-		String query = "select email, password, role from user where email = ?";
-		try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/GMS", "root", "");
-				PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+		try {connection = DBUtils.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_SELECT_USER_LOGIN_CREDENTIAL); 
 
 			preparedStatement.setString(1, user.getEmail());
 

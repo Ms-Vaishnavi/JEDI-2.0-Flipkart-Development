@@ -8,12 +8,13 @@ package com.flipkart.bean;
  */
 public class Slot {
 	private String slotId;
+	private String gymId;
 	private String startTime;
 	private String endTime;
-	private int numOfSeats;
 	private String trainer;
+	private int numOfSeats;
 	private int numOfSeatsBooked;
-	private String gymId;
+	
 	public Slot()
 	{
 
