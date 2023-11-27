@@ -195,7 +195,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 			preparedStatement.setInt(6, gymDetails.getSeatsPerSlotCount());
 			preparedStatement.setBoolean(7, gymDetails.isVerified());
 
-			System.out.println(preparedStatement);
+			//System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -210,7 +210,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	 */
 	public void editGym(Gym gymDetails) {
 		Connection connection = null;
-		System.out.println(SQLConstants.SQL_UPDATE_GYM);
+		//System.out.println(SQLConstants.SQL_UPDATE_GYM);
 		// Step 1: Establishing a Connection
 		try {connection = DBUtils.getConnection();
 
@@ -242,13 +242,13 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 	public List<Gym> getGymsOfGymOwner(String gymOwnerId) {
 		Connection connection = null;
 		List<Gym> gyms = new ArrayList<Gym>();
-		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where gymOwnerEmail =  ?";
+		String query = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where ownerEmail =  ?";
 		try {connection = DBUtils.getConnection();
 
 				// Step 2:Create a statement using connection object
 				PreparedStatement preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, gymOwnerId);
-			System.out.println(preparedStatement);
+			//System.out.println(preparedStatement);
 			// Step 3: Execute the query or update query
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -257,10 +257,10 @@ public class GymOwnerDAOImpl implements GymOwnerDAO{
 				Gym gym = new Gym();
 				gym.setGymId(rs.getString("gymId"));
 				gym.setGymName(rs.getString("gymName"));
-				gym.setOwnerEmail(rs.getString("gymOwnerEmail"));
+				gym.setOwnerEmail(rs.getString("ownerEmail"));
 				gym.setAddress(rs.getString("address"));
 				gym.setSlotCount(rs.getInt("slotCount"));
-				gym.setSeatsPerSlotCount(rs.getInt("seatsPerSlot"));
+				gym.setSeatsPerSlotCount(rs.getInt("seatsPerSlotCount"));
 				gym.setVerified(rs.getBoolean("isVerified"));
 				gyms.add(gym);
 //	                System.out.println(id + "," + name + "," + email + "," + country + "," + password);
