@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.constants.SQLConstants;
@@ -78,24 +79,28 @@ public class CustomerDAOImpl implements CustomerDAO {
     	   return slots;
     	}
     // shows all the bookings of the slots made by the customer
-    public void fetchBookedSlots(String email) {
+    public List<Booking> fetchBookedSlots(String email) {
         Connection connection = null;
+        List<Booking> bookings=new ArrayList<>();
         try {
             connection = DBUtils.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_BOOKED_SLOTS_BY_CUSTOMER);
             statement.setString(1, email);
-            ResultSet output = statement.executeQuery();
-            System.out.println("BookingId \t Date \t    GymId");
-            while (output.next()) {
-                System.out.printf("%-12s\t", output.getInt(1));
-                System.out.printf("  %-7s\t", output.getString(5));
-                System.out.printf("%-8s\t", output.getString(3));
-                System.out.println("");
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+               Booking b=new Booking();
+               b.setBookingId(rs.getString("bookingId"));
+               b.setCustomerEmail(rs.getString("customerEmail"));
+               b.setSlotId(rs.getString("slotId"));
+               b.setGymId(rs.getString("gymId"));
+               b.setType(rs.getString("type"));
+               b.setDate(rs.getDate("date"));
+               bookings.add(b);
             }
-            System.out.println("-----------------------------------------------");
         } catch (SQLException sqlExcep) {
             printSQLException(sqlExcep);
         }
+        return bookings;
     }
 
     // books the slot with the given slotId for the customer

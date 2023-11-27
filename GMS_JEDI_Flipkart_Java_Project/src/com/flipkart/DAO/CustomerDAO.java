@@ -3,6 +3,7 @@ package com.flipkart.DAO;
 import java.util.Date;
 import java.util.List;
 
+import com.flipkart.bean.Booking;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.Slot;
 import com.flipkart.exception.*;
@@ -12,7 +13,7 @@ public interface CustomerDAO {
 
 	public List<Slot> fetchSlotList(String gymId) throws SlotNotFoundException;
 
-	public void fetchBookedSlots(String email);
+	public List<Booking> fetchBookedSlots(String email);
 
 	public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail);
 

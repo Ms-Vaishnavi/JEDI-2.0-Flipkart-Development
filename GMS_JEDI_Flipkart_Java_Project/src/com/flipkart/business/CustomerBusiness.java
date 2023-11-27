@@ -58,15 +58,8 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @return List of bookings done by the given customer email
 	 */
 	public List<Booking> getBookings(String email) {
-
-		List<Booking> customerBookings = new ArrayList<Booking>();
-
-		for (Booking b : bookings) {
-			if (b.getCustomerEmail().equals(email)) {
-				customerBookings.add(b);
-			}
-		}
-		return customerBookings;
+		System.out.println(ColorConstants.GREEN+"Successfully fetched the list of bookings"+ColorConstants.RESET);
+	      return customerDAO.fetchBookedSlots(email);
 	}
 	/**
 	 * Performs booking cancellation operation for the given customer email.
