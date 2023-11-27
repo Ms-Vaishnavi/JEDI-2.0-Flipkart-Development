@@ -33,22 +33,23 @@ public interface AdminDAO {
 	/**
 	 * Approves a single gym owner request
 	 * @param gymOwnerEmail The Email of the gym owner
+	 * @return 
 	 */
-	public void approveSingleOwnerRequest(String gymOwnerEmail);
+	public int approveSingleOwnerRequest(String gymOwnerEmail);
 
 	/**
 	 * Approves all pending gym owner requests
 	 */
-	public void approveAllOwnerRequest();
+	public int approveAllOwnerRequest();
 
 	/**
 	 * Approves a single gym request
 	 * @param gymId The Id of the gym
 	 */
-	public void approveSingleGymRequest(String gymId);
+	public int approveSingleGymRequest(String gymId);
 
 	/**
 	 * Approves all pending gym requests
 	 */
-	public void approveAllGymRequest();
+	public int approveAllGymRequest();
 }

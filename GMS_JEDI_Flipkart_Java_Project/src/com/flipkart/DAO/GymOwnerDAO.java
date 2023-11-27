@@ -23,8 +23,9 @@ public interface GymOwnerDAO {
 	/**
 	 * Edits gym owner details in the database
 	 * @param GymOwner object
+	 * @return 
 	 */
-	public void editGymOwnerDetails(GymOwner gymOwnerDetails);
+	public int editGymOwnerDetails(GymOwner gymOwnerDetails);
 
 	/**
 	 * Retrieves gym details from the database

@@ -44,7 +44,7 @@ public class CustomerClient {
 
 	}
 
-	public void viewGyms(String email) throws ParseException {
+	public void viewGyms(String email) throws Exception {
 		getGyms();
 		System.out.print("Enter gym ID: ");
 		String gymId = sc.next();
@@ -82,8 +82,7 @@ public class CustomerClient {
 
 	public void editProfile(String email) {
 		System.out.println("Enter Details: ");
-		System.out.print("Enter Email: ");
-		customer.setEmail(sc.next());
+		customer.setEmail(email);
 		System.out.print("Enter password: ");
 		customer.setPassword(sc.next());
 		System.out.print("Enter Name: ");
@@ -114,7 +113,7 @@ public class CustomerClient {
 		customerBusiness.cancelBooking(bookingId, email);
 	}
 
-	public void customerMenu(String email) throws ParseException {
+	public void customerMenu(String email) throws Exception {
 		int choice = 0;
 
 		while (choice != 5) {

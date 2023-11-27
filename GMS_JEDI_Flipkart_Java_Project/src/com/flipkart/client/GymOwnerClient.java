@@ -9,6 +9,7 @@ import com.flipkart.bean.Slot;
 import com.flipkart.business.GymOwnerBusiness;
 import com.flipkart.business.UserBusiness;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.exception.GymOwnerNotFoundException;
 import com.flipkart.utils.IdGenerator;
 
 public class GymOwnerClient {
@@ -46,8 +47,7 @@ public class GymOwnerClient {
 
 	public void editProfile(Scanner in, String email) {
 		System.out.println("Enter Details: ");
-		System.out.print("Enter Email: ");
-		gymOwner.setEmail(in.next());
+		gymOwner.setEmail(email);
 		System.out.print("Enter Password: ");
 		gymOwner.setPassword(in.next());
 		gymOwner.setRoleId("GymOwner");
@@ -60,11 +60,21 @@ public class GymOwnerClient {
 		System.out.print("Enter Aadhaar: ");
 		gymOwner.setAadharNumber(in.next());
 
-		gymOwnerBusiness.editProfile(gymOwner);
+		try {
+			gymOwnerBusiness.editProfile(gymOwner);
+		} catch (GymOwnerNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void viewProfile(Scanner in, String email) {
-		gymOwner = gymOwnerBusiness.getProfile(email);
+		try {
+			gymOwner = gymOwnerBusiness.getProfile(email);
+		} catch (GymOwnerNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println("______________________________________________________________");
 		System.out.printf("%15s%15s%15s%15s", "Gym Owner Name", "Phone Number", "PAN Number", "Aadhaar Number");
 		System.out.println();
@@ -140,7 +150,7 @@ public class GymOwnerClient {
 		gymOwnerBusiness.addSlot(slot);
 	}
 
-	public void gymOwnerMenu(Scanner in, String email) {
+	public void gymOwnerMenu(Scanner in, String email) throws Exception {
 		boolean recur = true;
 		while (recur) {
 			System.out.println("\nHere are the actions you can perform!");
