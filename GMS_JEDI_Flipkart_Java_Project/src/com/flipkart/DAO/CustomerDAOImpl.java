@@ -239,6 +239,41 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     public int editCustomerDetails(Customer customer) {
+        Connection connection = null;
+        try {
+            connection = DBUtils.getConnection();
+
+            // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_USER);
+            preparedStatement.setString(1, customer.getEmail());
+            preparedStatement.setString(2, customer.getPassword());
+            preparedStatement.setString(3, "customer");
+            preparedStatement.setString(4, customer.getEmail());
+            // Step 3: Execute the query or update query
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+        try {
+            connection = DBUtils.getConnection();
+
+            // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_CUSTOMER);
+            preparedStatement.setString(1, customer.getName());
+            preparedStatement.setString(2, customer.getPhoneNumber());
+            preparedStatement.setInt(3,customer.getAge());
+            preparedStatement.setString(4, customer.getAddress());
+            preparedStatement.setString(5, customer.getPhoneNumber());
+            // Step 3: Execute the query or update query
+          return  preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            // print SQL exception information
+            printSQLException(e);
+        }
+
+        System.out.println(SQLConstants.SQL_UPDATE_CUSTOMER);
+        // Step 1: Establishing a Connection
         return 0;
     }
     // prints the SQL Exception
