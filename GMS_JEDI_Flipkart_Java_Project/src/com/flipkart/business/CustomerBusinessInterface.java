@@ -3,6 +3,7 @@ package com.flipkart.business;
 import com.flipkart.bean.*;
 import com.flipkart.exception.CustomerNotFoundException;
 import com.flipkart.exception.GymOwnerNotFoundException;
+import com.flipkart.exception.SlotNotFoundException;
 
 import java.util.*;
 
@@ -18,7 +19,7 @@ public interface CustomerBusinessInterface{
     */
    
     public List<Gym> getGymInCity(String city) ;
-    public List<Slot> getSlotInGym(String gymId);
+    public List<Slot> getSlotInGym(String gymId) throws SlotNotFoundException;
     public boolean isSlotBooked(String slotId, Date date);
     public boolean cancelBooking(String bookingId, String email);
 }

@@ -23,7 +23,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                 // Step 2:Create a statement using connection object
         	PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_SELECT_ALL_GYMS_BY_ADDRESS);
             statement.setString(1, city);
-            System.out.println(statement);
+            //System.out.println(statement);
             // Step 3: Execute the query or update query
             ResultSet rs = statement.executeQuery();
 
@@ -54,7 +54,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     	   String query = "Select * From Slot Where gymId=?";
     	   try {connection = DBUtils.getConnection();
     	   PreparedStatement statement = connection.prepareStatement(query);
-    	      System.out.println(statement);
+    	      //System.out.println(statement);
     	      statement.setString(1, gymId);
     	      //executing the query
     	      ResultSet rs = statement.executeQuery();

@@ -73,7 +73,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @return returns List of gyms available for the given city
 	 */
 	public List<Gym> getGymInCity(String city) {
-		System.out.println(ColorConstants.GREEN+"Successfully fetched the gyms in city "+city+ColorConstants.RESET);
+		System.out.println(ColorConstants.GREEN+"\nSuccessfully fetched the gyms in city \n"+city+ColorConstants.RESET);
 		return customerDAO.fetchGymList(city);
 		
 	}
@@ -82,14 +82,12 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @param gymId the Gym Id for which the slot details are requested
 	 * @return returns List of available slots for the given gymId
 	 */
-	public List<Slot> getSlotInGym(String gymId) {
-		try {
+	public List<Slot> getSlotInGym(String gymId) throws SlotNotFoundException{
+		
 			List<Slot> slotsOfGym = customerDAO.fetchSlotList(gymId);
+			if(slotsOfGym.size() == 0) throw new SlotNotFoundException();
 			return slotsOfGym;
-		} catch(SlotNotFoundException ex) {
-			System.out.println(ex.getMessage());
-		}
-		return null;
+		
 	}
 	/**
 	 * Performs booking operation for the given customer email on the given date for the given slotId

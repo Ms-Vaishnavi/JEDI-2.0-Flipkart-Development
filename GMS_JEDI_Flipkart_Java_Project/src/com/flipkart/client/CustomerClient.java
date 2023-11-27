@@ -10,6 +10,7 @@ import com.flipkart.bean.Slot;
 import com.flipkart.business.CustomerBusiness;
 import com.flipkart.business.UserBusiness;
 import com.flipkart.constants.ColorConstants;
+import com.flipkart.exception.SlotNotFoundException;
 import com.flipkart.exception.UserAlreadyExistsException;
 
 public class CustomerClient {
@@ -53,8 +54,9 @@ public class CustomerClient {
 		String dateStr = sc.next();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = dateFormat.parse(dateStr);
-
+		try {
 		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
+		
 		slots.forEach(slot -> {
 		    System.out.print("\nSlot Id: " + slot.getSlotId());
 		    System.out.print("\nAvailability: " + customerBusiness.isSlotBooked(slot.getSlotId(), date));
@@ -75,6 +77,9 @@ public class CustomerClient {
 			break;
 		default:
 			System.out.println(ColorConstants.RED +"Booking failed"+ColorConstants.RESET);
+		}
+		} catch (SlotNotFoundException e) {
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 		}
 	}
 
@@ -98,12 +103,12 @@ public class CustomerClient {
 	public void getGyms() {
 		System.out.print("\nEnter your city: ");
 		List<Gym> gyms = customerBusiness.getGymInCity(sc.next());
+		System.out.printf("%10s%20s%10s", "Gym Id", "Gym Owner Email", "Gym Name");
 		gyms.forEach(gym -> {
-		    System.out.print("Gym Id: " + gym.getGymId());
-		    System.out.print("Gym Owner Email: " + gym.getOwnerEmail());
-		    System.out.print("Gym Name: " + gym.getGymName());
 		    System.out.println();
+		    System.out.printf("%10s%20s%10s", gym.getGymId(), gym.getOwnerEmail(), gym.getGymName());
 		});
+		System.out.println("\n");
 	}
 
 	public void cancelBooking(String email) {
@@ -117,7 +122,7 @@ public class CustomerClient {
 
 		while (choice != 5) {
 			System.out.println("\nMenu:-");
-			System.out.println("1.View Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4. Edit Profile \n5.Exit");
+			System.out.println("1.Book Gyms \n2.View Booked Slots \n3.Cancel Booked Slots \n4. Edit Profile \n5.Exit");
 			System.out.print("\nEnter your choice: ");
 			choice = sc.nextInt();
 
