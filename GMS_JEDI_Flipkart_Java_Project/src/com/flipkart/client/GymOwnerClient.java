@@ -114,8 +114,10 @@ public class GymOwnerClient {
 
 	public void getGymDetails(Scanner in, String email) {
 		List<Gym> gymDetails = gymOwnerBusiness.getGymDetail(email);
+		System.out.printf("%15s%15s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Address", "SlotCount", "SeatsPerSlot", "Verification");
 		for (Gym gym : gymDetails) {
-			System.out.println(gym);
+			System.out.println();
+			System.out.printf("%15s%15s%15s%15s%15s%15s", gym.getGymId(), gym.getGymName(), gym.getAddress(), gym.getSlotCount(), gym.getSeatsPerSlotCount(), gym.isVerified() ? "Verified" : "Not Verified");
 		}
 	}
 

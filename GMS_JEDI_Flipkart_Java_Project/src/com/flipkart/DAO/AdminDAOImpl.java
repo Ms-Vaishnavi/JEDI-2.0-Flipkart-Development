@@ -16,8 +16,12 @@ import java.util.List;
  * 
  */
 public class AdminDAOImpl implements AdminDAO {
-	Connection connection = null;
+	/**
+	 * Retrieves a list of all gym owners from database
+	 * @return List of GymOwner objects
+	 */
 	public List<GymOwner> getAllGymOwners() {
+		Connection connection = null;
 		List<GymOwner> gymOwners = new ArrayList<GymOwner>();
 		String query = "select email, name, phoneNum, aadharNum, panNum, isVerified from gymOwner";
 		try {connection = DBUtils.getConnection();
@@ -46,6 +50,10 @@ public class AdminDAOImpl implements AdminDAO {
 		return gymOwners;
 	};
 	
+	/**
+	 * Retrieves a list of all gyms from database
+	 * @return List of Gym objects
+	 */
 	public List<Gym> getAllGyms() {
 		Connection connection = null;
 		List<Gym> gyms = new ArrayList<Gym>();
@@ -77,6 +85,10 @@ public class AdminDAOImpl implements AdminDAO {
 		return gyms;
 	};
 	
+	/**
+	 * Retrieves a list of all pending gym owner requests from database
+	 * @return List of GymOwner objects
+	 */
 	public List<GymOwner> getPendingGymOwnerRequests() {
 		Connection connection = null;
 		List<GymOwner> gymOwners = new ArrayList<GymOwner>();
@@ -109,6 +121,10 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	};
 	
+	/**
+	 * Retrieves a list of all pending gym requests from database
+	 * @return List of Gym objects
+	 */
 	public List<Gym> getPendingGymRequests() {
 		Connection connection = null;
 		List<Gym> gyms = new ArrayList<Gym>();
@@ -142,6 +158,10 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	};
 	
+	/**
+	 * Approves a single gym owner request
+	 * @param gymOwnerEmail The Email of the gym owner
+	 */
 	public void approveSingleOwnerRequest(String gymOwnerEmail) {
 		Connection connection = null;
 		String SQL_APPROVE_GYM_OWNER_BY_ID="update gymOwner set isVerified=1 WHERE email=?;";
@@ -157,6 +177,9 @@ public class AdminDAOImpl implements AdminDAO {
 	        }
 	};
 	
+	/**
+	 * Approves all pending gym owner requests
+	 */
 	public void approveAllOwnerRequest() {
 		Connection connection = null;
 		String SQL_APPROVE_ALL_GYMS="update gymOwner set isVerified=1;";
@@ -171,6 +194,10 @@ public class AdminDAOImpl implements AdminDAO {
 	        }
 	};
 	
+	/**
+	 * Approves a single gym request
+	 * @param gymId The Id of the gym
+	 */
 	public void approveSingleGymRequest(String gymId) {
 		Connection connection = null;
 		String SQL_APPROVE_GYM_BY_ID="update gym set isVerified=1 where gymId = ?;";
@@ -186,6 +213,9 @@ public class AdminDAOImpl implements AdminDAO {
 	        }
 	};
 	
+	/**
+	 * Approves all pending gym requests
+	 */
 	public void approveAllGymRequest() {
 		Connection connection = null;
 		String SQL_APPROVE_ALL_GYMS="update gym set isVerified=1;";
