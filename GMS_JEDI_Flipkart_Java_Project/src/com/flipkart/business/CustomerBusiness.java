@@ -64,8 +64,13 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @return returns true of the booking gets cancelled successfully else returns false
 	 */
 	public boolean cancelBooking(String bookingId, String email)  {
+		int isCancelled = customerDAO.cancelBooking(bookingId, email);
+		if (isCancelled == 0) {
+			System.out.println(ColorConstants.RED + "No booking found with the given details!" + ColorConstants.RESET);
+			return false;
+		}
 		System.out.println(ColorConstants.GREEN+"Successfully cancelled the booking "+ColorConstants.RESET);
-		return customerDAO.cancelBooking(bookingId, email);
+		return true;
 	}
 	/**
 	 * Obtains all the gyms for the given city.
@@ -95,11 +100,14 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @param slotId the slot id in which the customer wants to book a seat
 	 * @param date the date on which the customer wants to book a seat
 	 * @return returns integer signal based on the customer's booking status
+	 * @throws SlotNotFoundException 
 	 */
-	public int bookSlot(String gymId, String slotId, String email, String date)
+	public int bookSlot(String gymId, String slotId, String email, String date) throws SlotNotFoundException
 	{
 		Integer bookedSeatsNum = customerDAO.getNumberOfSeatsBooked(slotId);
 		Integer totalSeatsNum = customerDAO.getNumberOfSeats(slotId);
+		if (totalSeatsNum == 0)
+			throw new SlotNotFoundException();
 		if(customerDAO.alreadyBooked(slotId, email, date))
 		{
 			//System.out.println("entered already booked");

@@ -204,19 +204,18 @@ public class CustomerDAOImpl implements CustomerDAO {
     	return false;
     }
     // cancels the booking of the customer made earlier
-    public boolean cancelBooking(String bookingId, String email) {
+    public int cancelBooking(String bookingId, String email) {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_DELETE_BOOKING);
             statement.setString(2, bookingId);
             statement.setString(1, email);
-            statement.executeUpdate();
-            return true;
+            return statement.executeUpdate();
         } catch (SQLException sqlExcep) {
 //            printSQLException(sqlExcep);
         }
-        return false;
+        return 0;
     }
 
     // checks if the slot exists or not

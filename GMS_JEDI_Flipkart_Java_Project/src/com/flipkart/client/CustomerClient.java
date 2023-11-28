@@ -48,7 +48,7 @@ public class CustomerClient {
 		}	
 	}
 
-	public void viewGyms(String email) throws ParseException {
+	public void viewGyms(String email) {
 		if (getGyms() == 0)
 			return;
 		System.out.print("Enter gym ID: ");
