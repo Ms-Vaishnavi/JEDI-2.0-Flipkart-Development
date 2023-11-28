@@ -144,6 +144,10 @@ public class GymOwnerClient {
 
 	public void getGymDetails(Scanner in, String email) {
 		List<Gym> gymDetails = gymOwnerBusiness.getGymDetail(email);
+		if (gymDetails.size() == 0) {
+			System.out.println(ColorConstants.RED + "Sorry, no gyms found!" + ColorConstants.RED);
+			return;
+		}
 		System.out.printf("%15s%15s%15s%15s%15s%15s", "Gym Id", "Gym Name", "Address", "SlotCount", "SeatsPerSlot", "Verification");
 		gymDetails.forEach(gym -> {
 		    System.out.println();

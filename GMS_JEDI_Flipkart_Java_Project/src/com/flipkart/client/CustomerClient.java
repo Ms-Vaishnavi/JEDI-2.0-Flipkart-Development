@@ -49,7 +49,8 @@ public class CustomerClient {
 	}
 
 	public void viewGyms(String email) throws ParseException {
-		getGyms();
+		if (getGyms() == 0)
+			return;
 		System.out.print("Enter gym ID: ");
 		String gymId = sc.next();
 		System.out.print("\nEnter Date (yyyy-mm-dd): ");
@@ -106,13 +107,13 @@ public class CustomerClient {
 		}
 	}
 
-	public void getGyms() {
+	public int getGyms() {
 		System.out.print("\nEnter your city: ");
 		List<Gym> gyms = customerBusiness.getGymInCity(sc.next());
 		if(gyms.size()==0) 
 		{
-			System.out.print(ColorConstants.RED +"\nSorry, no gyms found in this city "+ColorConstants.RESET);
-			return;
+			System.out.print(ColorConstants.RED +"Sorry, no gyms found in this city "+ColorConstants.RESET);
+			return 0;
 		}
 		System.out.printf("%10s%20s%10s", "Gym Id", "Gym Owner Email", "Gym Name");
 		gyms.forEach(gym -> {
@@ -120,6 +121,7 @@ public class CustomerClient {
 		    System.out.printf("%10s%20s%10s", gym.getGymId(), gym.getOwnerEmail(), gym.getGymName());
 		});
 		System.out.println("\n");
+		return 1;
 	}
 
 	public void cancelBooking(String email) {
@@ -130,6 +132,10 @@ public class CustomerClient {
 	
 	public void viewBookings(String email) {
 		List<Booking> bookings = customerBusiness.getBookings(email);
+		if (bookings.size() == 0) {
+			System.out.println(ColorConstants.RED + "No bookings found!" + ColorConstants.RESET);
+			return;
+		}
 		System.out.printf("%15s%15s%15s%15s%15s", "Booking Id", "Slot Id", "Gym Id", "Booking Type", "Date");
 		System.out.println();
 		bookings.forEach(booking -> {
