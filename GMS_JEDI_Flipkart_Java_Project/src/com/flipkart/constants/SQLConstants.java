@@ -24,7 +24,7 @@ public class SQLConstants {
 
 	public static final String SQL_SELECT_ALL_GYMS = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where ownerEmail = ?";
 	public static final String SQL_VIEW_ALL_GYMS = "select * from gym";
-	public static final String SQL_SELECT_ALL_GYMS_BY_ADDRESS = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where address=?";
+	public static final String SQL_SELECT_ALL_GYMS_BY_ADDRESS = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where address=? and isVerified=1";
 	public static final String SQL_SELECT_ALL_GYMS_WITHOUT_FILTER = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym";
 	public static final String SQL_SELECT_SLOTS_BY_GYM_ID = "Select * From slot Where gymId=?";
 	public static final String SQL_SELECT_BOOKINGS_BY_CUSTOMER_EMAIL = "Select * From booking where customerEmail = ?";
