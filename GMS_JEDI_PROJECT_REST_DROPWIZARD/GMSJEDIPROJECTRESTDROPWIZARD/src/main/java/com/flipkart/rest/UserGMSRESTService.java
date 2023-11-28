@@ -68,6 +68,6 @@ public class UserGMSRESTService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response LogOut(@PathParam("email") String email, User user) {
          userBusiness.logout(user);
-            return Response.ok("Authenticated the user successfully!").build();
+            return Response.ok("Logged out the user successfully!").build();
     }
 }
