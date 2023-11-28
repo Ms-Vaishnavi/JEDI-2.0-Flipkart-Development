@@ -109,6 +109,11 @@ public class CustomerClient {
 	public void getGyms() {
 		System.out.print("\nEnter your city: ");
 		List<Gym> gyms = customerBusiness.getGymInCity(sc.next());
+		if(gyms.size()==0) 
+		{
+			System.out.print(ColorConstants.RED +"\nSorry, no gyms found in this city "+ColorConstants.RESET);
+			return;
+		}
 		System.out.printf("%10s%20s%10s", "Gym Id", "Gym Owner Email", "Gym Name");
 		gyms.forEach(gym -> {
 		    System.out.println();
