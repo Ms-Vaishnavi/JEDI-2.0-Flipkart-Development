@@ -38,6 +38,6 @@ Class-Path: dropwizard-core-2.0.33.jar dropwizard-util-2.0.33.jar guava-
  va-1.0.4.jar jakarta.inject-2.6.1.jar jersey-common-2.33.jar osgi-resou
  rce-locator-1.0.3.jar jersey-bean-validation-2.33.jar hibernate-validat
  or-6.1.7.Final.jar jboss-logging-3.3.2.Final.jar slf4j-api-1.7.36.jar
-Main-Class: com.flipkart.RESTAPI.GMS_API
+Main-Class: com.flipkart.RESTAPI.GMSRestAPI
 Created-By: Maven Integration for Eclipse
 
