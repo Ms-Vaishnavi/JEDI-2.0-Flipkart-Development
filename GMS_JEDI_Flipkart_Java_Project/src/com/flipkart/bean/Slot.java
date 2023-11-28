@@ -9,6 +9,7 @@ package com.flipkart.bean;
 public class Slot {
 	private String slotId;
 	private String gymId;
+	private String date;
 	private String startTime;
 	private String endTime;
 	private String trainer;
@@ -20,9 +21,10 @@ public class Slot {
 
 	}
 
-	public Slot(String slotId,String startTime,String endTime,int numOfSeats,String trainer,String gymId)
+	public Slot(String slotId, String date, String startTime,String endTime,int numOfSeats,String trainer,String gymId)
 	{
 		this.slotId=slotId;
+		this.date = date;
 		this.startTime=startTime;
 		this.endTime=endTime;
 		this.numOfSeats=numOfSeats;
@@ -85,5 +87,12 @@ public class Slot {
 
 	public void setGymId(String gymId) {
 		this.gymId = gymId;
+	}
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 }

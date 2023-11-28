@@ -159,6 +159,8 @@ public class GymOwnerClient {
 		slot.setSlotId(IdGenerator.generateId("Slot"));
 		System.out.print("Enter Gym Id:");
 		slot.setGymId(in.next());
+		System.out.print("Enter Slot Date: ");
+		slot.setDate(in.next());
 		System.out.print("Enter Slot Start Time: ");
 		slot.setStartTime(in.next());
 		System.out.print("Enter Slot End Time: ");

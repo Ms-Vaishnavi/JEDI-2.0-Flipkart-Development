@@ -329,11 +329,12 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_INSERT_SLOT);
             preparedStatement.setString(1, slot.getSlotId());
             preparedStatement.setString(2, slot.getGymId());
-            preparedStatement.setString(3, slot.getStartTime());
-            preparedStatement.setString(4, slot.getEndTime());
-            preparedStatement.setString(5, slot.getTrainer());
-            preparedStatement.setInt(6, slot.getNumOfSeats());
-            preparedStatement.setInt(7, slot.getNumOfSeatsBooked());
+            preparedStatement.setString(3, slot.getDate());
+            preparedStatement.setString(4, slot.getStartTime());
+            preparedStatement.setString(5, slot.getEndTime());
+            preparedStatement.setString(6, slot.getTrainer());
+            preparedStatement.setInt(7, slot.getNumOfSeats());
+            preparedStatement.setInt(8, slot.getNumOfSeatsBooked());
 
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();

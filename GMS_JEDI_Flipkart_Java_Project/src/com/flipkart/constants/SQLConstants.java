@@ -19,8 +19,8 @@ public class SQLConstants {
 	+ "  set gymId = ?, gymName = ?, ownerEmail = ?, address = ?, slotCount = ?, seatsPerSlotCount = ?, isVerified = ? where gymId = ?;";
 	
 	public static final String SQL_READ_SLOT_FROM_GYMID = "select slotId, gymId, startTime, endTime, trainer, numOfSeats, numOfSeatsBooked from slot where gymId =  ?";
-	public static final String SQL_INSERT_SLOT = "INSERT INTO slot" + "  (slotId, gymId, startTime, endTime, trainer, numOfSeats, numOfSeatsBooked) VALUES "
-					+ " (?, ?, ?, ?, ?, ?, ?);";
+	public static final String SQL_INSERT_SLOT = "INSERT INTO slot" + "  (slotId, gymId, date, startTime, endTime, trainer, numOfSeats, numOfSeatsBooked) VALUES "
+					+ " (?, ?, ?, ?, ?, ?, ?, ?);";
 
 	public static final String SQL_SELECT_ALL_GYMS = "select gymId, gymName, ownerEmail, address, slotCount, seatsPerSlotCount, isVerified from gym where ownerEmail = ?";
 	public static final String SQL_VIEW_ALL_GYMS = "select * from gym";
