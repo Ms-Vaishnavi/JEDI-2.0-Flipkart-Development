@@ -142,7 +142,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_ALREADY_BOOKED);
             preparedStatement.setString(1, slotId);
             preparedStatement.setString(2, email);
-            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             return rs.next();
         } catch (SQLException e) {
@@ -214,7 +214,6 @@ public class CustomerDAOImpl implements CustomerDAO {
             statement.setString(2, bookingId);
             statement.setString(1, email);
             statement.executeUpdate();
-            System.out.println("-----------------------------------------------");
             return true;
         } catch (SQLException sqlExcep) {
             printSQLException(sqlExcep);

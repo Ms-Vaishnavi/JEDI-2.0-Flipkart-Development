@@ -64,7 +64,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @return returns true of the booking gets cancelled successfully else returns false
 	 */
 	public boolean cancelBooking(String bookingId, String email)  {
-		System.out.println(ColorConstants.GREEN+"Successfully deleted the booking "+ColorConstants.RESET);
+		System.out.println(ColorConstants.GREEN+"Successfully cancelled the booking "+ColorConstants.RESET);
 		return customerDAO.cancelBooking(bookingId, email);
 	}
 	/**
@@ -98,10 +98,11 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 */
 	public int bookSlot(String gymId, String slotId, String email, String date)
 	{
-		int bookedSeatsNum = customerDAO.getNumberOfSeatsBooked(slotId);
-		int totalSeatsNum = customerDAO.getNumberOfSeats(slotId);
+		Integer bookedSeatsNum = customerDAO.getNumberOfSeatsBooked(slotId);
+		Integer totalSeatsNum = customerDAO.getNumberOfSeats(slotId);
 		if(customerDAO.alreadyBooked(slotId, email, date))
 		{
+			//System.out.println("entered already booked");
 			customerDAO.cancelBooking(slotId, email);
 			customerDAO.updateNumOfSeats(slotId,bookedSeatsNum--);
 			if(bookedSeatsNum<totalSeatsNum)

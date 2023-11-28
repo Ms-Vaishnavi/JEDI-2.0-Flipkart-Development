@@ -67,19 +67,19 @@ public class CustomerClient {
 		System.out.println("\n__________________________________________________________________________________\n");
 		System.out.print("Enter the slot ID which you want to book: ");
 		String slotId = sc.next();
-		int bookingResponse = customerBusiness.bookSlot(gymId,slotId, email, date);
+		int bookingResponse = customerBusiness.bookSlot(gymId ,slotId , email, date);
 		switch (bookingResponse) {
 		case 0:
-			System.out.println(ColorConstants.GREEN +"You have already booked this time. Cancelling the previous one and booking this slot"+ColorConstants.RESET);
+			System.out.println(ColorConstants.RED +"\nYou have already booked this time. \nCancelling the previous one and booking this slot"+ColorConstants.RESET);
 			break;
 		case 1:
-			System.out.println(ColorConstants.GREEN +"Slot is already booked, added to the waiting list"+ColorConstants.RESET);
+			System.out.println(ColorConstants.GREEN +"\nSlot is already booked, added to the waiting list"+ColorConstants.RESET);
 			break;
 		case 2:
-			System.out.println(ColorConstants.GREEN +"Successfully booked the slot"+ColorConstants.RESET);
+			System.out.println(ColorConstants.GREEN +"\nSuccessfully booked the slot"+ColorConstants.RESET);
 			break;
 		default:
-			System.out.println(ColorConstants.RED +"Booking failed"+ColorConstants.RESET);
+			System.out.println(ColorConstants.RED +"\nBooking failed"+ColorConstants.RESET);
 		}
 		} catch (SlotNotFoundException e) {
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
