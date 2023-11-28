@@ -98,39 +98,40 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 */
 	public int bookSlot(String gymId, String slotId, String email, Date date)
 	{
-		int num = customerDAO.getNumberOfSeatsBooked(slotId);
+		int bookedSeatsNum = customerDAO.getNumberOfSeatsBooked(slotId);
+		int totalSeatsNum = customerDAO.getNumberOfSeats(slotId);
 		if(customerDAO.alreadyBooked(slotId, email, date))
 		{
 			customerDAO.cancelBooking(slotId, email);
-			customerDAO.updateNumOfSeats(slotId,num++);
-			if(num>0)
+			customerDAO.updateNumOfSeats(slotId,bookedSeatsNum--);
+			if(bookedSeatsNum<totalSeatsNum)
 			{
-				customerDAO.updateNumOfSeats(slotId,num--);
+				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum++);
 				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"confirmed",date,email);
 			}
 			else
 			{
-				customerDAO.updateNumOfSeats(slotId,num--);
+				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum++);
 				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"waitlisted",date,email);
 			}
 			return 0;
 		}
 		if(customerDAO.isFull(slotId, date))
 		{
-			customerDAO.updateNumOfSeats(slotId,num--);
+			customerDAO.updateNumOfSeats(slotId,bookedSeatsNum++);
 			customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"waitlisted",date,email);
 			return 1;
 		}
 		else
 		{
-			if(num>0)
+			if(bookedSeatsNum<totalSeatsNum)
 			{
-				customerDAO.updateNumOfSeats(slotId,num--);
+				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum++);
 				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"confirmed",date,email);
 			}
 			else
 			{
-				customerDAO.updateNumOfSeats(slotId,num--);
+				customerDAO.updateNumOfSeats(slotId,bookedSeatsNum++);
 				customerDAO.bookSlots(IdGenerator.generateId("Booking"), slotId, gymId,"waitlisted",date,email);
 			}
 			return 2;

@@ -51,9 +51,8 @@ public class CustomerDAOImpl implements CustomerDAO {
     public List<Slot> fetchSlotList(String gymId) throws SlotNotFoundException {
     	   Connection connection = null;
     	   List<Slot> slots=new ArrayList<>();
-    	   String query = "Select * From Slot Where gymId=?";
     	   try {connection = DBUtils.getConnection();
-    	   PreparedStatement statement = connection.prepareStatement(query);
+    	   PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_FETCH_SLOT_LIST);
     	      //System.out.println(statement);
     	      statement.setString(1, gymId);
     	      //executing the query
@@ -127,7 +126,6 @@ public class CustomerDAOImpl implements CustomerDAO {
             connection = DBUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_FULL_SLOT);
             preparedStatement.setString(1, slotId);
-            //System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             return rs.next();
         } catch (SQLException e) {
@@ -156,12 +154,35 @@ public class CustomerDAOImpl implements CustomerDAO {
     public int getNumberOfSeatsBooked(String slotId)
     {
     	Connection connection = null;
+    	
     	try {
             connection = DBUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_GET_NUMBER_OF_BOOKED_SEATS);
             preparedStatement.setString(1, slotId);
-            ResultSet rs =  preparedStatement.executeQuery(); 
-            return rs.getInt("numOfSeatsBooked");
+            ResultSet rs =  preparedStatement.executeQuery();
+            while (rs.next()) {
+            	return rs.getInt("numOfSeatsBooked");
+            }
+            
+    	}
+    	catch (SQLException sqlExcep) {
+            printSQLException(sqlExcep);
+        }
+    	return 0;
+    }
+    public int getNumberOfSeats(String slotId)
+    {
+    	Connection connection = null;
+    	
+    	try {
+            connection = DBUtils.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_GET_NUMBER_OF_SEATS);
+            preparedStatement.setString(1, slotId);
+            ResultSet rs =  preparedStatement.executeQuery();
+            while (rs.next()) {
+            	return rs.getInt("numOfSeats");
+            }
+            
     	}
     	catch (SQLException sqlExcep) {
             printSQLException(sqlExcep);

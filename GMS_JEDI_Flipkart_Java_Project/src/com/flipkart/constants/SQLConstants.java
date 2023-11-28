@@ -2,6 +2,7 @@ package com.flipkart.constants;
 
 public class SQLConstants {
 
+	public static final String SQL_FETCH_SLOT_LIST = "Select * From Slot Where gymId=?";
     public static final String SQL_SELECT_USER_LOGIN_CREDENTIAL = "select email, password, role from user where email = ?";
     public static final String SQL_SELECT_GYM_OWNER_DETAILS = "select email, name, phoneNum, aadharNum, panNum from gymOwner where email = ?";
     public static final String SQL_INSERT_USER = "INSERT INTO user (email, password, role) VALUES (?, ?, ?);";
@@ -30,7 +31,7 @@ public class SQLConstants {
 	public static final String SQL_SELECT_SLOTS_BY_GYM_ID = "Select * From slot Where gymId=?";
 	public static final String SQL_SELECT_BOOKINGS_BY_CUSTOMER_EMAIL = "Select * From booking where customerEmail = ?";
 	public static final String SQL_SELECT_FULL_SLOTS = "Select * from slot where slotId=? and (numOfSeatsBooked>=numOfSeats)";
-	public static final String SQL_SELECT_VERIFICATION_STATUS_BOOKING = "select isVerified from Booking where slotId=? and customerEmail =?";
+	//public static final String SQL_SELECT_VERIFICATION_STATUS_BOOKING = "select isVerified from Booking where slotId=? and customerEmail =?";
 	public static final String SQL_SELECT_VERIFICATION_STATUS_SLOT = "select isVerified from slot where slotId=? and gymId =  ?";
 	public static final String SQL_SELECT_VERIFICATION_STATUS_GYM = "select isVerified from gym where gymId =  ?";
 	public static final String SQL_SELECT_VERIFICATION_STATUS_GYM_OWNER = "select isVerified from gym where gymId =  ?"; 
@@ -54,5 +55,6 @@ public class SQLConstants {
     public static final String SQL_INSERT_CUSTOMER = "INSERT INTO customer VALUES (?,?,?,?,?)";
     public static final String SQL_GET_NUMBER_OF_BOOKED_SEATS = "select numOfSeatsBooked from slot where slotId=?";
     public static final String SQL_UPDATE_NUMBER_OF_BOOKED_SEATS = "UPDATE slot set numOfSeatsBooked=? where slotId=?";
+    public static final String SQL_GET_NUMBER_OF_SEATS = "select numOfSeats from slot where slotId=?";
 }
 
