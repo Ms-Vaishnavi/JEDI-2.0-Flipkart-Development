@@ -46,7 +46,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 		int updatedCount = customerDAO.editCustomerDetails(customer);
 		if (updatedCount == 0)
 			throw new CustomerNotFoundException();
-		System.out.println(ColorConstants.GREEN + "\nEdited your profile Successfully!" + ColorConstants.RESET);
+		//System.out.println(ColorConstants.GREEN + "\nEdited your profile Successfully!" + ColorConstants.RESET);
 	}
 	/**
 	 * Obtains all the bookings done by the given customer email.
@@ -73,7 +73,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @return returns List of gyms available for the given city
 	 */
 	public List<Gym> getGymInCity(String city) {
-		System.out.println(ColorConstants.GREEN+"\nSuccessfully fetched the gyms in city \n"+city+ColorConstants.RESET);
+		System.out.println(ColorConstants.GREEN+"\nSuccessfully fetched the gyms in city "+city + "\n"+ColorConstants.RESET);
 		return customerDAO.fetchGymList(city);
 		
 	}

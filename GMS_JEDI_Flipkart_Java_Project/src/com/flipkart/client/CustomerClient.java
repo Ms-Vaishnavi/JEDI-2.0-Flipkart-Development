@@ -59,11 +59,13 @@ public class CustomerClient {
 		try {
 		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
 		
+		System.out.printf("%15s%15s%15s%15s", "Slot Id", "Start Time", "End Time", "Availability");
+		System.out.println();
 		slots.forEach(slot -> {
-		    System.out.print("\nSlot Id: " + slot.getSlotId());
-		    System.out.print("\nAvailability: " + customerBusiness.isSlotBooked(slot.getSlotId(), date));
+			System.out.printf("%15s%15s%15s%15s", slot.getSlotId(), slot.getStartTime(), slot.getEndTime(), customerBusiness.isSlotBooked(slot.getSlotId(), date)? "WaitingList": "Available");
+		    System.out.println();
 		});
-		System.out.println("__________________________________________________________________________________\n");
+		System.out.println("\n__________________________________________________________________________________\n");
 		System.out.print("Enter the slot ID which you want to book: ");
 		String slotId = sc.next();
 		int bookingResponse = customerBusiness.bookSlot(gymId,slotId, email, date);

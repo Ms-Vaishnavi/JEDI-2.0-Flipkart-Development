@@ -72,7 +72,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     	      }
     	      
     	   } catch (SQLException sqlExcep) {
-    	      printSQLException(sqlExcep);
+    	      //printSQLException(sqlExcep);
     	   }
     	   return slots;
     	}
@@ -127,7 +127,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             connection = DBUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_FULL_SLOT);
             preparedStatement.setString(1, slotId);
-            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             return rs.next();
         } catch (SQLException e) {
@@ -264,7 +264,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             preparedStatement.setString(2, customer.getPhoneNumber());
             preparedStatement.setInt(3,customer.getAge());
             preparedStatement.setString(4, customer.getAddress());
-            preparedStatement.setString(5, customer.getPhoneNumber());
+            preparedStatement.setString(5, customer.getEmail());
             // Step 3: Execute the query or update query
           return  preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -7,7 +7,7 @@ public class SQLConstants {
     public static final String SQL_INSERT_USER = "INSERT INTO user (email, password, role) VALUES (?, ?, ?);";
 	public static final String SQL_UPDATE_USER = "update user set email = ?, password = ?, role = ?" + " where email = ?;";
 
-	public static final String SQL_UPDATE_CUSTOMER="UPDATE customer set name=? ,phoneNumber=? ,age=? ,address=? where phoneNumber=?";
+	public static final String SQL_UPDATE_CUSTOMER="UPDATE customer set name=? ,phoneNum=? ,age=? ,address=? where email=?";
 	public static final String SQL_INSERT_GYM_OWNER = "INSERT INTO gymOwner (email, name, phoneNum, aadharNum, panNum, isVerified) VALUES (?, ?, ?, ?, ?, ?);";
 	public static final String SQL_UPDATE_GYM_OWNER = "UPDATE gymOwner set email = ?, name = ?, phoneNum = ?, aadharNum = ?, panNum = ?, isVerified = ? where email = ?;"; 
 
