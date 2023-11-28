@@ -5,6 +5,7 @@ import java.util.List;
 import com.flipkart.bean.Gym;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.bean.Slot;
+import com.flipkart.exception.UnauthorizedAccessException;
 
 public interface GymOwnerDAO {
 	/**
@@ -65,8 +66,9 @@ public interface GymOwnerDAO {
 	 * Adds a slot in the database
 	 * @param Slot object
 	 * @return if slot is generated
+	 * @throws UnauthorizedAccessException 
 	 */
-	public boolean addSlot(Slot slot);
+	public boolean addSlot(Slot slot, String ownerEmail) throws UnauthorizedAccessException;
 
 	/**
 	 * Checks if a gym owner is verified by the Administrator

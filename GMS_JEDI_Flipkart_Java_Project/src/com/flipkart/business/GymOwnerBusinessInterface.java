@@ -3,6 +3,7 @@ package com.flipkart.business;
 import com.flipkart.bean.*;
 import com.flipkart.exception.GymNotFoundException;
 import com.flipkart.exception.GymOwnerNotFoundException;
+import com.flipkart.exception.UnauthorizedAccessException;
 
 import java.util.*;
 
@@ -47,8 +48,9 @@ public interface GymOwnerBusinessInterface {
 	 * This method allows a gym owner to add details of a slot.
 	 * @param slot the slot object representing the slot details
 	 * @throws GymNotFoundException 
+     * @throws UnauthorizedAccessException 
 	 */
-    public void addSlot(Slot slot) throws GymNotFoundException;
+    public void addSlot(Slot slot, String ownerEmail) throws GymNotFoundException, UnauthorizedAccessException;
     
     /**
 	 * Checks if the gym owner is verified or not.

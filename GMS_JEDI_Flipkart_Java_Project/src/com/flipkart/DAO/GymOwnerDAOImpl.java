@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.flipkart.bean.*;
 import com.flipkart.constants.SQLConstants;
+import com.flipkart.exception.UnauthorizedAccessException;
 import com.flipkart.utils.DBUtils;
 
 public class GymOwnerDAOImpl implements GymOwnerDAO {
@@ -313,14 +314,22 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
     /**
      * Adds a slot in the database
      * @param Slot object
+     * @throws UnauthorizedAccessException 
      */
-    public boolean addSlot(Slot slot) {
+    public boolean addSlot(Slot slot, String ownerEmail) throws UnauthorizedAccessException {
         Connection connection = null;
         // Step 1: Establishing a Connection
         try {
             connection = DBUtils.getConnection();
 
             // Step 2:Create a statement using connection object
+            PreparedStatement preparedStatementAuthorize = connection.prepareStatement(SQLConstants.SQL_SELECT_GYM_WITH_OWNER);
+            preparedStatementAuthorize.setString(1, slot.getGymId());
+            preparedStatementAuthorize.setString(2, ownerEmail);
+            ResultSet rs1 = preparedStatementAuthorize.executeQuery();
+            if (!rs1.next())
+            	throw new UnauthorizedAccessException();
+
             PreparedStatement preparedStatementGym = connection.prepareStatement(SQLConstants.SQL_READ_GYM);
             preparedStatementGym.setString(1, slot.getGymId());
             ResultSet rs = preparedStatementGym.executeQuery();

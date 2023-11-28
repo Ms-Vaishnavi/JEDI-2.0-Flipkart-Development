@@ -13,6 +13,7 @@ import com.flipkart.constants.ColorConstants;
 import com.flipkart.exception.GymNotFoundException;
 import com.flipkart.exception.GymOwnerNotFoundException;
 import com.flipkart.exception.InvalidInputException;
+import com.flipkart.exception.UnauthorizedAccessException;
 import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.utils.IdGenerator;
 
@@ -153,7 +154,7 @@ public class GymOwnerClient {
 		System.out.println();
 	}
 
-	public void addSlot(Scanner in) {
+	public void addSlot(Scanner in, String email) {
 		System.out.println("Enter Slot Details: ");
 		Slot slot = new Slot();
 		slot.setSlotId(IdGenerator.generateId("Slot"));
@@ -177,9 +178,11 @@ public class GymOwnerClient {
 		slot.setNumOfSeatsBooked(0);
 		
 		try {
-			gymOwnerBusiness.addSlot(slot);
+			gymOwnerBusiness.addSlot(slot, email);
 		} catch (GymNotFoundException e) {
 			// TODO Auto-generated catch block
+			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
+		} catch (UnauthorizedAccessException e) {
 			System.out.println(ColorConstants.RED + e.getMessage() + ColorConstants.RESET);
 		}
 	}
@@ -216,7 +219,7 @@ public class GymOwnerClient {
 				editGym(in, email);
 				break;
 			case 5:
-				addSlot(in);
+				addSlot(in, email);
 				break;
 			case 6:
 				getGymDetails(in, email);
