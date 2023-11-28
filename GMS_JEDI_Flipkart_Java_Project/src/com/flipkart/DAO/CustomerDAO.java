@@ -25,7 +25,7 @@ public interface CustomerDAO {
 
 	public boolean alreadyBooked(String slotId, String email, String date);
 
-	public int cancelBooking(String bookingId, String email);
+	public boolean cancelBooking(String bookingId, String email);
 
 	public boolean checkSlotExists(String slotId, String gymId);
 
