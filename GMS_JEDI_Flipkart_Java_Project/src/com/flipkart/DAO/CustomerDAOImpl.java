@@ -41,7 +41,7 @@ public class CustomerDAOImpl implements CustomerDAO {
 //                    System.out.println(id + "," + name + "," + email + "," + country + "," + password);
             }
         } catch (SQLException e) {
-            printSQLException(e);
+//            printSQLException(e);
         }
         return gyms;
     }
@@ -95,7 +95,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                bookings.add(b);
             }
         } catch (SQLException sqlExcep) {
-            printSQLException(sqlExcep);
+//            printSQLException(sqlExcep);
         }
         return bookings;
     }
@@ -113,9 +113,8 @@ public class CustomerDAOImpl implements CustomerDAO {
             statement.setString(5, date);
             statement.setString(6, customerEmail);
             statement.executeUpdate();
-            System.out.println("-----------------------------------------------");
         } catch (SQLException sqlExcep) {
-            printSQLException(sqlExcep);
+//            printSQLException(sqlExcep);
         }
     }
 
@@ -129,7 +128,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             ResultSet rs = preparedStatement.executeQuery();
             return rs.next();
         } catch (SQLException e) {
-            printSQLException(e);
+//            printSQLException(e);
         }
         return false;
     }
@@ -142,11 +141,10 @@ public class CustomerDAOImpl implements CustomerDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_CHECK_ALREADY_BOOKED);
             preparedStatement.setString(1, slotId);
             preparedStatement.setString(2, email);
-            //System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
             return rs.next();
         } catch (SQLException e) {
-            printSQLException(e);
+//            printSQLException(e);
         }
         return false;
     }
@@ -166,7 +164,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             
     	}
     	catch (SQLException sqlExcep) {
-            printSQLException(sqlExcep);
+//            printSQLException(sqlExcep);
         }
     	return 0;
     }
@@ -185,7 +183,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             
     	}
     	catch (SQLException sqlExcep) {
-            printSQLException(sqlExcep);
+//            printSQLException(sqlExcep);
         }
     	return 0;
     }
@@ -201,7 +199,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             return true;
     	}
     	catch (SQLException sqlExcep) {
-            printSQLException(sqlExcep);
+//            printSQLException(sqlExcep);
         }
     	return false;
     }
@@ -216,7 +214,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             statement.executeUpdate();
             return true;
         } catch (SQLException sqlExcep) {
-            printSQLException(sqlExcep);
+//            printSQLException(sqlExcep);
         }
         return false;
     }
@@ -233,7 +231,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             ResultSet rs = preparedStatement.executeQuery();
             return rs.next();
         } catch (SQLException e) {
-            printSQLException(e);
+//            printSQLException(e);
         }
         return false;
     }
@@ -249,7 +247,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             ResultSet rs = preparedStatement.executeQuery();
             return rs.next();
         } catch (SQLException e) {
-            printSQLException(e);
+//            printSQLException(e);
         }
         return false;
     }
@@ -273,7 +271,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             // print SQL exception information
-            printSQLException(e);
+//            printSQLException(e);
         }
         try {
             connection = DBUtils.getConnection();
@@ -289,7 +287,7 @@ public class CustomerDAOImpl implements CustomerDAO {
           return  preparedStatement.executeUpdate();
         } catch (SQLException e) {
             // print SQL exception information
-            printSQLException(e);
+//            printSQLException(e);
         }
 
         System.out.println(SQLConstants.SQL_UPDATE_CUSTOMER);
