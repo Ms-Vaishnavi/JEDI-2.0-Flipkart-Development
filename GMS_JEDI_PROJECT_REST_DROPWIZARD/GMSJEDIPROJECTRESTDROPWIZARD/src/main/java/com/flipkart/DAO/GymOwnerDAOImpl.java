@@ -79,12 +79,11 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
             // Step 2:Create a statement using connection object
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_INSERT_GYM_OWNER);
             preparedStatement.setString(1, gymOwnerDetails.getEmail());
-            preparedStatement.setString(2, gymOwnerDetails.getPassword());
-            preparedStatement.setString(3, gymOwnerDetails.getName());
-            preparedStatement.setString(4, gymOwnerDetails.getPhoneNumber());
-            preparedStatement.setString(5, gymOwnerDetails.getAadharNumber());
-            preparedStatement.setString(6, gymOwnerDetails.getPanNumber());
-            preparedStatement.setBoolean(7, gymOwnerDetails.isVerified());
+            preparedStatement.setString(2, gymOwnerDetails.getName());
+            preparedStatement.setString(3, gymOwnerDetails.getPhoneNumber());
+            preparedStatement.setString(4, gymOwnerDetails.getAadharNumber());
+            preparedStatement.setString(5, gymOwnerDetails.getPanNumber());
+            preparedStatement.setBoolean(6, gymOwnerDetails.isVerified());
 
             // Step 3: Execute the query or update query
             preparedStatement.executeUpdate();
