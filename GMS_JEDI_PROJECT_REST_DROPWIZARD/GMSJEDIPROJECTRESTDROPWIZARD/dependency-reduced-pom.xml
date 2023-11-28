@@ -114,6 +114,9 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <additionalOptions>-Xdoclint:none</additionalOptions>
+        </configuration>
       </plugin>
     </plugins>
   </build>

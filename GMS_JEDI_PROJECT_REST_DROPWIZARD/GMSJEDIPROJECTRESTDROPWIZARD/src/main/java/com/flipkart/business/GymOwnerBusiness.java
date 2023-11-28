@@ -15,7 +15,7 @@ import com.flipkart.exception.UnauthorizedAccessException;
 import java.util.*;
 
 /**
- * 
+ * Gym owner business
  */
 public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	GymOwnerDAOImpl gymOwnerDAO = new GymOwnerDAOImpl();
@@ -24,7 +24,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	 * Obtains gym owner's profile details 
 	 * @param email the email of the gym owner whose profile details are requested
 	 * @return GymOwner the gym owner object
-	 * @throws GymOwnerNotFoundException 
+	 * @throws GymOwnerNotFoundException when email of gymOwner is not found
 	 */
 	public GymOwner getProfile(String email) throws GymOwnerNotFoundException {
 		GymOwner gymOwner = gymOwnerDAO.getGymOwnerDetails(email);
@@ -36,8 +36,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	/**
 	 * Gives functionality of updating gym onwer's personal data. 
 	 * @param gymOwnerNew the gymOwner object in which the profile data needs to be updated
-	 * @param email the gymOwner email for which the profile data needs to be update
-	 * @throws GymOwnerNotFoundException 
+	 * @throws GymOwnerNotFoundException when email of gymOwner is not found
 	 */
 	public void editProfile(GymOwner gymOwnerNew) throws GymOwnerNotFoundException {
 		int updatedCount = gymOwnerDAO.editGymOwnerDetails(gymOwnerNew);
@@ -48,6 +47,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	/**
 	 * This method allows a gym owner to add details of a particular gym.
 	 * @param gym the gym object representing the gym details
+	 * @return true if gym is added successfully and false otherwise
 	 */
 	public boolean addGym(Gym gym) {
 		gymOwnerDAO.addGym(gym);
@@ -77,6 +77,7 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 	/**
 	 * This method allows a gym owner to add details of a slot.
 	 * @param slot the slot object representing the slot details
+	 * @param ownerEmail Email Id of the gym owner
 	 * @throws GymNotFoundException 
 	 * @throws UnauthorizedAccessException 
 	 */

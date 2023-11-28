@@ -7,12 +7,13 @@ import com.flipkart.DAO.*;
 import com.flipkart.bean.*;
 import com.flipkart.constants.ColorConstants;
 import com.flipkart.exception.CustomerNotFoundException;
-import com.flipkart.exception.GymOwnerNotFoundException;
 import com.flipkart.exception.SlotNotFoundException;
 import com.flipkart.utils.IdGenerator;
-import java.util.Date;
 import java.util.*;
 
+/**
+ * Customer business
+ */
 public class CustomerBusiness implements CustomerBusinessInterface {
 
 	CustomerDAOImpl customerDAO = new CustomerDAOImpl();

@@ -4,7 +4,7 @@
 package com.flipkart.bean;
 
 /**
- * 
+ * Slot bean
  */
 public class Slot {
 	private String slotId;

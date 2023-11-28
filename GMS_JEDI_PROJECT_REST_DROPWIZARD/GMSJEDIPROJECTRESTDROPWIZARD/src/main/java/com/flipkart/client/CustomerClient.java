@@ -15,6 +15,9 @@ import com.flipkart.exception.CustomerNotFoundException;
 import com.flipkart.exception.SlotNotFoundException;
 import com.flipkart.exception.UserAlreadyExistsException;
 
+/**
+ * Access the operations of Customer
+ */
 public class CustomerClient {
 
 	Customer customer = new Customer();

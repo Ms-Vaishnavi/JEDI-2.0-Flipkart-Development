@@ -4,7 +4,7 @@
 package com.flipkart.bean;
 
 /**
- * 
+ * Gym bean
  */
 public class Gym {
 	private String gymId;

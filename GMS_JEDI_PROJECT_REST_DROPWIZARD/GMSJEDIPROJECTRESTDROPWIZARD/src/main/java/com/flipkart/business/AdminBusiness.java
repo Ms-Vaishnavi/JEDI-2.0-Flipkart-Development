@@ -43,7 +43,7 @@ public class AdminBusiness implements AdminBusinessInterface{
 	/**
 	 * Accepts one request from a gym owner. 
 	 * @param gymOwnerEmail The request's email that has to be approved
-	 * @throws GymOwnerNotFoundException 
+	 * @throws GymOwnerNotFoundException when gymOwnerEmail is not found
 	 */
 	public void approveSingleGymOwnerRequest(String gymOwnerEmail) throws GymOwnerNotFoundException {
 		int approvedCount = adminDAO.approveSingleOwnerRequest(gymOwnerEmail);
@@ -72,8 +72,7 @@ public class AdminBusiness implements AdminBusinessInterface{
 	/**
 	 * Approves a single Gym object request. 
 	 * @param gymId the id of a gym that needs to be approved
-	 * @return true if the gymId is valid else returns false
-	 * @throws GymNotFoundException 
+	 * @throws GymNotFoundException when gymId is not found
 	 */
 	public void approveSingleGymRequest(String gymId) throws GymNotFoundException {
 		int approvedCount = adminDAO.approveSingleGymRequest(gymId);

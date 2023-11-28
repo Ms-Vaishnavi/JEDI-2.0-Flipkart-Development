@@ -12,7 +12,7 @@ import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.exception.UserNotFoundException;
 
 /**
- * 
+ * User business
  */
 public class UserBusiness implements UserBusinessInterface{
 	

@@ -3,10 +3,8 @@
  */
 package com.flipkart.bean;
 
-import java.util.Date;
-
 /**
- * 
+ * Registration bean
  */
 public class Registration {
 	

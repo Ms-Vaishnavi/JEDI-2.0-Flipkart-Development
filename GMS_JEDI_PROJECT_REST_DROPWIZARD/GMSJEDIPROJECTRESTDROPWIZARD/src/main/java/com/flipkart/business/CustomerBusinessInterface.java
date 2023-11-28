@@ -6,7 +6,9 @@ import com.flipkart.exception.GymOwnerNotFoundException;
 import com.flipkart.exception.SlotNotFoundException;
 
 import java.util.*;
-
+/**
+ * Customer business interface
+ */
 public interface CustomerBusinessInterface{
     public Customer getProfile(Customer customer) throws CustomerNotFoundException;
     /*

@@ -4,7 +4,7 @@
 package com.flipkart.bean;
 
 /**
- * 
+ * Customer Bean
  */
 public class Customer extends User {
 	private String name;

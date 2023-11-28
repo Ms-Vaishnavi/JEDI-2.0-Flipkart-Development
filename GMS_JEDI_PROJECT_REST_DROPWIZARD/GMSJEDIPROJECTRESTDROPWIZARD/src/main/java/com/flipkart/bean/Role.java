@@ -4,7 +4,7 @@
 package com.flipkart.bean;
 
 /**
- * 
+ * Role bean
  */
 public class Role {
 	

@@ -4,7 +4,7 @@
 package com.flipkart.bean;
 
 /**
- * 
+ * User bean
  */
 public class User {
 	private String email;

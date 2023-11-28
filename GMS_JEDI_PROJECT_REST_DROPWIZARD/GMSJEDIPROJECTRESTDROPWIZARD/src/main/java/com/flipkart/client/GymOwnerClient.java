@@ -17,6 +17,9 @@ import com.flipkart.exception.UnauthorizedAccessException;
 import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.utils.IdGenerator;
 
+/**
+ * Access the operations of Gym Owner
+ */
 public class GymOwnerClient {
 
 	GymOwner gymOwner = new GymOwner();

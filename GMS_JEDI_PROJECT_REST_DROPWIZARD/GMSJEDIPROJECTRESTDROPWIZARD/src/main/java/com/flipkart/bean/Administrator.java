@@ -4,7 +4,7 @@
 package com.flipkart.bean;
 
 /**
- * 
+ * Administrator Bean
  */
 public class Administrator extends User {
 	private String name;

@@ -51,7 +51,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     /**
      * Adds a gym owner to the database
-     * @param GymOwner object
+     * @param gymOwnerDetails object
      */
     public void addGymOwnerDetails(GymOwner gymOwnerDetails) {
         Connection connection = null;
@@ -96,7 +96,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     /**
      * Edits gym owner details in the database
-     * @param GymOwner object
+     * @param gymOwnerDetails object
      */
 
     // Bug if GymOwner updates email
@@ -180,7 +180,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     /**
      * Adds a gym to the database
-     * @param Gym object
+     * @param gym object
      */
     public void addGym(Gym gymDetails) {
         Connection connection = null;
@@ -209,7 +209,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     /**
      * Edits a gym in the database
-     * @param Gym object
+     * @param gymDetails gym object
      */
     public int editGym(Gym gymDetails) {
         Connection connection = null;
@@ -313,7 +313,8 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
 
     /**
      * Adds a slot in the database
-     * @param Slot object
+     * @param slot object
+     * @param ownerEmail Email Id of the gym owner
      * @throws UnauthorizedAccessException 
      */
     public boolean addSlot(Slot slot, String ownerEmail) throws UnauthorizedAccessException {
@@ -359,6 +360,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
     /**
      * Checks if a gym owner is verified by the Administrator
      * @param email The emailId of the gym owner
+     * @return boolean value
      */
     public boolean checkOwnerApproval(String email) {
         Connection connection = null;
@@ -382,6 +384,7 @@ public class GymOwnerDAOImpl implements GymOwnerDAO {
     /**
      * Checks if a gym is verified by the Administrator
      * @param gymId The Id of the gym
+     * @return boolean value
      */
     public boolean checkGymApproval(String gymId) {
         Connection connection = null;

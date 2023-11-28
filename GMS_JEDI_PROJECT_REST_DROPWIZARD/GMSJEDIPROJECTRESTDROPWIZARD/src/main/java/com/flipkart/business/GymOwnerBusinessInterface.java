@@ -7,6 +7,9 @@ import com.flipkart.exception.UnauthorizedAccessException;
 
 import java.util.*;
 
+/**
+ * Gym owner business interface
+ */
 public interface GymOwnerBusinessInterface {
 	/**
 	 * Obtains gym owner's profile details 

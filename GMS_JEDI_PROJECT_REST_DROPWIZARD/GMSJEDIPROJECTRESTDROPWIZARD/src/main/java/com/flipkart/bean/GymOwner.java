@@ -4,7 +4,7 @@
 package com.flipkart.bean;
 
 /**
- * 
+ * GymOwner bean
  */
 public class GymOwner extends User {
 	private String name;

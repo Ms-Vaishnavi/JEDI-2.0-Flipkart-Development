@@ -6,7 +6,7 @@ package com.flipkart.utils;
 import java.util.HashSet;
 
 /**
- * 
+ * Generator for generating a unique identifier
  */
 public class IdGenerator {
 

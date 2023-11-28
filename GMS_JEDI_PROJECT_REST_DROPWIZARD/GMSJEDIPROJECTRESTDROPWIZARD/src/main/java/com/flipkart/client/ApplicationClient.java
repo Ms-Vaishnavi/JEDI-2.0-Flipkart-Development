@@ -7,6 +7,9 @@ import com.flipkart.business.UserBusiness;
 import com.flipkart.constants.*;
 import com.flipkart.exception.UserNotFoundException;
 
+/**
+ * Access the operations of application
+ */
 public class ApplicationClient {
 
 	public static void login() throws Exception {

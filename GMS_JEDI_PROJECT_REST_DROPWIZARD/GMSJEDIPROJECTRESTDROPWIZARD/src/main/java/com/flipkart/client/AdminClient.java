@@ -10,7 +10,7 @@ import com.flipkart.exception.GymOwnerNotFoundException;
 import java.util.*;
 
 /**
- * 
+ * Access the operations of Admin
  */
 
 public class AdminClient {

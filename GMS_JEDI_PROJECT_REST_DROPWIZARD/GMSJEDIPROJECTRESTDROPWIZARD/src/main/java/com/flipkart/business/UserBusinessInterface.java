@@ -4,6 +4,9 @@ import com.flipkart.bean.*;
 import com.flipkart.exception.UserAlreadyExistsException;
 import com.flipkart.exception.UserNotFoundException;
 
+/**
+ * User business interface
+ */
 public interface UserBusinessInterface{
 	 /*
     Registers a new customer

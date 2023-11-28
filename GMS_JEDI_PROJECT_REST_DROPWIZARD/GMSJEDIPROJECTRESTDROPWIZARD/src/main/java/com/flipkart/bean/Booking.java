@@ -6,7 +6,7 @@ package com.flipkart.bean;
 import java.util.Date;
 
 /**
- * 
+ * Booking bean
  */
 public class Booking {
 	private String bookingId;

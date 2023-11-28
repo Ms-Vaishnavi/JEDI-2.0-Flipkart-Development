@@ -1,5 +1,8 @@
 package com.flipkart.exception;
 
+/**
+ * Exception when customer with the given Id is not found
+ */
 public class CustomerNotFoundException extends Exception {
     @Override
     public String getMessage(){

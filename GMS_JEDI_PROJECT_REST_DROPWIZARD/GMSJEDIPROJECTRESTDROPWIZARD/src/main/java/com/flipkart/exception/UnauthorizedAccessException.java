@@ -1,10 +1,7 @@
-/**
- * 
- */
 package com.flipkart.exception;
 
 /**
- * 
+ * Exception when user is not authorized to perform an action
  */
 public class UnauthorizedAccessException extends Exception {
 	@Override

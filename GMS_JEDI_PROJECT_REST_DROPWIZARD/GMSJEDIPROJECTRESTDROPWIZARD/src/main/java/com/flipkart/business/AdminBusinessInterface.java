@@ -6,45 +6,56 @@ import com.flipkart.exception.GymOwnerNotFoundException;
 
 import java.util.*;
 
+/**
+ * Admin Business Interface
+ */
 public interface AdminBusinessInterface{
-	 /*
-    returns the list of all the gym owners
-    */
+	/**
+	 * Obtains a list of every gym owner within the system.
+	 * @return List of GymOwner objects
+	 */
     public List<GymOwner> getGymOwners();
    
-    /*
-    returns the list of all the gyms
-    */
+	/**
+	 * Obtains a list of every gym within the system.
+	 * @return List of Gym objects
+	 */
     public List<Gym> getGym() ;
     
-    /*
-    returns the list of all the gym owners whose requests are pending
-    */
+    /**
+	 * Returns all GymOwners object whose requests are pending for approval.
+	 * @return List of GymOwner objects
+	 */
     public List<GymOwner> viewAllPendingGymOwnerRequests();
     
-    /*
-    approves the gym owner request whose email is passed
-    */
+    /**
+	 * Accepts one request from a gym owner. 
+	 * @param gymOwnerEmail The request's email that has to be approved
+	 * @throws GymOwnerNotFoundException when gymOwnerEmail is not found
+	 */
     public void approveSingleGymOwnerRequest(String gymOwnerEmail) throws GymOwnerNotFoundException;
    
-    /*
-    approves all the pending gym owner requests
-    */
+    /**
+	 * Approves all GymOwners whose requests are pending for approval. 
+	 */
     public void approveAllPendingGymOwnerRequests();
     
-    /*
-    returns the list of all the gyms whose request is pending
-   */
+    /**
+	 * Returns all Gym object whose requests are pending for approval. 
+	 * @return List of Gym objects
+	 */
     public List<Gym> viewAllPendingGymRequests();
     
-    /*
-    approves single gym whose gymId is sent
-    */
+    /**
+	 * Approves a single Gym object request. 
+	 * @param gymId the id of a gym that needs to be approved
+	 * @throws GymNotFoundException when gymId is not found
+	 */
     public void approveSingleGymRequest(String gymId) throws GymNotFoundException;
    
-    /*
-    approves all the pending gym requests
-    */
+    /**
+	 * Approves all Gym whose requests are pending for approval. 
+	 */
     public void approveAllPendingGymRequests();
     
 }

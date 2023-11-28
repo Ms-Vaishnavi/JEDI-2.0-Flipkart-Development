@@ -1,5 +1,8 @@
 package com.flipkart.business;
 
+/**
+ * Booking business interface
+ */
 public interface BookingBusinessInterface {
 	/*
     Returns true if the booking is confirmed and false if its waitlisted

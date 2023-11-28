@@ -4,7 +4,7 @@
 package com.flipkart.bean;
 
 /**
- * 
+ * Payment bean
  */
 public class Payment {
 	public String creditCardNumber;

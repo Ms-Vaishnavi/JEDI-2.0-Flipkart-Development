@@ -4,7 +4,7 @@
 package com.flipkart.constants;
 
 /**
- * 
+ * Color constants
  */
 public class ColorConstants {
 	public static String RED = "\u001B[31m";

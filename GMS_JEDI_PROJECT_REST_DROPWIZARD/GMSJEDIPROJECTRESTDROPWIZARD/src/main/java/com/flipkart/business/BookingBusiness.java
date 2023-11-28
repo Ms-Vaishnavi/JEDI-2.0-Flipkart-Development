@@ -7,8 +7,9 @@ import com.flipkart.bean.*;
 import java.util.*;
 import java.util.Date;
 /**
- * 
- */public class BookingBusiness implements BookingBusinessInterface{
+ * Booking business
+ */
+public class BookingBusiness implements BookingBusinessInterface{
 
 	List<Booking> bookings=new ArrayList<>();
 	Date d1=new Date(); //current date

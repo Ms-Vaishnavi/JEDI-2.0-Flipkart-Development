@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * 
+ * Utils for establishing connection with the database
  */
 public class DBUtils {
 private static Connection connection = null;
