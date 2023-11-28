@@ -27,7 +27,7 @@ public class AdminGMSRESTService {
 	@GET
 	@Path("/getGyms")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public static Response getGym(){
+	public Response getGym(){
         try{
             return Response.ok(adminBusiness.getGym()).build();
         }
@@ -39,7 +39,7 @@ public class AdminGMSRESTService {
 	@GET
 	@Path("/getGymsOwners")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public static Response getGymOwners(){
+	public Response getGymOwners(){
         try{
             return Response.ok(adminBusiness.getGymOwners()).build();
         }
@@ -75,11 +75,12 @@ public class AdminGMSRESTService {
 	@PUT
 	@Path("/approveSingleGymOwnerRequest/{email}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response approveSingleGymOwnerRequest(@PathParam("email") String emai){
+	public void approveSingleGymOwnerRequest(@PathParam("email") String email){
         try{
-            return Response.ok(adminBusiness.approveSingleGymOwnerRequest(email)).build();
+            adminBusiness.approveSingleGymOwnerRequest(email);
         }
         catch(Exception exception){
+        	System.out.println(exception.getMessage());
             return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
         }
     }
@@ -87,36 +88,39 @@ public class AdminGMSRESTService {
 	@PUT
 	@Path("/approveAllPendingGymOwnerRequests")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response approveAllPendingGymOwnerRequests(){
+	public void approveAllPendingGymOwnerRequests(){
         try{
-            return Response.ok(adminBusiness.approveAllPendingGymOwnerRequests()).build();
+            adminBusiness.approveAllPendingGymOwnerRequests();
         }
         catch(Exception exception){
-            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
+        	System.out.println(exception.getMessage());
+//            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
         }
     }
 	
 	@PUT
 	@Path("/approveSingleGymRequest//{gymId}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response approveSingleGymRequest(@PathParam("gymId") String gymId){
+	public void approveSingleGymRequest(@PathParam("gymId") String gymId){
         try{
-            return Response.ok(adminBusiness.approveSingleGymRequest(gymId)).build();
+            adminBusiness.approveSingleGymRequest(gymId);
         }
         catch(Exception exception){
-            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
+        	System.out.println(exception.getMessage());
+//            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
         }
     }
 	
 	@PUT
-	@Path("/approveAllPendingGymRequest")
+	@Path("/approveAllPendingGymRequests")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response approveAllPendingGymRequest(){
+	public void approveAllPendingGymRequests(){
         try{
-            return Response.ok(adminBusiness.approveAllPendingGymRequest()).build();
+            adminBusiness.approveAllPendingGymRequests();
         }
         catch(Exception exception){
-            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
+        	System.out.println(exception.getMessage());
+//            return Response.status(Response.Status.UNAUTHORIZED).entity(exception.getMessage()).build();
         }
     }
 
