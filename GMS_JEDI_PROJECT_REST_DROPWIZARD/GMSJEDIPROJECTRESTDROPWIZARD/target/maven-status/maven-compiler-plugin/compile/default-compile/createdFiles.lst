@@ -16,6 +16,7 @@ com/flipkart/exception/UserNotFoundException.class
 com/flipkart/exception/CustomerNotFoundException.class
 com/flipkart/exception/GymOwnerNotFoundException.class
 com/flipkart/client/ApplicationClient.class
+com/flipkart/rest/GMSRestAPIConfiguration.class
 com/flipkart/constants/SQLConstants.class
 com/flipkart/bean/Registration.class
 com/flipkart/DAO/UserDAO.class
@@ -27,6 +28,7 @@ com/flipkart/utils/IdGenerator.class
 com/flipkart/DAO/UserDAOImpl.class
 com/flipkart/business/CustomerBusiness.class
 com/flipkart/business/UserBusiness.class
+com/flipkart/rest/GMSRestAPI.class
 com/flipkart/bean/Payment.class
 com/flipkart/client/CustomerClient.class
 com/flipkart/bean/Administrator.class
