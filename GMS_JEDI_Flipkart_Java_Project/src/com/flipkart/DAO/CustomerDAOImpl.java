@@ -91,7 +91,7 @@ public class CustomerDAOImpl implements CustomerDAO {
                b.setSlotId(rs.getString("slotId"));
                b.setGymId(rs.getString("gymId"));
                b.setType(rs.getString("type"));
-               b.setDate(rs.getDate("date"));
+               b.setDate(rs.getString("date"));
                bookings.add(b);
             }
         } catch (SQLException sqlExcep) {
@@ -101,7 +101,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     // books the slot with the given slotId for the customer
-    public void bookSlots(String bookingId, String slotId, String gymId, String type, Date date, String customerEmail) {
+    public void bookSlots(String bookingId, String slotId, String gymId, String type, String date, String customerEmail) {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
@@ -110,7 +110,7 @@ public class CustomerDAOImpl implements CustomerDAO {
             statement.setString(2, slotId);
             statement.setString(3, gymId);
             statement.setString(4, type);
-            statement.setDate(5, (java.sql.Date) date);
+            statement.setString(5, date);
             statement.setString(6, customerEmail);
             statement.executeUpdate();
             System.out.println("-----------------------------------------------");
@@ -120,7 +120,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     // returns true if the slot is fully booked
-    public boolean isFull(String slotId, Date date) {
+    public boolean isFull(String slotId, String date) {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
@@ -135,7 +135,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     // checks if the slot is already booked by the customer
-    public boolean alreadyBooked(String slotId, String email, Date date) {
+    public boolean alreadyBooked(String slotId, String email, String date) {
         Connection connection = null;
         try {
             connection = DBUtils.getConnection();
@@ -195,8 +195,8 @@ public class CustomerDAOImpl implements CustomerDAO {
     	try {
             connection = DBUtils.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(SQLConstants.SQL_UPDATE_NUMBER_OF_BOOKED_SEATS);
-            preparedStatement.setString(1, slotId);
-            preparedStatement.setInt(2, seats);
+            preparedStatement.setString(2, slotId);
+            preparedStatement.setInt(1, seats);
             preparedStatement.executeUpdate(); 
             return true;
     	}
@@ -211,8 +211,8 @@ public class CustomerDAOImpl implements CustomerDAO {
         try {
             connection = DBUtils.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLConstants.SQL_DELETE_BOOKING);
-            statement.setString(1, bookingId);
-            statement.setString(2, email);
+            statement.setString(2, bookingId);
+            statement.setString(1, email);
             statement.executeUpdate();
             System.out.println("-----------------------------------------------");
             return true;

@@ -96,7 +96,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @param date the date on which the customer wants to book a seat
 	 * @return returns integer signal based on the customer's booking status
 	 */
-	public int bookSlot(String gymId, String slotId, String email, Date date)
+	public int bookSlot(String gymId, String slotId, String email, String date)
 	{
 		int bookedSeatsNum = customerDAO.getNumberOfSeatsBooked(slotId);
 		int totalSeatsNum = customerDAO.getNumberOfSeats(slotId);
@@ -145,7 +145,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @param date the date on which the booking status is requested
 	 * @return returns true if the slot id for the given date is fully booked else returns false
 	 */
-	public boolean isSlotBooked(String slotId, Date date) {
+	public boolean isSlotBooked(String slotId, String date) {
 		return customerDAO.isFull(slotId, date);
 	}
 	/**
@@ -155,7 +155,7 @@ public class CustomerBusiness implements CustomerBusinessInterface {
 	 * @param customerEmail the email of customer for which the booking status is getting checked
 	 * @return returns true if the customer has already booked a seat on the same date in the same slot
 	 */
-	public boolean hasBookedSlotAlready(String slotId, String customerEmail, Date date) {
+	public boolean hasBookedSlotAlready(String slotId, String customerEmail, String date) {
 		return customerDAO.alreadyBooked(slotId, customerEmail, date);
 	}
 	

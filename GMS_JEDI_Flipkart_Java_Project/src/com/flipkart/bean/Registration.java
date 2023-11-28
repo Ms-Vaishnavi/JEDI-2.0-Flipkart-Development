@@ -11,7 +11,7 @@ import java.util.Date;
 public class Registration {
 	
 	public String RegistrationId;
-	public Date RegistrationDate;
+	public String RegistrationDate;
 	public String email;
 
 	public String getRegistrationId() {
@@ -20,10 +20,10 @@ public class Registration {
 	public void setRegistrationId(String registrationId) {
 		RegistrationId = registrationId;
 	}
-	public Date getRegistrationDate() {
+	public String getRegistrationDate() {
 		return RegistrationDate;
 	}
-	public void setRegistrationDate(Date registrationDate) {
+	public void setRegistrationDate(String registrationDate) {
 		RegistrationDate = registrationDate;
 	}
 	public String getEmail() {

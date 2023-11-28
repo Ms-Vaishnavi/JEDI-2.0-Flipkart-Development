@@ -48,8 +48,8 @@ public class SQLConstants {
     public static final String SQL_SELECT_BOOKED_SLOTS_BY_CUSTOMER = "Select * From booking where customerEmail = ?";
     public static final String SQL_INSERT_BOOKING = "INSERT INTO booking (bookingId,slotId,gymId,type,date,customerEmail) values(?, ?, ?, ?, ?, ?)";
     public static final String SQL_CHECK_FULL_SLOT = "Select * from slot where slotId=? and (numOfSeatsBooked>=numOfSeats)";
-    public static final String SQL_CHECK_ALREADY_BOOKED = "select isVerified from booking where slotId=? and customerEmail = ?";
-    public static final String SQL_DELETE_BOOKING = "Delete from booking where email = ? and bookingId = ?";
+    public static final String SQL_CHECK_ALREADY_BOOKED = "select type from booking where slotId=? and customerEmail = ?";
+    public static final String SQL_DELETE_BOOKING = "Delete from booking where customerEmail = ? and bookingId = ?";
     public static final String SQL_CHECK_SLOT_EXISTS = "select isVerified from slot where slotId=? and gymId = ?";
     public static final String SQL_CHECK_GYM_APPROVAL = "select isVerified from gym where gymId = ?";
     public static final String SQL_INSERT_CUSTOMER = "INSERT INTO customer VALUES (?,?,?,?,?)";

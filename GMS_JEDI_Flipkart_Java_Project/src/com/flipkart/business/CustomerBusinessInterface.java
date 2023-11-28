@@ -20,6 +20,6 @@ public interface CustomerBusinessInterface{
    
     public List<Gym> getGymInCity(String city) ;
     public List<Slot> getSlotInGym(String gymId) throws SlotNotFoundException;
-    public boolean isSlotBooked(String slotId, Date date);
+    public boolean isSlotBooked(String slotId, String date);
     public boolean cancelBooking(String bookingId, String email);
 }

@@ -53,9 +53,7 @@ public class CustomerClient {
 		System.out.print("Enter gym ID: ");
 		String gymId = sc.next();
 		System.out.print("\nEnter Date (yyyy-mm-dd): ");
-		String dateStr = sc.next();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = dateFormat.parse(dateStr);
+		String date = sc.next();
 		try {
 		List<Slot> slots = customerBusiness.getSlotInGym(gymId);
 		
