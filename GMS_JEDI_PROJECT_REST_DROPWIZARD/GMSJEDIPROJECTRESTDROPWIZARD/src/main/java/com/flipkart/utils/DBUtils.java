@@ -27,7 +27,7 @@ private static Connection connection = null;
             try {
             	Properties prop = new Properties();
                 //InputStream inputStream = DBUtils.class.getClassLoader().getResourceAsStream("./config.properties");
-            	FileInputStream fileInputStream = new FileInputStream("/Users/ksai.sudha/JEDI-2.0-Flipkart-Development/GMS_JEDI_Flipkart_Java_Project/src/config.properties");
+            	FileInputStream fileInputStream = new FileInputStream("/Users/vaishnavi.sahu1/Documents/workspace-spring-tool-suite-4-4.20.1.RELEASE/GMS/JEDI-2.0-Flipkart-Development/GMS_JEDI_PROJECT_REST_DROPWIZARD/GMSJEDIPROJECTRESTDROPWIZARD/src/main/java/config.properties");
                 prop.load(fileInputStream);
                 //String driver = prop.getProperty("driver");
                 String url = prop.getProperty("url");

@@ -63,6 +63,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     	         s.setSlotId(rs.getString("slotId"));
     	         s.setTrainer(rs.getString("trainer"));
     	         s.setGymId(rs.getString("gymId"));
+    	         s.setDate(rs.getString("date"));
     	         s.setNumOfSeatsBooked(rs.getInt("numOfSeatsBooked"));
     	         s.setNumOfSeats(rs.getInt("numOfSeats"));
     	         s.setStartTime(rs.getString("startTime"));
