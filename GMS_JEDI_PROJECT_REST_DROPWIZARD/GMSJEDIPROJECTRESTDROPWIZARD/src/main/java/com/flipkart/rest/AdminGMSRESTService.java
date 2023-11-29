@@ -25,7 +25,7 @@ public class AdminGMSRESTService {
 	AdminBusiness adminBusiness = new AdminBusiness();
 	
 	@GET
-	@Path("/getGyms")
+	@Path("/viewGyms")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getGym(){
         try{
@@ -37,7 +37,7 @@ public class AdminGMSRESTService {
     }
 	
 	@GET
-	@Path("/getGymsOwners")
+	@Path("/viewGymOwners")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getGymOwners(){
         try{
@@ -49,7 +49,7 @@ public class AdminGMSRESTService {
     }
 	
 	@GET
-	@Path("/viewAllPendingGymOwnerRequests")
+	@Path("/viewPendingGymOwners")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response viewAllPendingGymOwnerRequests(){
         try{
@@ -61,7 +61,7 @@ public class AdminGMSRESTService {
     }
 	
 	@GET
-	@Path("/viewAllPendingGymRequests")
+	@Path("/viewPendingGyms")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response viewAllPendingGymRequests(){
         try{
@@ -73,7 +73,7 @@ public class AdminGMSRESTService {
     }
 	
 	@PUT
-	@Path("/approveSingleGymOwnerRequest/{email}")
+	@Path("/approveGymOwner/{email}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response approveSingleGymOwnerRequest(@PathParam("email") String email){
         try{
@@ -87,7 +87,7 @@ public class AdminGMSRESTService {
     }
 	
 	@PUT
-	@Path("/approveAllPendingGymOwnerRequests")
+	@Path("/approveGymOwners")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response approveAllPendingGymOwnerRequests(){
         try{
@@ -101,7 +101,7 @@ public class AdminGMSRESTService {
     }
 	
 	@PUT
-	@Path("/approveSingleGymRequest//{gymId}")
+	@Path("/approveGym/{gymId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response approveSingleGymRequest(@PathParam("gymId") String gymId){
         try{
@@ -115,7 +115,7 @@ public class AdminGMSRESTService {
     }
 	
 	@PUT
-	@Path("/approveAllPendingGymRequests")
+	@Path("/approveGyms")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response approveAllPendingGymRequests(){
         try{

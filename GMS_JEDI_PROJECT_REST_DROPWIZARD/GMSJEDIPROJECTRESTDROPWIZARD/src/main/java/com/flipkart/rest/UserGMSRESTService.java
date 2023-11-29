@@ -21,10 +21,19 @@ import com.flipkart.utils.IdGenerator;
 /**
  * API Calls to User service
  */
-@Path("/v1/users")
+@Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserGMSRESTService {
     UserBusiness userBusiness = new UserBusiness();
+    
+    @GET
+    @Path("/")
+    @Timed
+    public Response menu() {
+    	String menu = "1. Register as Customer\n2. Register as GymOwner\n3. Login";
+    	return Response.ok(menu).build();
+    }
+    
     @POST
     @Path("/customerRegistration")
     @Timed
@@ -52,7 +61,7 @@ public class UserGMSRESTService {
     }
 
     @GET
-    @Path("/profile/{email}")
+    @Path("/login/{email}")
     public Response authorizeUser(@PathParam("email") String email, User user) {
         try {
             userBusiness.authenticateUser(user);
@@ -63,7 +72,7 @@ public class UserGMSRESTService {
     }
 
     @GET
-    @Path("/profile/logout/{email}")
+    @Path("/logout/{email}")
     public Response LogOut(@PathParam("email") String email, User user) {
          userBusiness.logout(user);
             return Response.ok("Logged out the user successfully!").build();

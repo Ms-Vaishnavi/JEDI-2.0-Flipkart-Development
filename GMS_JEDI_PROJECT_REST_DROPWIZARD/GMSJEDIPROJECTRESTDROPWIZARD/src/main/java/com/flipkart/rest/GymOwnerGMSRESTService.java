@@ -42,7 +42,7 @@ public class GymOwnerGMSRESTService {
 	}
 
 	@PUT
-	@Path("/profile/{email}")
+	@Path("/{email}/profile")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editProfile(@PathParam("email") String email, GymOwner gymOwner) {
 		try {
@@ -54,7 +54,7 @@ public class GymOwnerGMSRESTService {
 	}
 
 	@GET
-	@Path("/profile/{email}")
+	@Path("/{email}/profile")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response viewProfile(@PathParam("email") String email) {
 		try {
@@ -65,19 +65,19 @@ public class GymOwnerGMSRESTService {
 	}
 
 	@POST
-	@Path("/addGym")
+	@Path("/{email}/addGym")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addGym(Gym gym) {
+	public Response addGym(@PathParam("email") String email, Gym gym) {
 		gym.setGymId(IdGenerator.generateId("Gym"));
 		gymOwnerBusiness.addGym(gym);
 		return Response.ok("Added Gym Successfully").build();
 	}
 	
 	@PUT
-    @Path("/editGym")
+    @Path("/{email}/editGym")
     @Timed
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response editGym(Gym gym) {
+    public Response editGym(@PathParam("email") String email, Gym gym) {
         try {
             gymOwnerBusiness.editGym(gym);
             return Response.ok("Gym edited successfully!").build();
@@ -87,7 +87,7 @@ public class GymOwnerGMSRESTService {
     }
 	
 	@GET
-	@Path("/details/{email}")
+	@Path("/{email}/gyms")
 	@Timed
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getGymDetails(@PathParam("email") String email) {
@@ -95,7 +95,7 @@ public class GymOwnerGMSRESTService {
 	}
 	
 	@POST
-    @Path("/addSlot/{email}")
+    @Path("/{email}/addSlot")
     @Timed
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addSlot(Slot slot, @PathParam("email") String email) {
