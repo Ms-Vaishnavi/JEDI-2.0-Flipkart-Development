@@ -12,6 +12,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -47,7 +48,7 @@ public class CustomerGMSRESTService {
 	}
 	
 	@PUT
-	@Path("/profile/{email}")
+	@Path("/{email}/profile")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editProfile(@PathParam("email") String email, Customer customer) {
 		try {
@@ -58,11 +59,12 @@ public class CustomerGMSRESTService {
 		}
 	}
 	
+	
 	@GET
-	@Path("/book/{city}")
+	@Path("/{email}/book")
 	@Timed
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getGymDetails(@PathParam("city") String city) {
+	public Response getGymDetails(@PathParam("email") String email, @QueryParam("city") String city) {
 		List<Gym> gyms = customerBusiness.getGymInCity(city);
 		if(gyms.size() == 0)
 			return Response.status(Response.Status.BAD_REQUEST).entity("No gyms available").build();
@@ -70,7 +72,7 @@ public class CustomerGMSRESTService {
 	}
 	
 	@GET
-	@Path("/bookings/{email}")
+	@Path("/{email}/bookings")
 	@Timed
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response viewBookings(@PathParam("email") String email) {
@@ -78,17 +80,17 @@ public class CustomerGMSRESTService {
 	}
 	
 	@PUT
-	@Path("/bookings/cancel/{email}")
+	@Path("/{email}/bookings/cancel")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response cancelBooking(@PathParam("email") String email, String bookingId) {
+	public Response cancelBooking(@PathParam("email") String email, @QueryParam("bookingId") String bookingId) {
 		return Response.ok(customerBusiness.cancelBooking(bookingId, email)).build();
 	}
 	
 	@GET
-	@Path("/book/{city}/{gymId}")
+	@Path("/{email}/book/{gymId}")
 	@Timed
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response viewSlots(@PathParam("city") String city, @PathParam("gymId") String gymId) {
+	public Response viewSlots(@PathParam("email") String email, @QueryParam("city") String city, @PathParam("gymId") String gymId) {
 		try {
 			List<Slot> slots = customerBusiness.getSlotInGym(gymId);
 			return Response.ok(slots).build();
@@ -98,13 +100,13 @@ public class CustomerGMSRESTService {
 		
 	}
 	
-	@GET
-    @Path("/book/{city}/{gymId}/{date}/{slotId}")
+	@POST
+    @Path("/{email}/book")
     @Timed
-    public Response viewGyms(@PathParam("email") String email,
-                             @PathParam("gymId") String gymId,
-                             @PathParam("date") String date,
-                             @PathParam("slotId") String slotId) {
+    public Response bookSlot(@PathParam("email") String email,
+    		@QueryParam("gymId") String gymId,
+    		@QueryParam("date") String date,
+    		@QueryParam("slotId") String slotId) {
         try {
             int bookingResponse = customerBusiness.bookSlot(gymId, slotId, email, date);
 

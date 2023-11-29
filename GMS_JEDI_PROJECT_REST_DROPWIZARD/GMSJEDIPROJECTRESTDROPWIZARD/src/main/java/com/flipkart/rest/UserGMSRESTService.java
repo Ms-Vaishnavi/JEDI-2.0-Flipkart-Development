@@ -53,7 +53,6 @@ public class UserGMSRESTService {
 
     @GET
     @Path("/profile/{email}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response authorizeUser(@PathParam("email") String email, User user) {
         try {
             userBusiness.authenticateUser(user);
@@ -64,8 +63,7 @@ public class UserGMSRESTService {
     }
 
     @GET
-    @Path("/profile/{email}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/profile/logout/{email}")
     public Response LogOut(@PathParam("email") String email, User user) {
          userBusiness.logout(user);
             return Response.ok("Logged out the user successfully!").build();
